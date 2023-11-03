@@ -2917,9 +2917,11 @@ phys_dump_filter_trace_callstack |  | **Default:** <br>
 phys_dump_intersection_controller | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump intersection controller status
 phys_dump_main_world | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump physics main world to file
 phys_dynamic_scaling | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
+phys_enable_gjk_clipping | FCVAR_REPLICATED | **Default:** false<br>
 phys_expensive_shape_threshold | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 6<br>
 phys_fast_report_contacts |  | **Default:** 1<br>when 1, fast path for collision reporting is implemented making triggers faster in some cases
 phys_fastaddcloneshape |  | **Default:** false<br>
+phys_find_incident_face_wedges_fix | FCVAR_REPLICATED | **Default:** false<br>
 phys_headshotscale | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 1.3<br>Modifier for the headshot impulse hits on players
 phys_highlight_expensive_objects | FCVAR_CHEAT | **Default:** false<br>Highlight expensive physics objects
 phys_highlight_expensive_objects_strength | FCVAR_CHEAT | **Default:** 0.02<br>Highlight expensive physics objects strength
@@ -2944,6 +2946,8 @@ phys_playerscale | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 10<br>This m
 phys_position_iterations |  | **Default:** 2<br>
 phys_powered_ragdoll_debug | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 phys_pushscale | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>
+phys_query_last_features_enabled | FCVAR_REPLICATED | **Default:** true<br>
+phys_query_last_features_vertex_separation | FCVAR_REPLICATED | **Default:** true<br>
 phys_record_rays | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump physics main world to file
 phys_record_rays_and_world | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump traces physics main world to file
 phys_reload_immediately |  | **Default:** false<br>Set to 1 to reload resources and reconstruct physics of entities on the fly. May unexpectedly change behavior or crash the game, because game code is generally unaware of underlying resource reloads and may hold references to physics that may become invalid during resource reload. It is inherently harder for physics to deal with resource reloads because of persistent nature of objects being simulated (textures can be easily reloaded on the fly; if an entity holds a handle to a ragdoll body part, it may expect that handle to stay valid while the ragdoll exists)
@@ -3436,6 +3440,8 @@ ragdoll_prop_settle | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** true<br>E
 ragdoll_prop_sleepaftertime | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 4<br>After this many seconds of being basically stationary, the ragdoll will go to sleep.
 ragdoll_prop_sleepdisabletime | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 1.5<br>Ragdoll is not allowed to physically sleep until this timer has elapsed.
 ragdoll_relax_limts | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** false<br>
+ragdoll_resolve_initial_conflict | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
+ragdoll_resolve_separation | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 ragdoll_scale_sleep_tolerance | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 ragdoll_validate_targetpose | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 ragdoll_visualize_creation_skeleton | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** false<br>
