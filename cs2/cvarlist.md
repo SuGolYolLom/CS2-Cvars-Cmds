@@ -577,6 +577,7 @@ cl_fasttempentcollision | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:*
 cl_firstperson_legs | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_fixedcrosshairgap | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 3<br>For crosshair style 1: How big to make the gap between the pips in the fixed crosshair
 cl_flushentitypacket | FCVAR_CHEAT | **Default:** 0<br>For debugging. Force the engine to flush an entity packet.
+cl_force_next_signon_to_reset | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_fullupdate | FCVAR_CHEAT | Force uncompressed update
 cl_game_mode_convars | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Display the values of the convars for the current game_mode.
 cl_globallight_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
@@ -732,8 +733,7 @@ cl_player_visibility_far | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:
 cl_player_visibility_far_scale | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1.3<br>proxy scale multiplier at max dist (is 1.0 at mindist)
 cl_player_visibility_near | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 200<br>cull characters nearer than this
 cl_player_visibility_show_stencil_proxy | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
-cl_player_visibility_stencil_bloat_amount_box | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2.5<br>
-cl_player_visibility_stencil_bloat_amount_ellipsoid | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1.4<br>
+cl_player_visibility_stencil_bloat_amount | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1.4<br>
 cl_player_visibility_stencil_proxy_min_dist | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 3<br>
 cl_player_visibility_stencil_proxy_min_dist_box | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1<br>
 cl_player_visibility_stencil_proxy_type | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1<br>0 - box, 1 - dodecahedron
@@ -902,6 +902,7 @@ cl_smoke_torus_ring_subradius | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_
 cl_smoke_volume_growth | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1<br>
 cl_smoke_volumeprop | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_smooth | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>Smooth view/eye origin after prediction errors
+cl_smooth_targetspeed | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 150<br>
 cl_smoothtime | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.2<br>Smooth client's view after prediction error over this many seconds
 cl_snd_cast_clear | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
 cl_snd_cast_retrigger | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
@@ -974,6 +975,7 @@ cl_weapon_debug_print_accuracy | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCV
 cl_weapon_debug_show_accuracy | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0<br>Draws a circle representing the effective range with every shot.
 cl_weapon_debug_show_accuracy_duration | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 10<br>
 cl_weapon_pickup_lerp | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>
+cl_workshop_map_download_timeout | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 120<br>
 cl_wpn_sway_interp | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.1<br>
 cl_wpn_sway_scale | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 1<br>
 cl_yawspeed | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 210<br>
@@ -1075,16 +1077,16 @@ convert_steamid | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Convert SteamID int
 cpu_level | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>CPU Level - Default: High
 cpuinfo | FCVAR_DEVELOPMENTONLY | Print CPU configuration information
 cq_adjust_deadzone_ticks | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0.75<br>don't adjust rate faster/slower if average queue is this close to goal.
-cq_buffer_bloat_msecs | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 150<br>max buffer bloat before we reset and discard buffered user commands.
+cq_buffer_bloat_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 150<br>max buffer bloat before we reset and discard buffered user commands.
 cq_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 0<br>Verbose command queue logging.
 cq_dilation_percentage | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>When speeding up slowing down, this is how much
 cq_dropped_command_msecs | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 1000<br>max msecs of starved usercmds to queue before dropping any additional.
 cq_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 cq_fake_starve | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>if set, starve this many commands by discarding during process usercmds.
 cq_force_percent | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>debugging, force client tick rate faster/slower by specified percentage.
-cq_logging | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>command queue logging of events.
-cq_logging_interval | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>command queue logging per player stats every N seconds, 0 to disable.
-cq_min_queue_size | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 1<br>min buffer queue target size.
+cq_logging | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>command queue logging of events.
+cq_logging_interval | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>command queue logging per player stats every N seconds, 0 to disable.
+cq_min_queue_size | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 1<br>min buffer queue target size.
 cq_netgraph | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Display command queue statistics on the hud
 cq_netgraph_problem_show_auto | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Automatically activate/deactivate cq_netgraph when network conditions degrade
 cq_queue_sample_count | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 20<br>how many frames of samples to store in the buffer sample queue.
@@ -1248,6 +1250,8 @@ drawline | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Draws line between two 3D Points.<br>	
 drawoverviewmap | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Draws the overview map
 drawradar | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Draws HUD radar
 drop_hostage | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CHEAT | drop held hostage
+ds_workshop_changelevel | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Changelevel to an available workshop map by name
+ds_workshop_listmaps | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Dump workshop maps available on this server
 dsp_automatic | FCVAR_DEVELOPMENTONLY<br>FCVAR_DEMO | **Default:** 0<br>
 dsp_db_min | FCVAR_DEVELOPMENTONLY<br>FCVAR_DEMO | **Default:** 80<br>
 dsp_db_mixdrop | FCVAR_DEVELOPMENTONLY<br>FCVAR_DEMO | **Default:** 0.5<br>
@@ -1574,8 +1578,8 @@ host_framerate | FCVAR_RELEASE | **Default:** 0<br>Set to lock per-frame time el
 host_timescale | FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 1<br>Prescale the clock by this amount.
 host_timescale_dec | FCVAR_CHEAT | Decrement the timescale by one step
 host_timescale_inc | FCVAR_CHEAT | Increment the timescale by one step
-host_workshop_collection | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Host a workshop map collection as a mapgroup
-host_workshop_map | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Get the latest version of the map and host it on this server.
+host_workshop_collection | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Host a workshop map collection as a mapgroup
+host_workshop_map | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Get the latest version of the map and host it on this server.
 host_writeconfig | FCVAR_RELEASE | Saves out the user config values.
 hostage_debug | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0<br>Show hostage AI debug information
 hostage_drop_time | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 1<br>Time for the hostage before it fully drops to ground
@@ -1765,7 +1769,6 @@ kickid | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Kick a player by userid or uniqueid
 kickid_hltv | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Kick a player by userid or uniqueid, with a message.
 kill | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_CLIENT_CAN_EXECUTE | Kills the player with generic damage
 killvector | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_CLIENT_CAN_EXECUTE | Kills a player applying force. Usage: killvector &lt;player&gt; &lt;x value&gt; &lt;y value&gt; &lt;z value&gt;
-knife_damage_scale | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 100<br>
 labelled_debug_helper_arc_segments | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 20<br>
 labelled_debug_helper_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 labelled_debug_helper_scale | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 1<br>
@@ -1856,7 +1859,7 @@ map_enable_background_maps | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Enables/disables p
 map_setbombradius | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Sets the bomb radius for the map.
 map_showbombradius | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Shows bomb radius from the center of each bomb site and planted bomb.
 map_showspawnpoints | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Shows player spawn points (red=invalid). Optionally pass in the duration.
-map_workshop | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_VCONSOLE_FUZZY_MATCHING<br>FCVAR_VCONSOLE_SET_FOCUS | Launch a workshop map
+map_workshop | FCVAR_CLIENTDLL<br>FCVAR_RELEASE<br>FCVAR_VCONSOLE_FUZZY_MATCHING<br>FCVAR_VCONSOLE_SET_FOCUS | Launch a workshop map
 mapcyclefile | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** mapcycle.txt<br>Name of the .txt file used to cycle the maps on multiplayer servers 
 mapgroup | FCVAR_GAMEDLL<br>FCVAR_DONTRECORD<br>FCVAR_RELEASE | Specify a map group
 mapoverview_allow_client_draw | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Allow a client to draw on the map overview
@@ -3622,17 +3625,10 @@ skeleton_instance_lod_optimization | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>F
 skeleton_instance_scaleset_enable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 skeleton_instance_smear_boneflags | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>Smear boneflags across the model.  Costs computation, but tests to make sure your bone flags are consistent.
 skill | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_PER_USER | **Default:** 1<br>Game skill level.
-slope_drop_blend_max_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 6<br>The distance when the max speed is used
-slope_drop_blend_max_speed | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 160<br>The max speed (in units/second) at which the slope offset can change
-slope_drop_blend_min_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>The distance when the min speed is used
-slope_drop_blend_min_player_speed | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>The minimum player speed (in units/second) at which the slope offset blends at 100% speed
-slope_drop_blend_min_speed | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>The min speed (in units/second) at which the slope offset can change
 slope_drop_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>Toggles a test dropping the view offset based on the slope
-slope_drop_debug_draw | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>Draw debug info for the slope drop
 slope_drop_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Toggles a test dropping the view offset based on the slope
 slope_drop_max_offset | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 16<br>The maximum distance to adjust the view height
 slope_drop_off_ground_blend_speed | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 160<br>The speed with which the slope drop is blended out when the entity leaves the ground
-slope_drop_on_land_blend_time | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.2<br>Time in seconds to blend the slope drop when landing on the ground.
 slot0 | FCVAR_CLIENTDLL<br>FCVAR_SERVER_CAN_EXECUTE | 
 slot1 | FCVAR_CLIENTDLL<br>FCVAR_SERVER_CAN_EXECUTE | 
 slot10 | FCVAR_CLIENTDLL<br>FCVAR_SERVER_CAN_EXECUTE | 
@@ -4166,13 +4162,13 @@ sv_jump_spam_penalty_time | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED
 sv_kick_ban_duration | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 15<br>How long should a kick ban from the server should last (in minutes)
 sv_kick_players_with_cooldown | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 1<br>(0: do not kick on insecure servers; 1: kick players with Untrusted status or convicted by Overwatch; 2: kick players with any cooldown)
 sv_kill_smokegrenade | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CHEAT | kill all smoke grenades
-sv_knife_attack_extend_from_player_aabb | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>
 sv_ladder_angle | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** -0.707<br>Cos of angle of incidence to ladder perpendicular for applying ladder_dampen
 sv_ladder_dampen | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.2<br>Amount to dampen perpendicular movement on a ladder
 sv_ladder_scale_speed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0.78<br>Scale top speed on ladders
 sv_ladder_slack_z_mult | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0.026<br>Difference in Z increases toward the middle of the slack ladder.<br>
 sv_lagcompensationforcerestore | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>Don't test validity of a lag comp restore, just do it.
 sv_lan | FCVAR_RELEASE | **Default:** false<br>Server is a lan server ( no heartbeat, no authentication, no non-class C addresses )
+sv_late_commands_allowed | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 5<br>Allow N late commands to run at 0 timescale prior to running an on-time command. Negative values for network round trip based calculation with a hard cap of the of absolute value
 sv_lightquery_debug | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 sv_load_forced_client_names_file | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Loads a file containing SteamID64 names for clients
 sv_load_random_client_names_file | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Loads a file containing random name words for clients
@@ -4205,6 +4201,7 @@ sv_maxrate | FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>Max bandwidth
 sv_maxreplay | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>Maximum replay time in seconds
 sv_maxspeed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 320<br>
 sv_maxunlag | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0.2<br>Maximum lag compensation in seconds
+sv_maxuptimelimit | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>Number of hours to operate before trying sv_shutdown.
 sv_maxvelocity | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 3500<br>Maximum speed any ballistically moving object is allowed to attain per axis.
 sv_memlimit | FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0<br>If set, whenever a game ends, if the total memory used by the server is greater than this # of megabytes, the server will exit.
 sv_merge_changes_after_tick_with_calcdelta | FCVAR_RELEASE | **Default:** 1<br>This fixes bugs where pure calcdelta is used due to recipient changing but it doesn't pick up a field change where the value was changed back to same value as the from snapshot even though the destination fields change list does note the change. Set to 2 to spew any changes merged in by this fix.
@@ -4298,6 +4295,7 @@ sv_server_graphic1 | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCV
 sv_server_graphic2 | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** <br>A 220x45 (&lt;16kb) image file in /csgo/ that will be displayed to spectators.
 sv_server_side_animation | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>
 sv_server_verify_blood_on_player | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
+sv_setsteamaccount | FCVAR_RELEASE | token<br>Set game server account token to use for logging in to a persistent game server account
 sv_shared_team_pvs | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>PVS is shared between teams
 sv_shield_bash_damage_to_nonplayer | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 30<br>
 sv_shield_bash_damage_to_players | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 90<br>
