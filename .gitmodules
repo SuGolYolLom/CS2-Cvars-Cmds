@@ -1,0 +1,19 @@
+[submodule "sdk"]
+	path = sdk
+	url = https://github.com/alliedmodders/hl2sdk.git
+	branch = cs2
+
+[submodule "cvar-unhide-s2"]
+	path =  cvar-unhide-s2
+	url = https://github.com/saul/cvar-unhide-s2.git
+	branch = main
+
+[submodule "sdk2"]
+	path = sdk2
+	url = https://github.com/neverlosecc/source2sdk.git
+	branch = cs2
+
+[submodule "docs-poggu"]
+	path = docs-poggu
+	url = https://github.com/Poggicek/cs2-docs.git
+	branch = master
