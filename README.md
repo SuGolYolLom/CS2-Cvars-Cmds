@@ -24,7 +24,8 @@ VersionTime=19:27:14
 
 ### Changelog
 
-Are you searching for a particular release? [Click here of the list of updates](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/cs2/cvarlist.md) and/or [here for the -tools version](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/-tools/cvarlist.md)!
+Are you searching for a particular release? [Click here of the list of updates](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/cs2/cvarlist.md) and/or [here for the -tools version](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/-tools/cvarlist.md)!  
+If you want a cvarlist.log version, it is available [here](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/cs2/cvarlist.log) for the cs2 version and [here](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/-tools/cvarlist.log) for the -tools version
 
 
 ### Credits
