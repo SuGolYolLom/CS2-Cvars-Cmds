@@ -417,7 +417,7 @@ cl_clock_unhook | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdbg | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 4<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
