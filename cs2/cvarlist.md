@@ -635,7 +635,6 @@ cl_jiggle_bone_debug_yaw_constraints | FCVAR_CHEAT | **Default:** false<br>Displ
 cl_jiggle_bone_invert | FCVAR_CHEAT | **Default:** false<br>
 cl_jiggle_bone_sanity | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Prevent jiggle bones from pointing directly away from their target in case of numerical instability.
 cl_join_advertise | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 1<br>Advertise joinable game in progress to Steam friends, otherwise need a Steam invite (2: all servers, 1: official servers, 0: none)
-cl_lagcompensation | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** true<br>Perform server side lag compensation of weapon firing events.
 cl_lagcompensation_test_auto_target | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>Auto-pick value of cl_lagcompensation_test_target.
 cl_lagcompensation_test_target | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** -1<br>Player whose head is tracked to test lag compensation.
 cl_language | FCVAR_DEVELOPMENTONLY | **Default:** english<br>Language
@@ -746,14 +745,12 @@ cl_pred_optimize | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>
 cl_pred_parallel_postnetwork | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_pred_track | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | &lt;entindex&gt; &lt;fieldname&gt;:  Track changes to entity index entindex, for field fieldname.
 cl_pred_track_off | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | clear field track changes.
-cl_predict | FCVAR_CLIENTDLL<br>FCVAR_USERINFO<br>FCVAR_CHEAT | **Default:** true<br>Perform client side prediction.
 cl_predict_after_every_createmove | FCVAR_DEVELOPMENTONLY | **Default:** true<br>run prediction after every CreateMove instead of only after CreateMove for the final tick in a frame.
 cl_predict_bomb_defusal | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_predict_weapon_drop | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_predictioncopy_describe | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Describe datamap_t for entindex
 cl_predictioncopy_print | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Print simple description of prediction copy fields for entindex
 cl_predictioncopy_runs | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
-cl_predictweapons | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** true<br>Perform client side prediction of weapon effects.
 cl_printfps | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Print information from cl_showfps.
 cl_profilereadpacketentities | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_promoted_settings_acknowledged | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0:0<br>
@@ -1169,6 +1166,7 @@ debug_aim_angle | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>F
 debug_chicken | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>Chicken debug info
 debug_draw_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_REPLICATED | **Default:** true<br>
 debug_entity_outline_highlight | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
+debug_hltv | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CLIENTCMD_CAN_EXECUTE | **Default:** 0<br>Print out hltv events
 debug_overlay_fullposition | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 debug_physimpact | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 debug_purchase_defidx | FCVAR_CLIENTDLL<br>FCVAR_RELEASE<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Purchase an item by defindex
@@ -2635,6 +2633,7 @@ net_spewcounts | FCVAR_DEVELOPMENTONLY | Spew serializer counts, client only by 
 net_spewserializer | FCVAR_DEVELOPMENTONLY | Spew serializer info<br>
 net_stats_json | FCVAR_DEVELOPMENTONLY | Output server networking statistics in json format
 net_status | FCVAR_RELEASE | Shows current network status
+net_use_delta_property_fastpath | FCVAR_DEVELOPMENTONLY | **Default:** 1<br>
 net_use_packet_compression | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Compress network traffic
 net_usesocketsforloopback | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Use network sockets layer even for listen server local player's packets (multiplayer only).
 net_validatemessages | FCVAR_CHEAT | Activates/deactivates net message validation
@@ -4043,7 +4042,6 @@ sv_bounce | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED
 sv_buy_status_override | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** -1<br>Override for buy status map info. 0 = everyone can buy, 1 = ct only, 2 = t only 3 = nobody
 sv_chat_proximity | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** -1<br>
 sv_cheats | FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Allow cheats on server
-sv_client_predict | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** -1<br>This can be used to force the value of cl_predict for connected clients (only while they are connected).<br>   -1 = let clients set cl_predict to anything<br>    0 = force cl_predict to 0<br>    1 = force cl_predict to 1
 sv_clientrates | FCVAR_DEVELOPMENTONLY | Show client rates.
 sv_clip_penetration_traces_to_players | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 sv_clockcorrection_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 30<br>The server tries to keep each player's m_nTickBase withing this many msecs of the server absolute tickcount
@@ -4113,7 +4111,6 @@ sv_fistpunch_viewmove | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDL
 sv_footsteps | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Play footstep sound for players
 sv_force_team_intro_random | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>
 sv_force_team_intro_variant | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>
-sv_force_transmit_ents | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>Will transmit all entities to client, regardless of PVS conditions (will still skip based on transmit flags, however).
 sv_fps_max | FCVAR_DEVELOPMENTONLY<br>FCVAR_HIDDEN | **Default:** 0<br>Dedicated server frame rate limiter. 0=tick rate. Only applies to the dedicated server.
 sv_friction | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 5.2<br>World friction.
 sv_full_alltalk | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Any player (including Spectator team) can speak to any other player
@@ -4188,7 +4185,7 @@ sv_massreport | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 sv_matchend_drops_enabled | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** true<br>Rewards gameplay time is always accumulated for players, but drops at the end of the match can be prevented
 sv_matchpause_auto_5v5 | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>When enabled will automatically pause the match at next freeze time if less than 5 players are connected on each team.
 sv_max_allowed_net_graph | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 1<br>Determines max allowed net_graph value for clients.
-sv_max_change_offsets | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 40<br>How many network changes to track before requiring full diff check.
+sv_max_change_offsets | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 48<br>How many network changes to track before requiring full diff check.
 sv_max_deathmatch_respawns_per_tick | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>
 sv_max_distance_transmit_footsteps | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1250<br>Maximum distance to transmit footstep sound effects.
 sv_max_queries_sec | FCVAR_RELEASE | **Default:** 3<br>Maximum queries per second to respond to from a single IP address.
@@ -4374,14 +4371,13 @@ sv_turbophysics | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>F
 sv_turning_inaccuracy_angle_min | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 4<br>
 sv_turning_inaccuracy_decay | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0.8<br>
 sv_turning_inaccuracy_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** false<br>
-sv_unify_random_seed | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>Should we securely share seeds between the client and server?
 sv_unlag | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>Enables player lag compensation
 sv_unlag_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 sv_unlag_fixstuck | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>Disallow backtracking a player for lag compensation if it will cause them to become stuck
 sv_unlockedchapters | FCVAR_ARCHIVE | **Default:** 1<br>Highest unlocked game chapter.
 sv_update_animgraph_movement_in_finish | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>Whether we should update animgraph movement in FinishMove.
 sv_usenetworkvars | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Use networkvar system.
-sv_usercmd_custom_random_seed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** true<br>When enabled server will populate an additional random seed independent of the client
+sv_usercmd_custom_random_seed | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>When enabled server will populate an additional random seed independent of the client
 sv_usercmd_queue_spew_threshold | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 10<br>Spew warning if command queue has grown above this many backlogged commands.
 sv_usestepsimulation | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>use old stepsimulation system.
 sv_versus_screen_scene_id | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>Determines which scene is used for the versus screen.
@@ -4531,7 +4527,7 @@ tv_port | FCVAR_RELEASE | **Default:** 27020<br>Host SourceTV\[0\] port
 tv_port1 | FCVAR_RELEASE | **Default:** 27021<br>Host SourceTV\[1\] port
 tv_rate_multiplier | FCVAR_DEVELOPMENTONLY | **Default:** 2<br>Multiply requested rate by this value to adjust Dota TV send rate
 tv_record | FCVAR_RELEASE | Starts SourceTV demo recording.
-tv_record_immediate | FCVAR_RELEASE | **Default:** 1<br>tv_record starting the moment tv_record was executed, not tv_delay earlier
+tv_record_immediate | FCVAR_RELEASE | **Default:** 0<br>tv_record starting the moment tv_record was executed, not tv_delay earlier
 tv_relay | FCVAR_RELEASE | Connect to SourceTV server and relay broadcast.
 tv_relay_hard_shutdown | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 tv_relay_quit_after_game | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Quit after a game has been relayed, do not hibernate

@@ -435,7 +435,7 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             :                                     : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 1                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 2                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : cl                                  : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -653,7 +653,6 @@ cl_jiggle_bone_debug_yaw_constraints                                            
 cl_jiggle_bone_invert                                                           : false             : cheat                               : 
 cl_jiggle_bone_sanity                                                           : true              :                                     : Prevent jiggle bones from pointing directly away from their target in case of numerical instability.
 cl_join_advertise                                                               : 1                 : cl, a                               : Advertise joinable game in progress to Steam friends, otherwise need a Steam invite (2: all servers, 1: official servers, 0: none)
-cl_lagcompensation                                                              : true              : cl, user                            : Perform server side lag compensation of weapon firing events.
 cl_lagcompensation_test_auto_target                                             : false             : devonly, cl                         : Auto-pick value of cl_lagcompensation_test_target.
 cl_lagcompensation_test_target                                                  : -1                : devonly, cl                         : Player whose head is tracked to test lag compensation.
 cl_language                                                                     : english           :                                     : Language
@@ -764,14 +763,12 @@ cl_pred_optimize                                                                
 cl_pred_parallel_postnetwork                                                    : true              : cl                                  : 
 cl_pred_track                                                                   : cmd               : cl                                  : <entindex> <fieldname>:  Track changes to entity index entindex, for field fieldname.
 cl_pred_track_off                                                               : cmd               : cl                                  : clear field track changes.
-cl_predict                                                                      : true              : cl, user, cheat                     : Perform client side prediction.
 cl_predict_after_every_createmove                                               : true              : devonly                             : run prediction after every CreateMove instead of only after CreateMove for the final tick in a frame.
 cl_predict_bomb_defusal                                                         : true              : cl                                  : 
 cl_predict_weapon_drop                                                          : true              : cl                                  : 
 cl_predictioncopy_describe                                                      : cmd               : cl                                  : Describe datamap_t for entindex
 cl_predictioncopy_print                                                         : cmd               : cl                                  : Print simple description of prediction copy fields for entindex
 cl_predictioncopy_runs                                                          : true              : cl                                  : 
-cl_predictweapons                                                               : true              : cl, user                            : Perform client side prediction of weapon effects.
 cl_printfps                                                                     : cmd               : cl                                  : Print information from cl_showfps.
 cl_profilereadpacketentities                                                    : false             : devonly                             : 
 cl_promoted_settings_acknowledged                                               : 0:0               : cl, a                               : 
@@ -1187,6 +1184,7 @@ debug_aim_angle                                                                 
 debug_chicken                                                                   : false             : devonly, sv                         : Chicken debug info
 debug_draw_enable                                                               : true              : devonly, rep                        : 
 debug_entity_outline_highlight                                                  : false             : cl, cheat                           : 
+debug_hltv                                                                      : 0                 : devonly, sv, cl, rep, clientcmd_can_execute : Print out hltv events
 debug_overlay_fullposition                                                      : false             : sv                                  : 
 debug_physimpact                                                                : false             : sv                                  : 
 debug_purchase_defidx                                                           : cmd               : cl, release, clientcmd_can_execute  : Purchase an item by defindex
@@ -2718,6 +2716,7 @@ net_spewcounts                                                                  
 net_spewserializer                                                              : cmd               : devonly                             : Spew serializer info\n
 net_stats_json                                                                  : cmd               :                                     : Output server networking statistics in json format
 net_status                                                                      : cmd               : release                             : Shows current network status
+net_use_delta_property_fastpath                                                 : 1                 :                                     : 
 net_use_packet_compression                                                      : true              :                                     : Compress network traffic
 net_usesocketsforloopback                                                       : false             :                                     : Use network sockets layer even for listen server local player's packets (multiplayer only).
 net_validatemessages                                                            : cmd               : cheat                               : Activates/deactivates net message validation
@@ -4137,7 +4136,6 @@ sv_bounce                                                                       
 sv_buy_status_override                                                          : -1                : sv, rep, release, missing3          : Override for buy status map info. 0 = everyone can buy, 1 = ct only, 2 = t only 3 = nobody
 sv_chat_proximity                                                               : -1                : sv, cl, rep, release                : 
 sv_cheats                                                                       : false             : nf, rep, release                    : Allow cheats on server
-sv_client_predict                                                               : -1                : sv, cl, rep                         : This can be used to force the value of cl_predict for connected clients (only while they are connected).\n   -1 = let clients set cl_predict to anything\n    0 = force cl_predict to 0\n    1 = force cl_predict to 1
 sv_clientrates                                                                  : cmd               :                                     : Show client rates.
 sv_clip_penetration_traces_to_players                                           : true              : sv, cl, rep                         : 
 sv_clockcorrection_msecs                                                        : 30                : sv, release                         : The server tries to keep each player's m_nTickBase withing this many msecs of the server absolute tickcount
@@ -4207,7 +4205,6 @@ sv_fistpunch_viewmove                                                           
 sv_footsteps                                                                    : 1                 : devonly, sv, cl, nf, rep            : Play footstep sound for players
 sv_force_team_intro_random                                                      : 0                 : devonly, sv                         : 
 sv_force_team_intro_variant                                                     : 0                 : devonly, sv                         : 
-sv_force_transmit_ents                                                          : true              : devonly, sv                         : Will transmit all entities to client, regardless of PVS conditions (will still skip based on transmit flags, however).
 sv_fps_max                                                                      : 0                 : hidden                              : Dedicated server frame rate limiter. 0=tick rate. Only applies to the dedicated server.
 sv_friction                                                                     : 5.2               : sv, cl, nf, rep, release            : World friction.
 sv_full_alltalk                                                                 : false             : sv, cl, rep, release                : Any player (including Spectator team) can speak to any other player
@@ -4282,7 +4279,7 @@ sv_massreport                                                                   
 sv_matchend_drops_enabled                                                       : true              : sv, release                         : Rewards gameplay time is always accumulated for players, but drops at the end of the match can be prevented
 sv_matchpause_auto_5v5                                                          : false             : sv, cl, rep, release                : When enabled will automatically pause the match at next freeze time if less than 5 players are connected on each team.
 sv_max_allowed_net_graph                                                        : 1                 : sv, cl, nf, rep, release            : Determines max allowed net_graph value for clients.
-sv_max_change_offsets                                                           : 40                : devonly, sv                         : How many network changes to track before requiring full diff check.
+sv_max_change_offsets                                                           : 48                : devonly, sv                         : How many network changes to track before requiring full diff check.
 sv_max_deathmatch_respawns_per_tick                                             : 0                 : sv, release, missing3               : 
 sv_max_distance_transmit_footsteps                                              : 1250              : sv, cl, rep                         : Maximum distance to transmit footstep sound effects.
 sv_max_queries_sec                                                              : 3                 : release                             : Maximum queries per second to respond to from a single IP address.
@@ -4468,14 +4465,13 @@ sv_turbophysics                                                                 
 sv_turning_inaccuracy_angle_min                                                 : 4                 : sv, cl, rep, cheat, release         : 
 sv_turning_inaccuracy_decay                                                     : 0.8               : sv, cl, rep, cheat, release         : 
 sv_turning_inaccuracy_enabled                                                   : false             : sv, cl, rep, cheat, release         : 
-sv_unify_random_seed                                                            : false             : sv, release                         : Should we securely share seeds between the client and server?
 sv_unlag                                                                        : true              : devonly, sv                         : Enables player lag compensation
 sv_unlag_debug                                                                  : false             : devonly, sv                         : 
 sv_unlag_fixstuck                                                               : false             : devonly, sv                         : Disallow backtracking a player for lag compensation if it will cause them to become stuck
 sv_unlockedchapters                                                             : 1                 : a                                   : Highest unlocked game chapter.
 sv_update_animgraph_movement_in_finish                                          : true              : sv, cl, rep, cheat                  : Whether we should update animgraph movement in FinishMove.
 sv_usenetworkvars                                                               : true              :                                     : Use networkvar system.
-sv_usercmd_custom_random_seed                                                   : true              : sv, cl, rep, release                : When enabled server will populate an additional random seed independent of the client
+sv_usercmd_custom_random_seed                                                   : false             : sv, release                         : When enabled server will populate an additional random seed independent of the client
 sv_usercmd_queue_spew_threshold                                                 : 10                : sv, release                         : Spew warning if command queue has grown above this many backlogged commands.
 sv_usestepsimulation                                                            : false             : devonly, sv                         : use old stepsimulation system.
 sv_versus_screen_scene_id                                                       : 0                 : sv, release, missing3               : Determines which scene is used for the versus screen.
@@ -4628,7 +4624,7 @@ tv_port                                                                         
 tv_port1                                                                        : 27021             : release                             : Host SourceTV[1] port
 tv_rate_multiplier                                                              : 2                 :                                     : Multiply requested rate by this value to adjust Dota TV send rate
 tv_record                                                                       : cmd               : release                             : Starts SourceTV demo recording.
-tv_record_immediate                                                             : 1                 : release                             : tv_record starting the moment tv_record was executed, not tv_delay earlier
+tv_record_immediate                                                             : 0                 : release                             : tv_record starting the moment tv_record was executed, not tv_delay earlier
 tv_relay                                                                        : cmd               : release                             : Connect to SourceTV server and relay broadcast.
 tv_relay_hard_shutdown                                                          : false             :                                     : 
 tv_relay_quit_after_game                                                        : true              :                                     : Quit after a game has been relayed, do not hibernate
