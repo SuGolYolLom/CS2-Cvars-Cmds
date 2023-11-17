@@ -417,7 +417,7 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             : devonly                             : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 1                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 0                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : devonly, cl                         : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -461,6 +461,7 @@ cl_deathcam_audio_mix_phase1_fade_time                                          
 cl_deathcam_audio_mix_phase2_fade_amount                                        : 0.5               : cl, release                         : Sets the amount of ducking to do on death cam fade out. When set to 1, full DeathFadeLayer is applied.
 cl_deathcam_audio_mix_phase2_fade_time                                          : 0.4               : cl, release                         : Sets the amount of time we fade out over.
 cl_deathcampanel_position_dynamic                                               : 1                 : cl, a                               : Turn on/off deathcam's kill panel dynamic Y movement
+cl_deathnotices_show_numbers                                                    : 0                 : cl, release                         : 0: default; 1: draw names as just numbers; 2: append number on killer and victim to the name
 cl_debounce_zoom                                                                : true              : cl, a, user, per_user               : Whether or not to disable holding secondary fire to cycle zoom levels
 cl_debug_client_gamestats                                                       : true              : devonly, cl                         : 
 cl_debug_duck                                                                   : 2                 : devonly, cl                         : 
@@ -596,6 +597,7 @@ cl_glow_brightness                                                              
 cl_glow_item_far_b                                                              : 1                 : cl, release                         : 
 cl_glow_item_far_g                                                              : 0.4               : cl, release                         : 
 cl_glow_item_far_r                                                              : 0.3               : cl, release                         : 
+cl_graphics_driver_warning_dont_show_again                                      : false             : cl, a, release                      : 
 cl_groups                                                                       : cmd               : devonly, cl                         : Show status of all spawn groups.
 cl_gunlowerangle                                                                : 2                 : devonly, cl                         : 
 cl_gunlowerspeed                                                                : 0.1               : devonly, cl                         : 
@@ -1073,8 +1075,10 @@ convars_echo_toggle_changes                                                     
 convert_steamid                                                                 : cmd               : devonly, cl                         : Convert SteamID into multiple formats
 cpu_level                                                                       : 2                 : devonly, cl                         : CPU Level - Default: High
 cpuinfo                                                                         : cmd               : devonly                             : Print CPU configuration information
-cq_adjust_deadzone_ticks                                                        : 0.75              : devonly, sv                         : don't adjust rate faster/slower if average queue is this close to goal.
-cq_buffer_bloat_msecs                                                           : 150               : sv, release                         : max buffer bloat before we reset and discard buffered user commands.
+cq_adjust_deadzone_ticks_faster                                                 : 0.75              : devonly, sv                         : don't adjust rate faster/slower if average queue is this close to goal.
+cq_adjust_deadzone_ticks_slower                                                 : 0.25              : devonly, sv                         : don't adjust rate faster/slower if average queue is this close to goal.
+cq_buffer_bloat_msecs                                                           : 150               : sv, release                         : tolerable buffer bloat before we start pushing the rate down.
+cq_buffer_bloat_msecs_max                                                       : 150               : sv, release                         : absolute max buffer bloat before we reset and discard buffered user commands.
 cq_debug                                                                        : 0                 : devonly, sv, rep                    : Verbose command queue logging.
 cq_dilation_percentage                                                          : 5                 : devonly, sv, cl, rep                : When speeding up slowing down, this is how much
 cq_dropped_command_msecs                                                        : 1000              : devonly, sv                         : max msecs of starved usercmds to queue before dropping any additional.
@@ -1083,7 +1087,7 @@ cq_fake_starve                                                                  
 cq_force_percent                                                                : 0                 : devonly, sv                         : debugging, force client tick rate faster/slower by specified percentage.
 cq_logging                                                                      : false             : sv, release                         : command queue logging of events.
 cq_logging_interval                                                             : 0                 : sv, release                         : command queue logging per player stats every N seconds, 0 to disable.
-cq_min_queue_size                                                               : 1                 : sv, release                         : min buffer queue target size.
+cq_min_queue_size                                                               : 0                 : sv, release                         : min buffer queue target size.
 cq_netgraph                                                                     : 0                 : cl, user                            : Display command queue statistics on the hud
 cq_netgraph_problem_show_auto                                                   : false             : cl, a, release                      : Automatically activate/deactivate cq_netgraph when network conditions degrade
 cq_queue_sample_count                                                           : 20                : devonly, sv                         : how many frames of samples to store in the buffer sample queue.
@@ -1135,8 +1139,10 @@ csm_cascade1_override_dist                                                      
 csm_cascade2_override_dist                                                      : -1                : cheat                               : 
 csm_cascade3_override_dist                                                      : -1                : cheat                               : 
 csm_cascade_viewdir_shadow_bias_scale                                           : 2                 : cheat                               : 
+csm_max_dist_between_caster_and_receiver                                        : 15000             : cheat                               : default pushback
 csm_max_num_cascades_override                                                   : -1                : devonly                             : Number of cascades in sunlight shadow
 csm_max_shadow_dist_override                                                    : -1                : devonly                             : 
+csm_max_visible_dist                                                            : 7500              : cheat                               : 
 csm_res_override_0                                                              : 0                 : cheat                               : 
 csm_res_override_1                                                              : 0                 : cheat                               : 
 csm_res_override_2                                                              : 0                 : cheat                               : 
@@ -1147,6 +1153,7 @@ csm_viewdir_shadow_bias                                                         
 csm_viewmodel_farz                                                              : 30                : cheat                               : 
 csm_viewmodel_max_shadow_dist                                                   : 21                : cheat                               : 
 csm_viewmodel_max_visible_dist                                                  : 1000              : cheat                               : 
+csm_viewmodel_nearz                                                             : 0.5               : cheat                               : 
 csm_viewmodel_shadows                                                           : false             : devonly                             : 
 custom_bot_difficulty                                                           : 2                 : sv, cl, rep, release                : Bot difficulty for offline play.
 cv_bot_ai_bt_debug_target                                                       : -1                : sv, rep, cheat                      : Draw the behavior tree of the given bot.
@@ -1166,7 +1173,7 @@ debug_aim_angle                                                                 
 debug_chicken                                                                   : false             : devonly, sv                         : Chicken debug info
 debug_draw_enable                                                               : true              : devonly, rep                        : 
 debug_entity_outline_highlight                                                  : false             : cl, cheat                           : 
-debug_hltv                                                                      : 0                 : devonly, sv, cl, rep, clientcmd_can_execute : Print out hltv events
+debug_hltv                                                                      : 0                 : devonly, cl, rep, clientcmd_can_execute : Print out hltv events
 debug_overlay_fullposition                                                      : false             : devonly, sv                         : 
 debug_physimpact                                                                : false             : devonly, sv                         : 
 debug_purchase_defidx                                                           : cmd               : cl, release, clientcmd_can_execute  : Purchase an item by defindex
@@ -1788,6 +1795,9 @@ lb_csm_fov_override                                                             
 lb_csm_override_staticgeo_cascades                                              : false             : devonly                             : Override Cascades that will render static objects with lb_csm_override_staticgeo_cascades_value
 lb_csm_override_staticgeo_cascades_value                                        : -1                : devonly                             : If lb_csm_override_staticgeo_cascades, override value used to determine which cascades render static objects
 lb_csm_receiver_plane_depth_bias                                                : 1e-06             : devonly                             : Depth bias applied to shadow receiver
+lb_csm_receiver_plane_depth_bias_d16                                            : -0.003905         : devonly                             : Depth bias applied to shadow receiver (when using D16 image format for shadows)
+lb_csm_receiver_plane_depth_bias_transmissive_backface                          : 6e-05             : devonly                             : Depth bias applied to shadow receiver for transmissive backface geo
+lb_csm_receiver_plane_depth_bias_transmissive_backface_d16                      : -0.002            : devonly                             : Depth bias applied to shadow receiver for transmissive backface geo (when using D16 image format for shadows)
 lb_cubemap_normalization_max                                                    : 1                 : devonly                             : 
 lb_cubemap_normalization_roughness_begin                                        : 0.1               : devonly                             : 
 lb_debug_light_bounds                                                           : false             : devonly, cheat, menubar_item        : SceneSystem/LightBinner/Debug Light Bounds
@@ -3056,7 +3066,7 @@ r_csgo_render_post_mirror_vertical                                              
 r_csgo_render_translucent                                                       : true              : cl, cheat                           : 
 r_csgo_resolve_dither_bluenoise_amount                                          : 4                 : devonly, cl                         : Equivalent to r_csgo_render_dither_scale, but purely to control bluenoise for R11G11B10 downsample dither (if r_csgo_r11g11b10_dither_mode = 2)
 r_csgo_resolve_dither_noise_amount                                              : 0.2               : devonly, cl                         : Amount of screen space dither noise to apply during resolve (used/essential with R11G11B10_FLOAT RT)
-r_csgo_shadow_map_allocation_failure_policy                                     : 0                 : devonly, cl, cheat                  : What happens when a shadow map fails allocation? 0 = don't render, 1 = render unshadowed
+r_csgo_shadow_map_allocation_failure_policy                                     : 1                 : devonly, cl, cheat                  : What happens when a shadow map fails allocation? 0 = don't render, 1 = render unshadowed
 r_csgo_shadows_debug                                                            : 0                 : cl, cheat                           : 
 r_csgo_single_lightbinner                                                       : true              : devonly, cl                         : 
 r_csgo_smoke_avoid_flat                                                         : true              : devonly, cl                         : 
@@ -3067,6 +3077,8 @@ r_csgo_smoke_quality                                                            
 r_csgo_smoke_shadow                                                             : false             : devonly, cl                         : 
 r_csgo_stencil_sniper_zoom                                                      : true              : devonly, cl                         : 
 r_csgo_tools_vis_cubemap_roughness                                              : 0.0001            : devonly, cl, cheat                  : 
+r_csgo_viewmodel_csm_pushback_distance                                          : 15000             : devonly, cl                         : 
+r_csgo_viewmodel_csm_pushback_distance_d16                                      : 1000              : devonly, cl                         : 
 r_csgo_viewmodel_envmap_clamp_plane_distance                                    : 24                : devonly, cl, cheat                  : 
 r_csgo_viewmodel_envmap_position_bias                                           : 0.85              : devonly, cl, cheat                  : 
 r_csgo_viewmodel_far_plane                                                      : 100               : devonly, cl                         : 
@@ -3085,6 +3097,7 @@ r_decals                                                                        
 r_decals_default_fade_duration                                                  : 1                 : devonly, cl, rep                    : 
 r_decals_default_start_fade                                                     : 30                : devonly, cl, rep                    : 
 r_decals_overide_fadestarttime_params                                           : -1                : devonly, sv, cl, rep, missing3      : 
+r_decals_overlap_threshold                                                      : 6                 : devonly, cl, rep                    : 
 r_depth_of_field                                                                : 1                 : devonly, cl                         : 0 = off, 1 = enabled (high quality, circular bokeh, HDR)
 r_detail_lerp_znormal                                                           : 0.89              : devonly, cl                         : 
 r_detailprop_fade_dist                                                          : 3000              : devonly, cl                         : 
@@ -3173,11 +3186,13 @@ r_grass_parallel_load                                                           
 r_grass_quality                                                                 : 3                 : devonly                             : 0 = Off, 1 = Low, 2 = Med, 3 = high, 4 = ultra
 r_grass_start_fade                                                              : 3000              : devonly                             : 
 r_grass_vertex_lighting                                                         : 0                 : devonly                             : 
+r_icon_csm_pushback_distance                                                    : -1                : devonly, cl, cheat                  : csm pushback distance, should be much shorter/disabled for icon rendering
 r_icon_custommaterial_maxres                                                    : 512               : devonly, cl, cheat                  : maxres for custommaterials when rendering icons
 r_icon_generate_mips                                                            : true              : devonly, cl, cheat                  : generate mips for runtime and add sidecar file for offline
 r_icon_highcontrast_postprocessing_weight                                       : 0.375             : devonly, cl, cheat                  : if using high contrast postprocessing, use this weight (weight = 1.0 for characters)
 r_icon_max_mip_width                                                            : 128               : devonly, cl, cheat                  : r_icon_max_mip_width
 r_icon_player_equip_gloves_from_loadout                                         : false             : devonly, cl, cheat                  : equip gloves on player for icon rendering from loadout, or use default gloves
+r_icon_reload_map                                                               : false             : devonly, cl, cheat                  : force reload map on new request
 r_icon_rendering_height                                                         : 384               : devonly, cl, cheat                  : icon rendering height
 r_icon_rendering_msaa_mode                                                      : 4                 : devonly, cl, cheat                  : MSAA mode used for icon rendering 0-none, 1-2xMSAA, 2-4xMSAA, 3-6X, 4-8X, etc
 r_icon_rendering_width                                                          : 512               : devonly, cl, cheat                  : icon rendering width
@@ -4075,6 +4090,7 @@ sv_disable_radar                                                                
 sv_disable_reliable_delta_retransmit                                            : true              : devonly                             : Assume that a reliable entity delta will be ack'ed and send future deltas relative to the last reliable delta.
 sv_disable_teamselect_menu                                                      : false             : sv, cl, rep, release, missing3      : Disable teamselect menu on clients
 sv_disconnected_player_data_hold_time                                           : 60                : sv, cl, rep, release                : Duration, in seconds, to hold onto the data of disconnected players, for scoreboard display.
+sv_disconnected_players_cleanup_delay                                           : 0                 : sv, release, missing3               : Delay between player disconnecting and their corpse getting cleaned up.
 sv_distance_guaranteed_damage_feedback                                          : 1070              : sv, release                         : Attacks made within this radius are guaranteed to generate damage feedback sounds.
 sv_dm_gamemoderules_controls_rounds                                             : true              : devonly, sv                         : 
 sv_dz_cash_bundle_size                                                          : 50                : sv, rep, release                    : Size of a cash bundle
@@ -4272,6 +4288,7 @@ sv_record_item_time_data                                                        
 sv_regeneration_force_on                                                        : false             : sv, cheat                           : Cheat to test regenerative health systems
 sv_regeneration_wait_time                                                       : 1                 : devonly, sv, rep                    : 
 sv_region                                                                       : -1                : release                             : The region of the world to report this server in.
+sv_reliableavatardata                                                           : false             : sv, cl, rep, release                : Use server overrides for steam avatars
 sv_remapper_loopsoundfix                                                        : false             : devonly, sv, cl, rep                : 
 sv_remapper_range_multiplier                                                    : 1                 : devonly, sv, cl, rep                : 
 sv_remove_ent_from_pvs                                                          : 0                 : devonly, sv                         : 
@@ -4342,6 +4359,7 @@ sv_staminajumpcost                                                              
 sv_staminalandcost                                                              : 0.05              : sv, cl, rep, release, missing3      : Stamina penalty for landing
 sv_staminamax                                                                   : 80                : sv, cl, rep, release                : Maximum stamina penalty
 sv_staminarecoveryrate                                                          : 60                : sv, cl, rep, release                : Rate at which stamina recovers (units/sec)
+sv_standable_normal                                                             : 0.7               : sv, cl, rep, cheat, release         : 
 sv_stats                                                                        : true              : devonly                             : Collect CPU usage stats
 sv_steamgroup                                                                   :                   : nf, release                         : The ID of the steam group that this server belongs to. You can find your group's ID on the admin profile page in the steam community.
 sv_steamgroup_exclusive                                                         : false             : release                             : If set, only members of Steam group will be able to join the server when it's empty, public people will be able to join the server only if it has players.
@@ -4414,6 +4432,7 @@ sv_vote_kick_ban_duration                                                       
 sv_vote_quorum_ratio                                                            : 0.501             : sv, release                         : The minimum ratio of players needed to vote on an issue to resolve it.
 sv_vote_timer_duration                                                          : 15                : sv, release                         : How long to allow voting on an issue
 sv_vote_to_changelevel_before_match_point                                       : false             : sv, rep, release, missing3          : Restricts vote to change level to rounds prior to match point (default 0, vote is never disallowed)
+sv_walkable_normal                                                              : 0.7               : sv, cl, rep, cheat, release         : 
 sv_warmup_to_freezetime_delay                                                   : 4                 : sv, cl, rep, release, missing3      : Delay between end of warmup and start of match.
 sv_watchtransmit                                                                : -2                : sv, release                         : Watch NetworkStateChanged info for this entity index.
 sv_water_slow_amount                                                            : 0.9               : sv, cl, rep, release                : 
@@ -4665,7 +4684,7 @@ voice_show_mute                                                                 
 voice_stall_ms                                                                  : 250               : devonly                             : 
 voice_status_test_toggle                                                        : cmd               : devonly, cl                         : Test voice and status notices
 voice_test_log_send                                                             : false             : release                             : 
-voice_threshold                                                                 : 4000              : cl, a                               : 
+voice_threshold                                                                 : 0                 : cl, a                               : 
 voice_threshold_delay                                                           : 0.5               : devonly                             : 
 voice_unmute                                                                    : cmd               : devonly                             : Unmute a specific Steam user, or `all` to unmute all connected players.
 voice_vox                                                                       : 0                 : cl, a, per_user                     : Voice chat uses a vox-style always on
