@@ -129,7 +129,6 @@ anim_disable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:
 anim_eval_stats | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Displays stats about how many EvaluatePose calls are unused
 anim_resetclientsideframe_old_behavior | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 anim_resource_validate_on_load | FCVAR_RELEASE | **Default:** true<br>Validates the animation group channel list against the animations on load for every animation
-anim_scale_wasd_input_arm_pump | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.8<br>
 anim_scale_wasd_input_hip_dip | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.8<br>
 anim_scale_wasd_input_hip_swivel | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.8<br>
 animated_material_attributes | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
@@ -435,7 +434,7 @@ cl_clock_unhook |  | **Default:** false<br>
 cl_clockdbg |  | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 2<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -1099,7 +1098,6 @@ cq_buffer_bloat_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 150<br>tol
 cq_buffer_bloat_msecs_max | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 150<br>absolute max buffer bloat before we reset and discard buffered user commands.
 cq_debug | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 0<br>Verbose command queue logging.
 cq_dilation_percentage | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>When speeding up slowing down, this is how much
-cq_dropped_command_msecs | FCVAR_GAMEDLL | **Default:** 1000<br>max msecs of starved usercmds to queue before dropping any additional.
 cq_enable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 cq_fake_starve | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>if set, starve this many commands by discarding during process usercmds.
 cq_force_percent | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 0<br>debugging, force client tick rate faster/slower by specified percentage.
@@ -2371,7 +2369,6 @@ mp_warmup_start | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Start warmup.
 mp_warmuptime | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 30<br>How long the warmup period lasts. Changing this value resets warmup.
 mp_warmuptime_all_players_connected | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>Warmup time to use when all players have connected. 0 to disable.
 mp_warmuptime_match_cancelled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 5<br>Warmup time to use when the match will be cancelled (eg. due to a live VAC ban).
-mp_weapon_melee_touch_time_after_hit | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 5<br>
 mp_weapon_next_owner_touch_time | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 1.3<br>
 mp_weapon_prev_owner_touch_time | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 1.5<br>
 mp_weapon_self_inflict_amount | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>If Set to non-0, will hurt the attacker by the specified fraction of max damage if they miss.
