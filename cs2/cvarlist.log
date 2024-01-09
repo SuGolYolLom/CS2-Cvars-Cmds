@@ -174,6 +174,7 @@ animgraph_trace_static_only                                                     
 animgraph_verify_dirty_netvar_optimization                                      : false             : devonly                             : 
 apply_crosshair_code                                                            : cmd               : devonly, cl                         : Apply a crosshair code to the current crosshair settings.
 async_serialize                                                                 : false             : devonly                             : Force async reads to serialize for profiling
+audio_input_test_signal                                                         : false             : devonly                             : For testing the audio input pathway with a sine tone instead of SDL3.
 auto_bug                                                                        : cmd               : devonly, norecord                   : auto_bug : create non-interactive bug report.
 autobuy                                                                         : cmd               : cl, clientcmd_can_execute           : Attempt to purchase items with the order listed in cl_autobuy
 autosave                                                                        : cmd               : devonly, sv                         : Autosave
@@ -416,7 +417,7 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             : devonly                             : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 3                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 0                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : devonly, cl                         : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -1640,6 +1641,7 @@ imgui_show_command_tool                                                         
 imgui_show_entity_browser                                                       : false             : devonly, sv, cl, a, rep, cheat, menubar_item : Game/Show Entity Browser
 imgui_show_entity_catalog                                                       : false             : devonly, sv, cl, a, rep, cheat, menubar_item : Game/Show Entity Catalog
 imgui_show_example_window                                                       : false             : devonly, sv, cl, a, rep, cheat, menubar_item : Source2/Show Example Window
+imgui_show_sound_window                                                         : false             : devonly, sv, cl, a, rep, cheat, menubar_item : Source2/Show Example Window
 imgui_temp_enable                                                               : false             : devonly, sv, cl, rep, cheat         : if imgui should display temporarily
 import_csgo_config                                                              : cmd               : devonly, cl                         : Imports an existing CS:GO configuration file into CS2
 impulse                                                                         : cmd               : cl, release                         : Triggers impulse command
@@ -2675,6 +2677,9 @@ npcsolve_separation_r2                                                          
 open_asset                                                                      : cmd               : devonly                             : Opens an asset in it's primary editor of choice. Specify the full path to the asset from the mod directory.
 option_duck_method                                                              : false             : cl, a, user, per_user               : Input toggle control
 option_speed_method                                                             : false             : cl, a, user, per_user               : Input toggle control
+opus_decode_test_signal                                                         : false             : devonly                             : 
+opus_encode_test_signal                                                         : false             : devonly                             : 
+opus_unittest_test_signal                                                       : false             : devonly                             : 
 p2p_listpeers                                                                   : cmd               : devonly                             : List currently known peers.
 p2p_ping                                                                        : cmd               : devonly, cl                         : Ping a peer.
 panorama_2d_translate_no_comp_layer                                             : true              : devonly, hidden                     : 
@@ -2829,6 +2834,7 @@ phys_buoyancy_angular_damping_multiplier                                        
 phys_buoyancy_drag_multiplier                                                   : 1                 : devonly, nf, rep                    : Multiply water drag (tries to equalize object velocity with the velocity of the water flow)
 phys_buoyancy_horizontal_damping_multiplier                                     : 0                 : devonly, nf, rep                    : Multiply water damping for buoyancy affecting linear velocity in the horizontal plane
 phys_buoyancy_vertical_damping_multiplier                                       : 1                 : devonly, nf, rep                    : Multiply water damping for buoyancy affecting linear velocity in the vertical direction
+phys_capsule_clip_compensation                                                  : true              : devonly, rep                        : 
 phys_continuous_kinematic_update                                                : 0                 : devonly, sv, cl, rep                : 
 phys_create_test_character_proxy                                                : cmd               : devonly, sv                         : Create test character proxy
 phys_cull_internal_mesh_contacts                                                : false             : devonly, rep                        : 
@@ -2841,6 +2847,7 @@ phys_dump_filter_trace_callstack                                                
 phys_dump_intersection_controller                                               : cmd               : devonly, sv                         : Dump intersection controller status
 phys_dump_main_world                                                            : cmd               : devonly, sv                         : Dump physics main world to file
 phys_dynamic_scaling                                                            : true              : sv, cl, rep, cheat                  : 
+phys_enable_fallback_toi                                                        : true              : devonly, rep                        : 
 phys_enable_gjk_clipping                                                        : false             : devonly, rep                        : 
 phys_expensive_shape_threshold                                                  : 6                 : cl, cheat                           : 
 phys_fast_report_contacts                                                       : 1                 : devonly                             : when 1, fast path for collision reporting is implemented making triggers faster in some cases
@@ -2851,6 +2858,7 @@ phys_highlight_expensive_objects                                                
 phys_highlight_expensive_objects_strength                                       : 0.02              : cheat                               : Highlight expensive physics objects strength
 phys_impactforcescale                                                           : 1                 : devonly, sv                         : 
 phys_implicit_integarator                                                       : true              : devonly, nf, rep                    : Use implicit integrator for gyroscopic forces
+phys_intermediate_notify_remove_only                                            : true              : devonly, rep                        : 
 phys_jiggle_bone_enable                                                         : true              : devonly                             : 
 phys_joint_teleport                                                             : true              : sv, cheat                           : Teleport joint anchors if connected to world
 phys_length_damping_ratio                                                       : 2                 : sv, cheat                           : Spring damping ratio for length constraint
@@ -4016,6 +4024,9 @@ stopsoundscape                                                                  
 subclass_change                                                                 : cmd               : sv, cheat, vconsole_fuzzy_matching  : Changes the subclass of the given entity.\n	Arguments:   	<new_subclass> {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 subclass_create                                                                 : cmd               : sv, cheat, vconsole_fuzzy_matching  : Creates an entity of the given subclass where the player is looking.
 surfaceprop                                                                     : cmd               : sv, cheat                           : Reports the surface properties at the cursor
+suspicious_hit_odds_threshold                                                   : 0.01              : sv, cl, rep, release                : 
+suspicious_hit_player_radius                                                    : 8                 : sv, cl, rep, release                : 
+suspicious_hit_strategy                                                         : 0                 : sv, cl, rep, release                : What to do about suspicious hits. 0: Nothing. 1: Skip the bullet. 2: Skip the bullet and re-roll a new bullet.
 sv_accelerate                                                                   : 5.5               : sv, cl, nf, rep, release            : 
 sv_accelerate_debug_speed                                                       : false             : sv, cl, nf, rep, release            : 
 sv_accelerate_use_weapon_speed                                                  : true              : sv, cl, nf, rep, release            : 
@@ -4233,7 +4244,7 @@ sv_noclipduringpause                                                            
 sv_noclipfriction                                                               : 4                 : sv, cl, a, nf, rep                  : Friction during noclip move.
 sv_noclipspeed                                                                  : 1200              : sv, cl, a, nf, rep                  : 
 sv_nomvp                                                                        : false             : devonly, sv                         : Disable MVP awards.
-sv_nonemesis                                                                    : false             : devonly, sv                         : Disable nemesis and revenge.
+sv_nonemesis                                                                    : true              : devonly, sv                         : Disable nemesis and revenge.
 sv_nowinpanel                                                                   : false             : devonly, sv                         : Turn on/off win panel on server
 sv_optimizedmovement                                                            : true              : devonly, sv, cl, rep                : 
 sv_outofammo_indicator                                                          : false             : sv, cl, rep, release, missing3      : 
@@ -4664,11 +4675,15 @@ vmix_input                                                                      
 vmix_output                                                                     : cmd               : cheat                               : Dump main graph control output values
 voice_all_icons                                                                 : false             : devonly, cl                         : Draw all players' voice icons
 voice_always_sample_mic                                                         : false             : a                                   : For systems experiencing a hang/stall when using voice chat.
+voice_bypass_noise_gate                                                         : false             : devonly                             : 
 voice_clientdebug                                                               : 0                 : devonly, cl                         : 
 voice_debugfeedbackfrom                                                         : false             : devonly                             : 
+voice_device_override                                                           :                   : a, release                          : Default device used for voice capture.
 voice_fadeouttime                                                               : 0.005             : devonly                             : 
+voice_in_process                                                                : false             : devonly                             : 
 voice_initial_buffer_ms                                                         : 200               : devonly                             : 
 voice_loopback                                                                  : false             : user                                : 
+voice_loopback_no_networking                                                    : false             : devonly                             : 
 voice_min_buffer_ms                                                             : 100               : devonly                             : 
 voice_modenable                                                                 : true              : cl, a, release, clientcmd_can_execute : Enable/disable voice in this mod.
 voice_modenable_toggle                                                          : cmd               : cl, release                         : Toggle the voice_modenable convar.
@@ -4681,8 +4696,10 @@ voice_show_mute                                                                 
 voice_stall_ms                                                                  : 250               : devonly                             : 
 voice_status_test_toggle                                                        : cmd               : devonly, cl                         : Test voice and status notices
 voice_test_log_send                                                             : false             : release                             : 
-voice_threshold                                                                 : 0                 : cl, a                               : 
-voice_threshold_delay                                                           : 0.5               : devonly                             : 
+voice_threshold                                                                 : 0                 : cl, a                               : decibel threshold for how loud the talker's input signal is before we think they are talking.
+voice_threshold_attack                                                          : 0.3               : cl, a                               : Amount of time we buffer outgoing audio to detect an onset.
+voice_threshold_delay                                                           : 1.5               : cl, a                               : Amount of time the talker is silent before we infer that they are no longer talking.
+voice_threshold_hold                                                            : 0.8               : cl, a                               : Amount of time after the talker starts talking we should keep listening regardless of how loud they are speaking.
 voice_unmute                                                                    : cmd               : devonly                             : Unmute a specific Steam user, or `all` to unmute all connected players.
 voice_vox                                                                       : 0                 : cl, a, per_user                     : Voice chat uses a vox-style always on
 voice_vox_current_peak                                                          : 0                 : devonly, cl                         : Current peak value (out of 64k) of the incoming voice stream

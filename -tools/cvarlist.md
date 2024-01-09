@@ -192,6 +192,7 @@ assetsystem_stats | FCVAR_LINKED_CONCOMMAND | Information about the current asse
 assetsystem_test_resort | FCVAR_LINKED_CONCOMMAND | (Dev command - regenerate the asset sort indicies)
 assetthumbnail_old_fingerprint_style |  | **Default:** true<br>Set to true to revert to old behavior
 async_serialize |  | **Default:** false<br>Force async reads to serialize for profiling
+audio_input_test_signal | FCVAR_DEVELOPMENTONLY | **Default:** false<br>For testing the audio input pathway with a sine tone instead of SDL3.
 auto_bug | FCVAR_DONTRECORD | auto_bug : create non-interactive bug report.
 autobuy | FCVAR_CLIENTDLL<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Attempt to purchase items with the order listed in cl_autobuy
 autosave | FCVAR_GAMEDLL | Autosave
@@ -434,7 +435,7 @@ cl_clock_unhook |  | **Default:** false<br>
 cl_clockdbg |  | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 0<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -1722,6 +1723,7 @@ imgui_show_command_tool | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENT
 imgui_show_entity_browser | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Entity Browser
 imgui_show_entity_catalog | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Entity Catalog
 imgui_show_example_window | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Source2/Show Example Window
+imgui_show_sound_window | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Source2/Show Example Window
 imgui_temp_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>if imgui should display temporarily
 import_csgo_config | FCVAR_CLIENTDLL | Imports an existing CS:GO configuration file into CS2
 import_wizard_spew |  | **Default:** false<br>
@@ -2758,6 +2760,9 @@ npcsolve_separation_r2 | FCVAR_GAMEDLL | **Default:** false<br>
 open_asset |  | Opens an asset in it's primary editor of choice. Specify the full path to the asset from the mod directory.
 option_duck_method | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO<br>FCVAR_PER_USER | **Default:** false<br>Input toggle control
 option_speed_method | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO<br>FCVAR_PER_USER | **Default:** false<br>Input toggle control
+opus_decode_test_signal | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+opus_encode_test_signal | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+opus_unittest_test_signal | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 p2p_listpeers |  | List currently known peers.
 p2p_ping | FCVAR_CLIENTDLL | Ping a peer.
 panorama_2d_translate_no_comp_layer | FCVAR_HIDDEN | **Default:** true<br>
@@ -2914,6 +2919,7 @@ phys_buoyancy_angular_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **
 phys_buoyancy_drag_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply water drag (tries to equalize object velocity with the velocity of the water flow)
 phys_buoyancy_horizontal_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 0<br>Multiply water damping for buoyancy affecting linear velocity in the horizontal plane
 phys_buoyancy_vertical_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply water damping for buoyancy affecting linear velocity in the vertical direction
+phys_capsule_clip_compensation | FCVAR_REPLICATED | **Default:** true<br>
 phys_continuous_kinematic_update | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>
 phys_create_test_character_proxy | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Create test character proxy
 phys_cull_internal_mesh_contacts | FCVAR_REPLICATED | **Default:** false<br>
@@ -2926,6 +2932,7 @@ phys_dump_filter_trace_callstack |  | **Default:** <br>
 phys_dump_intersection_controller | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump intersection controller status
 phys_dump_main_world | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump physics main world to file
 phys_dynamic_scaling | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
+phys_enable_fallback_toi | FCVAR_REPLICATED | **Default:** true<br>
 phys_enable_gjk_clipping | FCVAR_REPLICATED | **Default:** false<br>
 phys_expensive_shape_threshold | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 6<br>
 phys_fast_report_contacts |  | **Default:** 1<br>when 1, fast path for collision reporting is implemented making triggers faster in some cases
@@ -2936,6 +2943,7 @@ phys_highlight_expensive_objects | FCVAR_CHEAT | **Default:** false<br>Highlight
 phys_highlight_expensive_objects_strength | FCVAR_CHEAT | **Default:** 0.02<br>Highlight expensive physics objects strength
 phys_impactforcescale | FCVAR_GAMEDLL | **Default:** 1<br>
 phys_implicit_integarator | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** true<br>Use implicit integrator for gyroscopic forces
+phys_intermediate_notify_remove_only | FCVAR_REPLICATED | **Default:** true<br>
 phys_jiggle_bone_enable |  | **Default:** true<br>
 phys_joint_teleport | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>Teleport joint anchors if connected to world
 phys_length_damping_ratio | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 2<br>Spring damping ratio for length constraint
@@ -4110,6 +4118,9 @@ stopsoundscape | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Stops all soundscape processin
 subclass_change | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Changes the subclass of the given entity.<br>	Arguments:   	&lt;new_subclass&gt; {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 subclass_create | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Creates an entity of the given subclass where the player is looking.
 surfaceprop | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Reports the surface properties at the cursor
+suspicious_hit_odds_threshold | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0.01<br>
+suspicious_hit_player_radius | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 8<br>
+suspicious_hit_strategy | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>What to do about suspicious hits. 0: Nothing. 1: Skip the bullet. 2: Skip the bullet and re-roll a new bullet.
 sv_accelerate | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 5.5<br>
 sv_accelerate_debug_speed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>
 sv_accelerate_use_weapon_speed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** true<br>
@@ -4327,7 +4338,7 @@ sv_noclipduringpause | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>F
 sv_noclipfriction | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 4<br>Friction during noclip move.
 sv_noclipspeed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1200<br>
 sv_nomvp | FCVAR_GAMEDLL | **Default:** false<br>Disable MVP awards.
-sv_nonemesis | FCVAR_GAMEDLL | **Default:** false<br>Disable nemesis and revenge.
+sv_nonemesis | FCVAR_GAMEDLL | **Default:** true<br>Disable nemesis and revenge.
 sv_nowinpanel | FCVAR_GAMEDLL | **Default:** false<br>Turn on/off win panel on server
 sv_optimizedmovement | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 sv_outofammo_indicator | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>
@@ -4764,11 +4775,15 @@ vmix_input | FCVAR_CHEAT | Set an input mix value
 vmix_output | FCVAR_CHEAT | Dump main graph control output values
 voice_all_icons | FCVAR_CLIENTDLL | **Default:** false<br>Draw all players' voice icons
 voice_always_sample_mic | FCVAR_ARCHIVE | **Default:** false<br>For systems experiencing a hang/stall when using voice chat.
+voice_bypass_noise_gate | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 voice_clientdebug | FCVAR_CLIENTDLL | **Default:** 0<br>
 voice_debugfeedbackfrom |  | **Default:** false<br>
+voice_device_override | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>Default device used for voice capture.
 voice_fadeouttime |  | **Default:** 0.005<br>
+voice_in_process |  | **Default:** false<br>
 voice_initial_buffer_ms |  | **Default:** 200<br>
 voice_loopback | FCVAR_USERINFO | **Default:** false<br>
+voice_loopback_no_networking | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 voice_min_buffer_ms |  | **Default:** 100<br>
 voice_modenable | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE<br>FCVAR_CLIENTCMD_CAN_EXECUTE | **Default:** true<br>Enable/disable voice in this mod.
 voice_modenable_toggle | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | Toggle the voice_modenable convar.
@@ -4781,8 +4796,10 @@ voice_show_mute |  | Show whether current players are muted.
 voice_stall_ms |  | **Default:** 250<br>
 voice_status_test_toggle | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Test voice and status notices
 voice_test_log_send | FCVAR_RELEASE | **Default:** false<br>
-voice_threshold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0<br>
-voice_threshold_delay |  | **Default:** 0.5<br>
+voice_threshold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0<br>decibel threshold for how loud the talker's input signal is before we think they are talking.
+voice_threshold_attack | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.3<br>Amount of time we buffer outgoing audio to detect an onset.
+voice_threshold_delay | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 1.5<br>Amount of time the talker is silent before we infer that they are no longer talking.
+voice_threshold_hold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.8<br>Amount of time after the talker starts talking we should keep listening regardless of how loud they are speaking.
 voice_unmute |  | Unmute a specific Steam user, or `all` to unmute all connected players.
 voice_vox | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 0<br>Voice chat uses a vox-style always on
 voice_vox_current_peak | FCVAR_CLIENTDLL | **Default:** 0<br>Current peak value (out of 64k) of the incoming voice stream
