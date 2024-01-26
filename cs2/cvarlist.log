@@ -417,7 +417,7 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             : devonly                             : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 0                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 3                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : devonly, cl                         : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -4768,6 +4768,7 @@ weapon_sound_falloff_multiplier                                                 
 weapon_switch                                                                   : cmd               : devonly, sv                         : Use a particular weapon	\nArguments: <weapon_name>
 webapi_values_init_buffer_size                                                  : 65536             : devonly, cl                         : Initial buffer size for buffers in the WebAPIValues buffer pool
 webapi_values_max_pool_size_mb                                                  : 400               : devonly, cl                         : Maximum size in bytes of the WebAPIValues buffer pool
+workshop_tournament_item_submit                                                 : cmd               : cl, hidden, release                 : 
 world_dump_loaded_worlds                                                        : cmd               : devonly                             : Dump all of the worlds that we know about
 world_layer_list                                                                : cmd               : devonly                             : List all world layers
 world_layer_set_visible                                                         : cmd               : devonly                             : Show or hide the specified world layer

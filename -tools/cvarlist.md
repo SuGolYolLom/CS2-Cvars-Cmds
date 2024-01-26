@@ -435,7 +435,7 @@ cl_clock_unhook |  | **Default:** false<br>
 cl_clockdbg |  | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 0<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -4868,6 +4868,7 @@ weapon_sound_falloff_multiplier | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPL
 weapon_switch | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Use a particular weapon	<br>Arguments: &lt;weapon_name&gt;
 webapi_values_init_buffer_size | FCVAR_CLIENTDLL | **Default:** 65536<br>Initial buffer size for buffers in the WebAPIValues buffer pool
 webapi_values_max_pool_size_mb | FCVAR_CLIENTDLL | **Default:** 400<br>Maximum size in bytes of the WebAPIValues buffer pool
+workshop_tournament_item_submit | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_RELEASE | 
 world_dump_loaded_worlds |  | Dump all of the worlds that we know about
 world_layer_list |  | List all world layers
 world_layer_set_visible |  | Show or hide the specified world layer
