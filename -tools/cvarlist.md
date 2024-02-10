@@ -66,6 +66,7 @@ ai_debug_dyninteractions | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>Debu
 ai_debug_los | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>NPC Line-Of-Sight debug mode. If 1, solid entities that block NPC LOC will be highlighted with white bounding boxes. If 2, it'll show non-solid entities that would do it if they were solid.
 ai_debug_off_nav | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 ai_debug_ragdoll_magnets | FCVAR_GAMEDLL | **Default:** false<br>
+ai_debug_scripted_sequence | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 ai_debug_shoot_positions | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0<br>
 ai_debug_soundent | FCVAR_GAMEDLL | **Default:** 0<br>Reports sounds being entered into the AI sound list. Set to 1 to see all sounds, set to 2 to only see DANGER sounds.
 ai_debug_soundent_duration | FCVAR_GAMEDLL | **Default:** 0.1<br>Length of time to display ai_debug_soundent visual displays.
@@ -77,6 +78,7 @@ ai_force_serverside_ragdoll | FCVAR_GAMEDLL | **Default:** false<br>
 ai_sequence_debug | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 ai_show_current_nav | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 ai_use_visibility_cache | FCVAR_GAMEDLL | **Default:** 1<br>Sets whether or not NPCs can cache their Visibility checks against other entities. If set to 2, also tests to make sure that NPC-&gt;Target results match that of Target-&gt;NPC.
+ai_use_visibility_cache_reciprocation | FCVAR_GAMEDLL | **Default:** true<br>Sets whether or not the visibility check cache should be reciprocal.
 alias | FCVAR_RELEASE | Alias a command.
 ammo_338mag_headshot_mult | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>You must enable tweaking via tweak_ammo_impulses to use this value.
 ammo_338mag_impulse | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 2800<br>You must enable tweaking via tweak_ammo_impulses to use this value.
@@ -127,7 +129,6 @@ anim_dampedaccel16_timewindow | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_
 anim_decode_forcewritealltransforms | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Force BatchAnimationDecode to write transformations for all bones
 anim_disable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 anim_eval_stats | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Displays stats about how many EvaluatePose calls are unused
-anim_resetclientsideframe_old_behavior | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 anim_resource_validate_on_load | FCVAR_RELEASE | **Default:** true<br>Validates the animation group channel list against the animations on load for every animation
 anim_scale_wasd_input_hip_dip | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.8<br>
 anim_scale_wasd_input_hip_swivel | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0.8<br>
@@ -139,11 +140,13 @@ animgraph_debug_entindex | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<
 animgraph_debug_filterent | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>Filter setting for animgraph_debug_variables output. If set to -1, show debug for all entities. If set to 0, show debug for any NPCs that have been npc_selected. If set to &gt;0, something other than 0, show debug for the entity with the matching entindex.
 animgraph_debug_max_poseop_count | FCVAR_MISSING0 | **Default:** false<br>
 animgraph_debug_set_filter_params | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** <br>Comma separated list of params to filter against when drawing debug text overlays
+animgraph_debug_show_unreferenced_params | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 animgraph_debug_tags | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 animgraph_debug_variables | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>Turn on to see animgraph variable changes for entities passing animgraph_debug_filterent.
 animgraph_debug_variables_ignore_missing | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>If set, animgraph_debug_variables won't show debug for warnings about sets to missing variables.
 animgraph_debug_variables_ignore_nonchanges | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>If set, animgraph_debug_variables won't show debug for variable sets that don't change the value.
 animgraph_draw_traces | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
+animgraph_dump_update_list | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Displays stats about which animations are updating
 animgraph_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Enable animation graph
 animgraph_enable_dirty_netvar_optimization |  | **Default:** true<br>
 animgraph_enable_parallel_update | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
@@ -166,6 +169,12 @@ animgraph_ik_debug |  | **Default:** false<br>
 animgraph_motionmatching_print_compressionstats | FCVAR_REPLICATED | **Default:** false<br>
 animgraph_network_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Enable animation graph networking. The setting is only read at graph creation time; to use please set on the command line.
 animgraph_record_all | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>Automatically start recording AnimGraphs when they get created, and save them to disk when they are destroyed
+animgraph_set_parameter_bool | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified bool parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
+animgraph_set_parameter_enum | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified enum parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
+animgraph_set_parameter_float | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified float parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
+animgraph_set_parameter_int | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified int parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
+animgraph_set_parameter_string | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified bool parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
+animgraph_set_parameter_vector | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Specified entities will have the specified vector parameter set to the value specified.  Useful for animators to test.<br>	Arguments: &lt;entity&gt; &lt;parameter name&gt; &lt;value you want to send to animgraph for the entity&gt;
 animgraph_slope_draw_raycasts | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>
 animgraph_slope_enable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 animgraph_slowdownonslopes_enabled | FCVAR_REPLICATED | **Default:** true<br>
@@ -288,7 +297,6 @@ buildcubemaps | FCVAR_CLIENTDLL | Build Cubemaps
 buildcubemaps_renderdoc_capture | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** -1<br>Capture a specific cubemap with RenderDoc during buildcubemaps.
 buymenu | FCVAR_CLIENTDLL<br>FCVAR_SERVER_CAN_EXECUTE | Show or hide main buy menu
 buyrandom | FCVAR_GAMEDLL<br>FCVAR_CLIENT_CAN_EXECUTE | Buy random primary and secondary. Primarily for deathmatch where cost is not an issue.
-c_csgo_itempreview_demo_scene | FCVAR_CLIENTDLL | **Default:** false<br>
 c_maxdistance | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 200<br>
 c_maxpitch | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 90<br>
 c_maxyaw | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 135<br>
@@ -391,16 +399,13 @@ character_patches | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true
 check_transmit_dump_ents | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 chet_debug_idle | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_ARCHIVE<br>FCVAR_CHEAT | **Default:** false<br>If set one, many debug prints to help track down the TLK_IDLE issue. Set two for super verbose info
 clDrawTargetIDTrace | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>visualizing line trace for target ID
-clTaserShakeFreqMax | FCVAR_CLIENTDLL | **Default:** 0.7<br>how often the shake is applied (max time)
-clTaserShakeFreqMin | FCVAR_CLIENTDLL | **Default:** 0.2<br>how often the shake is applied (min time)
-clTaserShakeTimeTotal | FCVAR_CLIENTDLL | **Default:** 7<br>time the taser shake is applied.
 cl_ShowBoneSetupEnts | FCVAR_CLIENTDLL | **Default:** false<br>Show which entities are having their bones setup each frame.
 cl_access_all_missions | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
 cl_aggregate_particles |  | **Default:** false<br>
 cl_allow_animated_avatars | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Whether or not to allow animated avatars
 cl_anglespeedkey | FCVAR_CLIENTDLL | **Default:** 0.67<br>
 cl_anim_eval_stats | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Displays stats about how many EvaluatePose calls are unused
-cl_anim_queue_changes | FCVAR_CLIENTDLL | **Default:** false<br>
+cl_animgraph_dump_update_list | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Displays stats about which animations are updating
 cl_animgraph_history_force_temporal_consistency | FCVAR_CLIENTDLL | **Default:** true<br>
 cl_async_client_shatter | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>spawn client glass shards asynchronously during demos or when remotely connected.
 cl_auto_cursor_scale | FCVAR_ARCHIVE | **Default:** true<br>Automatic cursor size scaling.
@@ -429,13 +434,23 @@ cl_clock_correction | FCVAR_CHEAT | **Default:** true<br>Enable/disable clock co
 cl_clock_correction_adjustment_max_amount | FCVAR_CHEAT | **Default:** 200<br>Sets the maximum number of milliseconds per second it is allowed to correct the client clock. It will only correct this amount if the difference between the client and server clock is equal to or larger than cl_clock_correction_adjustment_max_offset.
 cl_clock_correction_adjustment_max_offset | FCVAR_CHEAT | **Default:** 90<br>As the clock offset goes from cl_clock_correction_adjustment_min_offset to this value (in milliseconds), it moves towards applying cl_clock_correction_adjustment_max_amount of adjustment. That way, the response is small when the offset is small.
 cl_clock_correction_adjustment_min_offset | FCVAR_CHEAT | **Default:** 10<br>If the clock offset is less than this amount (in milliseconds), then no clock correction is applied.
-cl_clock_correction_force_server_tick | FCVAR_CHEAT | **Default:** 999<br>Force clock correction to match the server tick + this offset (-999 disables it).
+cl_clock_correction_force_server_tick | FCVAR_CHEAT | **Default:** 999<br>Force clock correction to match the server tick + this offset (999 disables it).
+cl_clock_recvmargin_adjust_limit_slowdown | FCVAR_DEVELOPMENTONLY | **Default:** 93<br>Recvmargin-based clock sync will not slow down time slower than N%
+cl_clock_recvmargin_adjust_limit_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 106<br>Recvmargin-based clock sync will not speed up time faster than N%
+cl_clock_recvmargin_desired | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Recvmargin-based clock sync will try to maintain N ms margin between tick arrival and polling network
+cl_clock_recvmargin_enable | FCVAR_RELEASE | **Default:** true<br>Enable new client clock synchronization strategy that tries to achieve a certain client recv margin
+cl_clock_recvmargin_minsamples_slowdown | FCVAR_DEVELOPMENTONLY | **Default:** 3<br>Recvmargin-based clock sync will not slow down unless we have N indicating samples
+cl_clock_recvmargin_minsamples_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 32<br>Recvmargin-based clock sync will not speed up unless we have N indicating samples
+cl_clock_recvmargin_spew_interval | FCVAR_RELEASE | **Default:** 0<br>
+cl_clock_recvmargin_timeconstant_slowdown | FCVAR_DEVELOPMENTONLY | **Default:** 0.3<br>Recvmargin-based clock sync will remove 63.2% of the error in N seconds
+cl_clock_recvmargin_timeconstant_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 0.6<br>Recvmargin-based clock sync will remove 63.2% of the error in N seconds
+cl_clock_recvmargin_window | FCVAR_DEVELOPMENTONLY | **Default:** 1<br>Recvmargin-based clock sync will use past N seconds
 cl_clock_showdebuginfo |  | **Default:** 0<br>Show debugging info about the clock drift, 1= resets, 2=adjustments, 3=verbose
 cl_clock_unhook |  | **Default:** false<br>
 cl_clockdbg |  | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 2<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -518,7 +533,6 @@ cl_drawhud_force_radar | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 0<br>0:
 cl_drawhud_force_teamid_overhead | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 0<br>0: default; 1: draw teamid even if hud disabled; -1: force no teamid
 cl_drawhud_specvote | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** true<br>1: default; 0: disables vote UI for spectators
 cl_drawline | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Draws line between two 3D Points.<br>	Green if no collision<br>	Red is collides with something<br>	Arguments: x1 y1 z1 x2 y2 z2
-cl_dump_animgraph_list | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Displays stats about which animations are updating
 cl_dump_player_animgraph_state | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Dumps the local player's animgraph state to console
 cl_dump_projected_texture_count | FCVAR_CLIENTDLL | Print out number of active projected textures
 cl_dumpentity | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Dumps info about an entity
@@ -581,6 +595,7 @@ cl_ent_text_sticky_remove | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Removes from the li
 cl_ent_ungrab | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | un-grabs all objects
 cl_ent_vcollide_wireframe | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Displays the interpolated vcollide wireframe pm am entity.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 cl_ent_viewoffset | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Displays the eye position for the given entity(ies) in red.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
+cl_ent_visibility_traces | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Displays visibility traces for the given entity<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 cl_entityreport | FCVAR_CLIENTDLL | Reports all extant entities. Optional 2nd arg is a substring of a classname that the list will be filtered by.
 cl_entitysummary | FCVAR_CLIENTDLL | Summarizes (by class) all extant entities. Optional 2nd arg is a substring of a classname that the list will be filtered by.
 cl_ents | FCVAR_CLIENTDLL | List client entities, sorted by spawn group
@@ -628,15 +643,19 @@ cl_hud_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 
 cl_hud_radar_scale | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 1<br>
 cl_ignore_campaign_completion_requirements | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>Ignores campaign progression requirements when granting quests.
 cl_ignorepackets | FCVAR_CHEAT | **Default:** false<br>Force client to ignore packets (for debugging).
+cl_imgui_debug_entity | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Shows the entity browswer, focused on the entity you specify.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 cl_imgui_set_selection | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Sets ImGui selection
 cl_imgui_set_status_text | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Sets ImGui header status text
 cl_import_csgo_config | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>
 cl_in_forcebuttonstate | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Forces a button to be a particular state - WHEN PROCESSING USERCOMMANDS
+cl_inferno_bodyburn | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
 cl_instant_death_anim | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
+cl_interp | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | Read the effective client simulation interpolation amount in terms of time.
 cl_interp_all | FCVAR_CLIENTDLL | **Default:** false<br>Disable interpolation list optimizations.
 cl_interp_animationvars | FCVAR_CLIENTDLL | **Default:** true<br>Interpolate LATCH_ANIMATION_BIT vars if interpolation interval is greater than simulation interval
 cl_interp_hermite | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>Set to zero do disable hermite interpolation.
-cl_interp_npcs | FCVAR_CLIENTDLL | **Default:** 0<br>Interpolate NPC positions starting this many seconds in past (or cl_interp, if greater)
+cl_interp_npcs | FCVAR_CLIENTDLL | **Default:** 0<br>Interpolate NPC positions starting this many seconds in past (or the value as per cl_interp_ratio, if greater)
+cl_interp_ratio | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Set number of client simulation interpolation ticks.
 cl_interp_simulationvars | FCVAR_CLIENTDLL | **Default:** true<br>Interpolate LATCH_SIMULATION_BIT vars if interpolation interval is greater than animation interval
 cl_interp_threadmodeticks | FCVAR_CLIENTDLL | **Default:** 0<br>Additional interpolation ticks to use when interpolating with threaded engine mode set.
 cl_interpolate | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** true<br>Interpolate entities on the client.
@@ -683,6 +702,7 @@ cl_mute_all_but_friends_and_party | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default
 cl_mute_enemy_team | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** false<br>Block all communication from players on the enemy team.
 cl_mute_player_after_reporting_abuse | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>Mute players reported for abuse automatically.
 cl_names_debug | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+cl_net_buffer_ticks | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>Number of ticks of delay for server snapshots and user commands.  This value controls the value of cl_interp_ratio, which you should not modify directly.
 cl_net_showeventlisteners | FCVAR_CLIENTDLL | **Default:** false<br>Show listening addition/removals
 cl_net_showevents | FCVAR_CLIENTDLL | **Default:** 0<br>Dump game events to console (1=client only, 2=all).
 cl_new_user_phase | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>0: Not Started, 1: Needs Training, 2: Training Complete, -1: Disabled
@@ -763,6 +783,7 @@ cl_pred_build_verbose | FCVAR_CLIENTDLL | **Default:** false<br>Verbose spew whe
 cl_pred_checkstuck | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>Perform the additional 'stuck' traces on the client side during prediction.
 cl_pred_optimize | FCVAR_CLIENTDLL | **Default:** 2<br>Optimize for not copying data if didn't receive a network update (1), and also for not repredicting if there were no errors (2).
 cl_pred_parallel_postnetwork | FCVAR_CLIENTDLL | **Default:** true<br>
+cl_pred_print_every_cmd | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Print something every time we predict a command
 cl_pred_track | FCVAR_CLIENTDLL | &lt;entindex&gt; &lt;fieldname&gt;:  Track changes to entity index entindex, for field fieldname.
 cl_pred_track_off | FCVAR_CLIENTDLL | clear field track changes.
 cl_predict_after_every_createmove | FCVAR_DEVELOPMENTONLY | **Default:** true<br>run prediction after every CreateMove instead of only after CreateMove for the final tick in a frame.
@@ -959,6 +980,17 @@ cl_teammate_color_4 | FCVAR_CLIENTDLL | **Default:** 230 128 42 255<br>
 cl_teammate_color_5 | FCVAR_CLIENTDLL | **Default:** 189 44 150 255<br>
 cl_teammate_colors_show | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 1<br>In competitive, 1 = show teammates as separate colors in the radar, scoreboard, etc., 2 = show colors and letters
 cl_test_list_entities | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | test-list entities
+cl_tickpacket_desired_queuelength |  | **Default:** 99<br>Desired command queue length on the server, used to avoid command queue starvation due to packet loss.  The effective value is the smaller of this value and cl_interp_ratio, hence the large default value.  This value, multiplied by the tick interval, is added to cl_tickpacket_recvmargin_desired to obtain the effective desired recv margin.
+cl_tickpacket_recvmargin_adjust_limit | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Recvmargin-based usercommand pacing will not speed up or slow down command pacing by more than N% compared to realtime
+cl_tickpacket_recvmargin_desired | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Recvmargin-based usercommand pacing will try to maintain N ms margin between user command arriving at the server and the server needing that user command.  See also cl_tickpacket_desired_queuelength.
+cl_tickpacket_recvmargin_enable | FCVAR_RELEASE | **Default:** true<br>Enable new method for pacing out usercommands that keeps a packet prepared at all times, and tries to send it to achieve a desired server recv margin
+cl_tickpacket_recvmargin_minsamples | FCVAR_DEVELOPMENTONLY | **Default:** 10<br>Recvmargin-based usercommand pacing will not take action unless we have N samples
+cl_tickpacket_recvmargin_spew_interval | FCVAR_RELEASE | **Default:** 0<br>
+cl_tickpacket_recvmargin_timeconstant | FCVAR_DEVELOPMENTONLY | **Default:** 0.4<br>Recvmargin-based usercommand pacing will remove 63.2% of the error in N seconds
+cl_tickpacket_recvmargin_window | FCVAR_DEVELOPMENTONLY | **Default:** 0.75<br>Recvmargin-based usercommand pacing will use past N seconds
+cl_tickpacket_send_every_tick | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Send a network packet each time we generate a new usercommand, even if our frame rate is slow and we generate multiple commands in one frame
+cl_ticks_warning_level | FCVAR_RELEASE | **Default:** 0<br>Print a message about problems with ticks and interpolation.  0=never, 1=warnings, 2=all, even if hidden by interpolation
+cl_ticktiming | FCVAR_DONTRECORD<br>FCVAR_RELEASE | {print\|&lt;interval&gt;} \[summary\|detail\]  Print timing stats now, or set report interval
 cl_timeout | FCVAR_ARCHIVE | **Default:** 30<br>After this many seconds without receiving a packet from the server, the client will disconnect itself
 cl_tracer_frequency_override | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1<br>Override tracer frequency (-1 to disable)
 cl_tracer_whiz_distance | FCVAR_CLIENTDLL | **Default:** 72<br>
@@ -972,8 +1004,9 @@ cl_use_entity_as_targetid | FCVAR_CLIENTDLL | **Default:** true<br>
 cl_use_old_wearable_shoulddraw | FCVAR_CLIENTDLL | **Default:** false<br>
 cl_use_opens_buy_menu | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO<br>FCVAR_PER_USER | **Default:** false<br>Pressing the +use key will open the buy menu if in a buy zone (just as if you pressed the 'buy' key).
 cl_usercmd_dbg | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>show usercmd payload sizing info for packets with more than this many usercmds
-cl_usercmd_maxcount | FCVAR_RELEASE | **Default:** 4<br>max number of CUserCmds to send in one packet
+cl_usercmd_max_per_movemsg  | FCVAR_RELEASE | **Default:** 4<br>max number of CUserCmds to send in one client move message
 cl_usercmd_showsize | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+cl_usesocketsforloopback |  | **Default:** true<br>When connecting to local listen server (for example, using the 'map' command), default to loopback=false, which connects to '127.0.0.1' instead of 'loopback'.  This uses the network stack so that fake lag/loss can be simulated.
 cl_versus_intro | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>
 cl_view_near_hud_player_eye_dist | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 20<br>
 cl_view_near_other_player_eye_dist | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 16<br>
@@ -981,7 +1014,6 @@ cl_viewmodelsclonedasworld | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Defaul
 cl_viewtarget_clamp | FCVAR_CLIENTDLL | **Default:** true<br>
 cl_voiceenabled | FCVAR_CLIENTDLL | **Default:** true<br>
 cl_voip_lobby_audio_volume | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_HIDDEN | **Default:** 0<br>Lobby voip stream audio volume
-cl_vprof_scope_entity_gamephys | FCVAR_CLIENTDLL | **Default:** false<br>
 cl_wallbang_heavy_threshold | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 22<br>The Threshold where to switch from Light to Heavy Wallbang tracer
 cl_weapon_clip_thinwalls | FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 cl_weapon_clip_thinwalls_debug | FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>
@@ -1060,7 +1092,7 @@ composite_material_use_gpu | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Defaul
 composite_material_use_gpu_endpoint_optimization | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
 composite_material_use_gpu_perceptual_error_metric | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 compositematerial_showdebugwindow | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Source2/Composite Material Debug
-con_enable | FCVAR_ARCHIVE | **Default:** false<br>Allows the console to be activated.
+con_enable | FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** false<br>Allows the console to be activated.
 con_logfile_suffix |  | **Default:** <br>Suffix to append to the console log, may be changed to reopen the log
 condump | FCVAR_RELEASE | dump the text currently in the console to condumpXX.log
 confirm_abandon_match | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Confirm that we wish to abandon match
@@ -1095,8 +1127,8 @@ cpu_level | FCVAR_CLIENTDLL | **Default:** 2<br>CPU Level - Default: High
 cpuinfo |  | Print CPU configuration information
 cq_adjust_deadzone_ticks_faster | FCVAR_GAMEDLL | **Default:** 0.75<br>don't adjust rate faster/slower if average queue is this close to goal.
 cq_adjust_deadzone_ticks_slower | FCVAR_GAMEDLL | **Default:** 0.25<br>don't adjust rate faster/slower if average queue is this close to goal.
-cq_buffer_bloat_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 150<br>tolerable buffer bloat before we start pushing the rate down.
-cq_buffer_bloat_msecs_max | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 150<br>absolute max buffer bloat before we reset and discard buffered user commands.
+cq_buffer_bloat_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 64<br>tolerable buffer bloat before we start pushing the rate down.
+cq_buffer_bloat_msecs_max | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 64<br>absolute max buffer bloat before we reset and discard buffered user commands.
 cq_debug | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 0<br>Verbose command queue logging.
 cq_dilation_percentage | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>When speeding up slowing down, this is how much
 cq_enable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
@@ -1107,6 +1139,7 @@ cq_logging_interval | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>command
 cq_min_queue_size | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>min buffer queue target size.
 cq_netgraph | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Display command queue statistics on the hud
 cq_netgraph_problem_show_auto | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Automatically activate/deactivate cq_netgraph when network conditions degrade
+cq_print_every_command | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>print every command as we execute it
 cq_queue_sample_count | FCVAR_GAMEDLL | **Default:** 20<br>how many frames of samples to store in the buffer sample queue.
 cq_resolve_commands_per_second | FCVAR_GAMEDLL | **Default:** 0.5<br>once cq_starve_hold_time elapses, we return to cq_min_queue_size over this many commands per second.
 cq_runtests | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
@@ -1130,7 +1163,9 @@ cs_ShowStateTransitions | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -2<br>cs_S
 cs_enable_player_physics_box | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>
 cs_hostage_near_rescue_music_distance | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 2000<br>
 cs_logtouchexpansion | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -2<br>cs_logtouchexpansion &lt;ent index or -1 for all&gt;. Log player touch expansion component.
-cs_minimap_create_output_size | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 512<br>Size of minimap texture generated with cs_minimap_create (512 default)
+cs_minimap_create_output_size | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 1024<br>Size of minimap texture generated with cs_minimap_create (512 default)
+cs_minimap_renderdoc_capture_enabled | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CHEAT | **Default:** false<br>
+cs_minimap_rendering_msaa_mode | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 2<br>MSAA mode used for minimap rendering 0-none, 1-2xMSAA, 2-4xMSAA, 3-6X, 4-8X, etc
 cs_quit_prompt | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | Quit the game
 csgo_3d_skybox | FCVAR_CLIENTDLL | **Default:** true<br>
 csgo_demoui_playbeck_timestep_value | FCVAR_CLIENTDLL | **Default:** 15<br>Number of seconds to seek when using TimeStep buttons on demo playback controller.
@@ -1164,7 +1199,6 @@ csm_res_override_0 | FCVAR_CHEAT | **Default:** 0<br>
 csm_res_override_1 | FCVAR_CHEAT | **Default:** 0<br>
 csm_res_override_2 | FCVAR_CHEAT | **Default:** 0<br>
 csm_res_override_3 | FCVAR_CHEAT | **Default:** 0<br>
-csm_slope_scale_db_override | FCVAR_CHEAT | **Default:** 3<br>
 csm_split_log_scalar | FCVAR_CHEAT | **Default:** 0.85<br>
 csm_viewdir_shadow_bias | FCVAR_CHEAT | **Default:** 0<br>
 csm_viewmodel_farz | FCVAR_CHEAT | **Default:** 30<br>
@@ -1199,11 +1233,10 @@ debug_takedamage_summaries | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<b
 debug_visibility_monitor | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
 debugoverlay_cycle_domain | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Toggles visibility of the debug overlay system.
 debugoverlay_cycle_state | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Toggles visibility of the debug overlay system.
-debugoverlay_draw_current | FCVAR_CHEAT | **Default:** false<br>Tell debugoverlay to not draw any entries that have aged out by the time of rendering. Useful if sim runs more often than rendering.
 debugoverlay_force_respect_ttl | FCVAR_CHEAT | **Default:** false<br>Force respect TTL even when clearing scopes
 debugoverlay_hide_imgui | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Hides the overlay.
-debugoverlay_ignore_source | FCVAR_CHEAT | **Default:** false<br>Draw everything normal and ignore the source for rendering
 debugoverlay_show_text_outline | FCVAR_CHEAT | **Default:** false<br>Toggle display of box around text
+debugoverlay_text_scale | FCVAR_ARCHIVE<br>FCVAR_CHEAT | **Default:** 1<br>Scale of the text used for 3d display
 debugoverlay_toggle | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Toggles visibility of the debug overlay system.
 decalfrequency | FCVAR_GAMEDLL<br>FCVAR_NOTIFY | **Default:** 10<br>
 default_fov | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 90<br>
@@ -1286,13 +1319,12 @@ dsp_vol_2ch | FCVAR_DEMO | **Default:** 1<br>
 dsp_vol_4ch | FCVAR_DEMO | **Default:** 0.5<br>
 dsp_vol_5ch | FCVAR_DEMO | **Default:** 0.5<br>
 dsp_volume | FCVAR_ARCHIVE<br>FCVAR_DEMO | **Default:** 0.8<br>
-dump_animgraph_list | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Displays stats about which animations are updating
+dump_audio_input | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 dump_entity_report | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | List all client-side entities in the scene
 dump_globals | FCVAR_GAMEDLL | Dump all global entities/states
 dump_loc_token |  | List information on the given token
 dump_localization_files |  | List all loaded localization files
 dump_panorama_css_properties | FCVAR_RELEASE | Prints out all valid panorama CSS properties and their documentation
-dump_panorama_css_properties_memstats |  | Prints out mem stats of all valid panorama CSS properties
 dump_panorama_events | FCVAR_RELEASE | print panorama event types and their documentation
 dump_panorama_render_command_stats |  | 
 dump_secondary_scene_worlds | FCVAR_CLIENTDLL | Lists secondary scene worlds and ref counts
@@ -1327,8 +1359,7 @@ engine_rendersystem_init |  | **Default:** <br>Rendersystem option requested (ch
 engine_rendersystem_shader_model |  | **Default:** 0<br>Rendersystem shader model in use (changing this does not change the shader model).
 engine_rendersystem_used |  | **Default:** <br>Rendersystem option in use (changing this does not change the rendersystem).
 engine_show_frame_dispatch | FCVAR_DEVELOPMENTONLY | **Default:** false<br>show frame dispatch names.
-engine_show_frame_multiple_ticks |  | **Default:** false<br>
-engine_show_frame_pacing |  | **Default:** false<br>
+engine_show_frame_pacing | FCVAR_RELEASE | **Default:** false<br>
 engine_show_frame_ticks |  | **Default:** false<br>
 engine_sse42 |  | **Default:** true<br>turn on sse4.2 optimizations in the engine
 engine_vr_max_ticks_to_simulate |  | **Default:** 3<br>Max number of ticks to simulate per frame, after which simulation will start to slow down compared to real time.
@@ -1416,12 +1447,14 @@ ent_vcollide_wireframe | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Displays the interpolate
 ent_viewentity | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Selects the picked entity as the view entity
 ent_viewoffset | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Displays the eye position for the given entity(ies) in red.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 ent_viewpunch | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Used to debug ViewPunch
+ent_visibility_traces | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Displays visibility traces for the given entity<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 entity_log_load_unserialize | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0<br>Output unserialization of entities on map load. 0 - off, 1 - client/server, 2 - server, 3 - client
 entity_lump_list |  | List all known entity lumps
 entity_lump_spew |  | Dump the contents of an entity lump
 entityreport | FCVAR_GAMEDLL | Reports all extant entities. Optional 2nd arg is a substring of a classname that the list will be filtered by.
 entitysummary | FCVAR_GAMEDLL | Summarizes (by class) all extant entities. Optional 2nd arg is a substring of a classname that the list will be filtered by.
 ents | FCVAR_GAMEDLL | List server entities, sorted by spawn group
+eom_local_player_defeat_anim_enabled | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>
 error_message_explain_pure | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Take user to Steam support article
 error_message_explain_unsigned | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Take user to Steam support article
 error_message_explain_vac | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Take user to Steam support article
@@ -1566,6 +1599,8 @@ gameui_preventescapetoshow | FCVAR_HIDDEN<br>FCVAR_RELEASE | Escape key doesn't 
 gc_secret_key | FCVAR_GAMEDLL<br>FCVAR_PROTECTED | **Default:** <br>Secret key for authenticating with the GC<br>
 gcmd | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Generate a command
 generate_minidump_comment | FCVAR_DEVELOPMENTONLY | Generate a minidump comment and spew the results to the console
+generate_trash_synth | FCVAR_LINKED_CONCOMMAND | Args: \[Asset directory Path\]
+generate_voice_containers | FCVAR_LINKED_CONCOMMAND | Generate some example voice containers in content to test
 getpos | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | dump position and angles to the console
 getpos_exact | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | dump origin and angles to the console
 gfx_calculate_skin_diffusion_profile_dipole |  | Calculate a skin diffusion profile using scattering constants.
@@ -1597,6 +1632,7 @@ gfx_load_skin_diffusion_profile_sum_of_gaussians |  | Load sum-of-gaussians skin
 gfx_make_gpu_scrambled_halton_code |  | Make some code for me
 gfx_remove_obsolete_detail_modes |  | Remove F_DETAIL_TEXTURE 1 and 2
 give | FCVAR_GAMEDLL<br>FCVAR_VCONSOLE_FUZZY_MATCHING<br>FCVAR_CLIENT_CAN_EXECUTE | Give item to player.<br>	Arguments: &lt;item_name&gt;
+give_oriented | FCVAR_GAMEDLL<br>FCVAR_VCONSOLE_FUZZY_MATCHING<br>FCVAR_CLIENT_CAN_EXECUTE | Give item oriented to player angles.<br>	Arguments: &lt;item_name&gt;
 givecurrentammo | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Give a supply of ammo for current weapon..<br>
 gl_clear | FCVAR_CLIENTDLL | **Default:** true<br>
 gl_clear_gray | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>Clear the back buffer to gray every frame.
@@ -1608,6 +1644,7 @@ god | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_CLIENT_CAN_EXECUTE | Toggle by defau
 gotv_theater_container | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** <br>Enables GOTV theater mode for the specified container, setting it to 'live' will play top live matches
 gpu_level | FCVAR_CLIENTDLL | **Default:** 3<br>GPU Level - Default: High
 gpu_mem_level | FCVAR_CLIENTDLL | **Default:** 2<br>Memory Level - Default: High
+graphcontroller_dumpparams | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Print all anim graph parameters for the specified entity.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 grep | FCVAR_RELEASE | grep line for pattern, print out matching lines only
 groundlist | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CHEAT | Display ground entity list &lt;index&gt;
 groups | FCVAR_GAMEDLL | Show status of all spawn groups.
@@ -1661,6 +1698,7 @@ hinttext_displaytime | FCVAR_CLIENTDLL | **Default:** 4<br>
 host_force_frametime_to_equal_tick_interval |  | **Default:** false<br>
 host_force_max_frametime_to_tick_interval |  | **Default:** false<br>
 host_framerate | FCVAR_RELEASE | **Default:** 0<br>Set to lock per-frame time elapse.
+host_readconfig_ignore_userconfig | FCVAR_CHEAT | **Default:** false<br>Whether we should ignore the user config file for reading/writing.
 host_timescale | FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 1<br>Prescale the clock by this amount.
 host_timescale_dec | FCVAR_CHEAT | Decrement the timescale by one step
 host_timescale_inc | FCVAR_CHEAT | Increment the timescale by one step
@@ -1714,15 +1752,20 @@ ik_planetilt_enable |  | **Default:** true<br>
 ime_hkl_info | FCVAR_DONTRECORD | Spew IME HKL info.
 ime_info | FCVAR_DONTRECORD | Spew IME info.
 ime_supported_info | FCVAR_DONTRECORD | Spew IME Supported info.
+imgui_debug_entity | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Shows the entity browswer, focused on the entity you specify.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
+imgui_desired_state_override | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0<br>if imgui should override the desired state
 imgui_domain | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 2<br>1 == client, 2 == server
 imgui_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>if imgui should display
 imgui_enable_input | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>if imgui should consume input
+imgui_entity_browser_size | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0<br>
 imgui_set_selection | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Sets ImGui selection
 imgui_set_status_text | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Sets ImGui header status text
 imgui_show_command_tool | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Command Tool
 imgui_show_entity_browser | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Entity Browser
 imgui_show_entity_catalog | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Entity Catalog
+imgui_show_entity_text_window | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Show Entity Text History
 imgui_show_example_window | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Source2/Show Example Window
+imgui_show_overlay_nav_editor | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Nav Editor
 imgui_show_sound_window | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Source2/Show Example Window
 imgui_temp_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>if imgui should display temporarily
 import_csgo_config | FCVAR_CLIENTDLL | Imports an existing CS:GO configuration file into CS2
@@ -1756,13 +1799,13 @@ inferno_max_range | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Defau
 inferno_max_trace_per_tick | FCVAR_GAMEDLL | **Default:** 16<br>
 inferno_per_flame_spawn_duration | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 3<br>Duration each new flame will attempt to spawn new flames
 inferno_scorch_decals | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
-inferno_smoke_volume_density | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.1<br>
+inferno_smoke_volume_density | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.05<br>
 inferno_spawn_angle | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 45<br>Angular change from parent
-inferno_surface_offset | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 20<br>
+inferno_surface_offset | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 15<br>
 inferno_velocity_decay_factor | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.2<br>
 inferno_velocity_factor | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.003<br>
 inferno_velocity_normal_factor | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
-input_button_code_is_scan_code | FCVAR_ARCHIVE | **Default:** true<br>Bind keys based on keyboard position instead of key name
+input_button_code_is_scan_code | FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** true<br>Bind keys based on keyboard position instead of key name
 input_downimpulsevalue | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.7<br>
 input_filter_relative_analog_inputs | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** false<br>
 input_forceuser | FCVAR_CHEAT | **Default:** -1<br>Force user input to this split screen player.
@@ -1877,16 +1920,21 @@ lb_csm_draw_translucent |  | **Default:** true<br>
 lb_csm_fov_override | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** -1<br>
 lb_csm_override_staticgeo_cascades |  | **Default:** false<br>Override Cascades that will render static objects with lb_csm_override_staticgeo_cascades_value
 lb_csm_override_staticgeo_cascades_value |  | **Default:** -1<br>If lb_csm_override_staticgeo_cascades, override value used to determine which cascades render static objects
-lb_csm_receiver_plane_depth_bias |  | **Default:** 1e-06<br>Depth bias applied to shadow receiver
-lb_csm_receiver_plane_depth_bias_d16 |  | **Default:** -0.003905<br>Depth bias applied to shadow receiver (when using D16 image format for shadows)
-lb_csm_receiver_plane_depth_bias_transmissive_backface |  | **Default:** 6e-05<br>Depth bias applied to shadow receiver for transmissive backface geo
-lb_csm_receiver_plane_depth_bias_transmissive_backface_d16 |  | **Default:** -0.002<br>Depth bias applied to shadow receiver for transmissive backface geo (when using D16 image format for shadows)
+lb_csm_receiver_plane_depth_bias |  | **Default:** 1.526e-05<br>Shader depth bias applied to shadow receiver (Note this conflicts with renderstate depth bias, both now default to 0)
+lb_csm_receiver_plane_depth_bias_transmissive_backface |  | **Default:** 0.00015<br>Depth bias applied to shadow receiver for transmissive backface geo (based on renderstate depthbias being 0)
 lb_cubemap_normalization_max |  | **Default:** 1<br>
 lb_cubemap_normalization_roughness_begin |  | **Default:** 0.1<br>
 lb_debug_light_bounds | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/LightBinner/Debug Light Bounds
 lb_debug_shadow_atlas | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/LightBinner/Debug Dynamic Shadow Atlas
 lb_debug_silhouette | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** 0<br>SceneSystem/LightBinner/Debug Silhouettes
 lb_debug_tiles | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** 0<br>SceneSystem/LightBinner/Debug Tiles
+lb_debug_visualize_shadowed_lights | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/LightBinner/Debug Visualize Shadowed Lights
+lb_dynamic_shadow_penumbra |  | **Default:** true<br>Adjust shadow penumbra based on light size
+lb_dynamic_shadow_resolution |  | **Default:** true<br>Dynamically adjust shadow resolution
+lb_dynamic_shadow_resolution_base |  | **Default:** 1024<br>Base resolution for dynamic shadowmap sizing.  Shadowmap size of a screen sized light
+lb_dynamic_shadow_resolution_delay |  | **Default:** 0.85<br>Update delay for shadow size
+lb_dynamic_shadow_resolution_hysteresis |  | **Default:** 0.33<br>Update hysteresis for shadow size
+lb_dynamic_shadow_resolution_quantization |  | **Default:** 64<br>Quantization of dynamically computed shadow size
 lb_enable_baked_shadows | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** true<br>SceneSystem/LightBinner/Enable Baked Shadows
 lb_enable_binning | FCVAR_MENUBAR_ITEM | **Default:** true<br>SceneSystem/LightBinner/Enable Binning
 lb_enable_dynamic_lights | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** true<br>Allows rendering dynamic lights
@@ -1905,9 +1953,11 @@ lb_shadow_texture_width_override |  | **Default:** -1<br>Override width of shado
 lb_show_light_fog_clipmap_cb_cost | FCVAR_CHEAT | **Default:** false<br>Show cost of lights in fog clipmap constant buffer. yellow = 1 cost, red = 6 cost
 lb_sun_csm_size_cull_threshold_texels |  | **Default:** 10<br>Size, in texels, where we will cull an object in the shadowmap
 lb_tile_pixels |  | **Default:** 8<br>
+lb_timesliced_shadows_dynamic_size |  | **Default:** true<br>
 lb_use_ellipsoid_bounds | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** true<br>
 lb_use_illumination_silhouette | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** true<br>SceneSystem/LightBinner/Use Illumination Bounds
 leaderboards_cache_duration | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 600<br>
+legacy_models_supported | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Whether to support legacy (pre-modeldoc) models
 lightquery_debug_direct_lighting | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 lightquery_debug_indirect_lighting | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 listRecentNPCSpeech | FCVAR_GAMEDLL<br>FCVAR_DONTRECORD | Displays a list of the last 5 lines of speech from NPCs.
@@ -1967,10 +2017,11 @@ mat_colcorrection_disableentities | FCVAR_CLIENTDLL | **Default:** false<br>Disa
 mat_colcorrection_editor | FCVAR_CLIENTDLL | **Default:** false<br>
 mat_colcorrection_forceentitiesclientside | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>Forces color correction entities to be updated on the client
 mat_colorcorrection | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
+mat_debug | FCVAR_CLIENTDLL | Sets a mat_fullbright debug visualization mode
 mat_depthbias_shadowmap | FCVAR_CLIENTDLL | **Default:** 0.0005<br>
 mat_disable_dynamic_shader_compile |  | Reloads all shaders from vcs files until the next time mat_reloadshaders is called
 mat_disable_normal_mapping | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
-mat_fullbright | FCVAR_CHEAT | **Default:** 0<br>
+mat_fullbright | FCVAR_CHEAT | **Default:** 0<br>Debug rendering modes
 mat_hide_error_shader | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 mat_lpv_luxels | FCVAR_CHEAT | **Default:** false<br>
 mat_luxels | FCVAR_CHEAT | **Default:** false<br>
@@ -2002,6 +2053,7 @@ mat_shading_complexity | FCVAR_CHEAT | **Default:** false<br>Visualize shading c
 mat_shading_complexity_color | FCVAR_CHEAT | **Default:** 1 0.5 0.25<br>
 mat_shading_complexity_max_instruction_count | FCVAR_CHEAT | **Default:** 1024<br>
 mat_shading_complexity_max_register_count | FCVAR_CHEAT | **Default:** 128<br>
+mat_shadowmap_luxels | FCVAR_CHEAT | **Default:** false<br>
 mat_show_distance_field | FCVAR_CHEAT | **Default:** 0<br>0=Off, 1=Visualize trace from camera, 2=Visualize occlusion
 mat_slopescaledepthbias_shadowmap | FCVAR_CLIENTDLL | **Default:** 4<br>
 mat_tonemap_bloom_scale | FCVAR_CHEAT | **Default:** -1<br>
@@ -2097,6 +2149,7 @@ mobile_fps_limit | FCVAR_ARCHIVE | **Default:** 30<br>MOBILE_FPS_CONTROL: Mobile
 model_default_preview_sequence_name | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED | **Default:** <br>
 model_dump_convert_info | FCVAR_LINKED_CONCOMMAND<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL | Print model load-time conversion info
 molotov_throw_detonate_time | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 2<br>
+molotov_usethrow_direction | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 motdfile | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** motd.txt<br>The MOTD file to load.
 mouse_disableinput |  | **Default:** false<br>Set to disable mouse input
 mouse_inverty | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** false<br>
@@ -2273,6 +2326,7 @@ mp_playercashawards | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FC
 mp_playerid | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>Controls what information player see in the status bar: 0 all names; 1 team names; 2 no names
 mp_playerid_delay | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0.4<br>Number of seconds to delay showing information in the status bar
 mp_playerid_hold | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0.1<br>Number of seconds to keep showing old information in the status bar
+mp_promoted_item_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Allow the purchasing of the promoted item.
 mp_randomspawn | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>Determines whether players are to spawn. 0 = default; 1 = both teams; 2 = Terrorists; 3 = CTs.
 mp_randomspawn_dist | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>If using mp_randomspawn, determines whether to test distance when selecting this spot.
 mp_randomspawn_los | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** true<br>If using mp_randomspawn, determines whether to test Line of Sight when spawning.
@@ -2323,7 +2377,7 @@ mp_t_default_melee | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCV
 mp_t_default_primary | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** <br>The default primary (rifle) weapon that the Ts will spawn with
 mp_t_default_secondary | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** weapon_glock<br>The default secondary (pistol) weapon that the Ts will spawn with
 mp_tagging_scale | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 1<br>Scalar for player tagging modifier when hit. Lower values for greater tagging.
-mp_taser_recharge_time | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** -1<br>Determines recharge time for taser. -1 = disabled.
+mp_taser_recharge_time | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 30<br>Determines recharge time for taser. -1 = disabled.
 mp_td_dmgtokick | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 300<br>The damage threshhold players have to exceed in a match to get kicked.
 mp_td_dmgtowarn | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 200<br>The damage threshhold players have to exceed in a match to get warned that they are about to be kicked.
 mp_td_spawndmgthreshold | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 50<br>The damage threshold players have to exceed at the start of the round to be warned/kick.
@@ -2360,8 +2414,6 @@ mp_tournament | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLIC
 mp_tournament_whitelist | FCVAR_GAMEDLL | **Default:** item_whitelist.txt<br>Specifies the item whitelist file to use.
 mp_unpause_match | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Resume the match
 mp_use_respawn_waves | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>When set to 1, and that player's team is set to respawn, they will respawn in waves. If set to 2, teams will respawn when the whole team is dead.
-mp_usehwmmodels | FCVAR_CLIENTDLL | **Default:** 0<br>Enable the use of the hw morph models. (-1 = never, 1 = always, 0 = based upon GPU)
-mp_usehwmvcds | FCVAR_CLIENTDLL | **Default:** 0<br>Enable the use of the hw morph vcd(s). (-1 = never, 1 = always, 0 = based upon GPU)
 mp_verbose_changelevel_spew | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 1<br>
 mp_warmup_end | FCVAR_GAMEDLL<br>FCVAR_RELEASE | End warmup immediately.
 mp_warmup_offline_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Whether or not to do a warmup period at the start of a match in an offline (bot) match.
@@ -2407,6 +2459,7 @@ nav_clear_attribute | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Remove given nav attribute 
 nav_clear_attributes | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Clear all nav attributes of selected area.
 nav_clear_selected_set | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Clear the selected set.
 nav_corner_adjust_adjacent | FCVAR_CHEAT | **Default:** 18<br>radius used to raise/lower corners in nearby areas when raising/lowering corners.
+nav_create_indirect_connection | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Create a connection between the selected area and the area pointed at by the crosshair.
 nav_curve_alt | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_curve_iter | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
 nav_curve_lock | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -1<br>
@@ -2422,10 +2475,12 @@ nav_drag_selection_volume_zmax_offset | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **De
 nav_drag_selection_volume_zmin_offset | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 32<br>The offset of the nav drag volume bottom from center
 nav_draw_area_connections | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_filled | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>
+nav_draw_area_gravity | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_ground | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_hull_support | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_ids | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_inset_margin | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
+nav_draw_area_normal | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_should_be_destroyed | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_split_by_nav_link_mgr | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_area_split_by_obstacle_mgr | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
@@ -2453,7 +2508,6 @@ nav_draw_space_neighbors | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_space_portals | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_draw_space_radius | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
 nav_draw_space_swim | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
-nav_draw_vertex_normal | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_edit | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>Set to one to interactively edit the Navigation Mesh. Set to zero to leave edit mode.
 nav_edit_validate | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>Validate navmesh structures.
 nav_end_deselecting | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Stop continuously removing from the selected set.
@@ -2545,6 +2599,7 @@ nav_pathfind_draw_costs | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_pathfind_draw_fail | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
 nav_pathfind_draw_total_costs | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_pathfind_inadmissable_heuristic_factor | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 1<br>
+nav_pathfind_multithread | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_potentially_visible_dot_tolerance | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.98<br>
 nav_precise | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Toggles the 'dont avoid obstacles' flag used by the AI system.
 nav_raise_drag_volume_max | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Raise the top of the drag select volume.
@@ -2596,12 +2651,13 @@ nav_smooth_spring_timestep_min | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.1
 nav_smooth_spring_yaw_rotation_speed | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 50<br>
 nav_smooth_spring_yaw_threshold | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 20<br>
 nav_smooth_use_opt | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>
-nav_space_select_dist | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 200<br>
+nav_space_select_dist | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 1000<br>
 nav_split | FCVAR_GAMEDLL<br>FCVAR_CHEAT | To split an Area into two, align the split line using your cursor and invoke the split command.
 nav_split_place_on_ground | FCVAR_CHEAT | **Default:** false<br>If true, nav areas will be placed flush with the ground when split.
 nav_split_show_line | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>Show the free split line.
 nav_store_selected_set | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Stores the current selected set for later retrieval.
 nav_switch | FCVAR_GAMEDLL | Switches to navmesh for the specified spawngroup
+nav_test_area_gravity | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_bfs_lattice_dist_0 | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -1<br>
 nav_test_bfs_lattice_dist_1 | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -1<br>
 nav_test_bfs_lattice_dist_2 | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** -1<br>
@@ -2630,6 +2686,8 @@ nav_test_find_z | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
 nav_test_force_npc_repath | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_genrt | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_genrt_place | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
+nav_test_getareaoverlapping_gravity | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
+nav_test_getnearestnav_gravity | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_level_hull | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Find entities that intrude into the nav mesh.  List those entities in console output, and display bounding boxes around them for a while.
 nav_test_level_hull_move | FCVAR_GAMEDLL<br>FCVAR_CHEAT | 
 nav_test_multi_connection | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
@@ -2650,7 +2708,8 @@ nav_test_path_space_fly | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>Te
 nav_test_path_space_swim | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>Test swim paths
 nav_test_pos_name | FCVAR_GAMEDLL | **Default:** <br>
 nav_test_pos_place | FCVAR_GAMEDLL | **Default:** -1<br>
-nav_test_ray_space | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
+nav_test_ray_space | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
+nav_test_ray_space_scatter | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_rays | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_smooth | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>
 nav_test_smooth_extern_push | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0<br>
@@ -2693,7 +2752,8 @@ net_connections_stats | FCVAR_RELEASE | Print detailed network statistics for ea
 net_culloptimization |  | **Default:** true<br>Enable optimization of slow path that makes HLTV CPU consumption high in AnimGraph-using mods. Will switch to this on by default soon.
 net_debug_to_file | FCVAR_GAMEDLL | **Default:** false<br>
 net_detailed_canpacket_log |  | **Default:** false<br>
-net_fakelag | FCVAR_RELEASE | Shorthand for 'net_option FakePacketLag_Recv'
+net_fakelag | FCVAR_RELEASE | Shortcut to set both FakePacketLag_Recv and FakePacketLag_Send net options
+net_fakeloss | FCVAR_RELEASE | Shortcut to set both FakePacketLoss_Recv and FakePacketLoss_Send net options
 net_filelogging | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Log packets to files
 net_fs_showindirections | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 net_listallmessages | FCVAR_CHEAT | List all registered net messages
@@ -2701,7 +2761,6 @@ net_log_processing |  | **Default:** false<br>Log network processing
 net_max_message_process_count |  | **Default:** 0<br>Maximum number of messages to process from a client in a single frame (0 == no limit).
 net_max_message_queue_size |  | **Default:** 0<br>Maximum number of messages to allow waiting in queue after processing; exceeding this disconnects the client. 0 == no limit
 net_max_polymorphic_spew |  | **Default:** 5<br>Max polymorphic variants to spew when spewing a flattened serializer.
-net_maxroutable | FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1200<br>Requested max packet size before packets are 'split'.
 net_messageinfo | FCVAR_CHEAT | Display info about a message (by classname or id)
 net_option | FCVAR_RELEASE | Get or set SteamNetworkingSockets options such as fake packet lag and loss
 net_p2p_listen_dedicated |  | **Default:** false<br>Should dedicated server listen for new-style P2P?
@@ -2727,7 +2786,6 @@ net_stats_json |  | Output server networking statistics in json format
 net_status | FCVAR_RELEASE | Shows current network status
 net_use_delta_property_fastpath |  | **Default:** 1<br>
 net_use_packet_compression |  | **Default:** true<br>Compress network traffic
-net_usesocketsforloopback |  | **Default:** false<br>Use network sockets layer even for listen server local player's packets (multiplayer only).
 net_validatemessages | FCVAR_CHEAT | Activates/deactivates net message validation
 net_why_field_excluded | FCVAR_DEVELOPMENTONLY | &lt;classname&gt; &lt;fieldname&gt;:  spew why field was excluded from networking for classname.
 nextdemo | FCVAR_RELEASE | Play next demo in sequence.
@@ -2737,7 +2795,6 @@ nextmode | FCVAR_GAMEDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | 
 noclip | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_CLIENT_CAN_EXECUTE | Toggle. Player becomes non-solid and flies.  Optional argument of 0 or 1 to force enable/disable
 noclip_fixup | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>
 notarget | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_CLIENT_CAN_EXECUTE | Toggle. Player becomes hidden to NPCs.
-npc_vphysics | FCVAR_GAMEDLL | **Default:** false<br>
 npcsolve_attract_draw | FCVAR_GAMEDLL | **Default:** false<br>
 npcsolve_constraint_nav | FCVAR_GAMEDLL | **Default:** true<br>
 npcsolve_constraint_npc | FCVAR_GAMEDLL | **Default:** true<br>
@@ -2836,7 +2893,6 @@ panorama_enable_secondary_layout_pass | FCVAR_HIDDEN | **Default:** true<br>
 panorama_focus_world_panels | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** false<br>when set request key focus when a world panel is enabled
 panorama_force_active_controller_type | FCVAR_HIDDEN | **Default:** -1<br>
 panorama_force_text_shadow_strength | FCVAR_HIDDEN | **Default:** -1<br>
-panorama_frame_limit_v8_gc_microseconds | FCVAR_HIDDEN | **Default:** 5000<br>
 panorama_generate_layout_xsd |  | Generate the Layout XML Schema Definition for the current run-time (types are dependent on which game DLL is running).
 panorama_highlight_bad_opacity_masks | FCVAR_HIDDEN | **Default:** false<br>
 panorama_highlight_composition_layers | FCVAR_HIDDEN | **Default:** false<br>
@@ -2880,6 +2936,9 @@ panorama_use_backbuffer_directly | FCVAR_HIDDEN | **Default:** true<br>
 panorama_worldpanel_update_cull_distance | FCVAR_CLIENTDLL | **Default:** 1000<br>
 panorama_worldpanel_update_cull_size_threshold | FCVAR_CLIENTDLL | **Default:** 5<br>
 panorama_worldpanel_update_culling | FCVAR_CLIENTDLL | **Default:** false<br>
+particle_cluster_debug | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>
+particle_cluster_manager_search_dist | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 256<br>
+particle_cluster_nodraw | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 particle_debug_creation_filter | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_REPLICATED | **Default:** <br>
 particle_layer_id_whitelist | FCVAR_DEVELOPMENTONLY | **Default:** <br>
 particle_powsimd_random_range_exp |  | **Default:** true<br>
@@ -2895,6 +2954,7 @@ particle_test_destroy | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Destroys all particle sys
 particle_test_file | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** <br>Name of the particle system to dynamically spawn
 particle_test_start | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Dispatches the test particle system with the parameters specified in particle_test_file,<br> particle_test_attach_mode and particle_test_attach_param on the entity the player is looking at.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 particle_test_stop | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Stops all particle systems on the selected entities.<br>	Arguments:   	{entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
+particle_use_gpu_particle_model_collection |  | **Default:** false<br>
 particles_multiplier | FCVAR_CHEAT | **Default:** 1<br>Multiply # of rendered particles by this for perf testing
 partybrowser_throttle_data | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.15<br>
 partybrowser_timeout | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 15<br>
@@ -2918,13 +2978,16 @@ phys_build_mass |  | **Default:** false<br>
 phys_buoyancy_angular_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply water damping for buoyancy affecting angular velocity
 phys_buoyancy_drag_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply water drag (tries to equalize object velocity with the velocity of the water flow)
 phys_buoyancy_horizontal_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 0<br>Multiply water damping for buoyancy affecting linear velocity in the horizontal plane
+phys_buoyancy_max_acceleration | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 3200<br>Maximum acceleration that can be applied by water forces
 phys_buoyancy_vertical_damping_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply water damping for buoyancy affecting linear velocity in the vertical direction
-phys_capsule_clip_compensation | FCVAR_REPLICATED | **Default:** true<br>
+phys_client_clear_shadow_velocity | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 phys_continuous_kinematic_update | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>
+phys_controller_clear_velocity |  | **Default:** false<br>
 phys_create_test_character_proxy | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Create test character proxy
 phys_cull_internal_mesh_contacts | FCVAR_REPLICATED | **Default:** false<br>
 phys_debug_draw |  | Set up debug-draw of physics internal state
 phys_debug_showdefaultmaterial | FCVAR_CHEAT | **Default:** false<br>If enabled, surfaces with default material are highlighted in physics debug geometry.
+phys_deterministic | FCVAR_REPLICATED | **Default:** true<br>
 phys_drag_multiplier | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 1<br>Multiply air drag
 phys_dump_filter_body_name |  | **Default:** <br>
 phys_dump_filter_solid_only |  | **Default:** false<br>
@@ -2937,7 +3000,6 @@ phys_enable_gjk_clipping | FCVAR_REPLICATED | **Default:** false<br>
 phys_expensive_shape_threshold | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 6<br>
 phys_fast_report_contacts |  | **Default:** 1<br>when 1, fast path for collision reporting is implemented making triggers faster in some cases
 phys_fastaddcloneshape |  | **Default:** false<br>
-phys_find_incident_face_wedges_fix | FCVAR_REPLICATED | **Default:** false<br>
 phys_headshotscale | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 1.3<br>Modifier for the headshot impulse hits on players
 phys_highlight_expensive_objects | FCVAR_CHEAT | **Default:** false<br>Highlight expensive physics objects
 phys_highlight_expensive_objects_strength | FCVAR_CHEAT | **Default:** 0.02<br>Highlight expensive physics objects strength
@@ -2952,22 +3014,19 @@ phys_list | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | List all physics component 
 phys_log_updaters | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 phys_log_updaters_exclude | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** weapon pistol rifle survivor common_male<br>
 phys_log_updaters_include | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** limbs<br>
+phys_manifold_pool_enabled | FCVAR_REPLICATED | **Default:** true<br>
 phys_mark_debug | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Mark object for debug
-phys_mesh_cluster_cull_compensation | FCVAR_REPLICATED | **Default:** true<br>
-phys_mesh_find_matching_contacts_distance | FCVAR_REPLICATED | **Default:** true<br>
-phys_mesh_notify_force_generic | FCVAR_REPLICATED | **Default:** true<br>
-phys_mesh_notify_ignore_sdf | FCVAR_REPLICATED | **Default:** true<br>
+phys_mesh_local_toi | FCVAR_REPLICATED | **Default:** true<br>
 phys_old_contact_draw |  | **Default:** false<br>
 phys_parallel_islands | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>Enable/Disable Parallel Island Solving
 phys_playerscale | FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 10<br>This multiplies the bullet impact impuse on players for more dramatic results when players are shot.
 phys_position_iterations |  | **Default:** 2<br>
 phys_powered_ragdoll_debug | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 phys_pushscale | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>
-phys_query_last_features_enabled | FCVAR_REPLICATED | **Default:** true<br>
-phys_query_last_features_vertex_separation | FCVAR_REPLICATED | **Default:** true<br>
 phys_record_rays | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump physics main world to file
 phys_record_rays_and_world | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | Dump traces physics main world to file
 phys_reload_immediately |  | **Default:** false<br>Set to 1 to reload resources and reconstruct physics of entities on the fly. May unexpectedly change behavior or crash the game, because game code is generally unaware of underlying resource reloads and may hold references to physics that may become invalid during resource reload. It is inherently harder for physics to deal with resource reloads because of persistent nature of objects being simulated (textures can be easily reloaded on the fly; if an entity holds a handle to a ragdoll body part, it may expect that handle to stay valid while the ragdoll exists)
+phys_server_clear_shadow_velocity | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 phys_shoot | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Shoots a phys object.
 phys_shoot_angular_speed | FCVAR_GAMEDLL | **Default:** 3600<br>
 phys_shoot_speed | FCVAR_GAMEDLL | **Default:** 250<br>
@@ -2981,7 +3040,6 @@ phys_threaded_transform_update | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLI
 phys_timescale | FCVAR_GAMEDLL | **Default:** 1<br>Scale time for physics
 phys_upimpactforcescale | FCVAR_GAMEDLL | **Default:** 0.375<br>
 phys_use_block_solver | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** true<br>Use block solving for constraint entities
-phys_use_position_based_toi_test | FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** true<br>Use a position based heuristic to cull slow objects from the TOI phase of the solver
 phys_validate |  | **Default:** false<br>
 phys_vehicleimpactforcescale | FCVAR_GAMEDLL | **Default:** 1.5<br>
 phys_velocity_iterations |  | **Default:** 8<br>
@@ -3041,7 +3099,10 @@ prop_physics_create | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Creates a physics prop with
 proped_debug_priority |  | **Default:** false<br>
 property_editor_use_overlay |  | **Default:** true<br>
 props_break_max_pieces_perframe | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 16<br>Maximum prop breakable piece count per frame (-1 = model default)
+pulse_debug_entity | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Opens a graph referencing the selected entity. If it is referenced by more than 1 graph, list all the active pulse graph instances referring to that entity so you can pick which one you want.
 pulse_debug_print | FCVAR_DEVELOPMENTONLY | Usage: pulse_debug_print &lt;vpulse_resource&gt;
+pulse_list_graphs | FCVAR_CHEAT | List all the active pulse graph instances
+pulse_open_graph_id | FCVAR_CHEAT | Open a specific graph instance by id
 push_var_values |  | Save convars and config values
 pvs_debugentity | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** -1<br>Verbose spew for this entity when doing IsInPVS computation.
 pvs_flowtype | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>Flow through spawn groups for vis (0 == default, 1 == always visible, 2 == never visible.
@@ -3065,18 +3126,11 @@ r_aoproxy_min_dist |  | **Default:** 3<br>
 r_aoproxy_min_dist_box |  | **Default:** 1<br>
 r_aoproxy_show | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
 r_aspectratio |  | **Default:** 0<br>
-r_async_shader_compile_notify_frequency | FCVAR_DEVELOPMENTONLY | **Default:** 100<br>
+r_async_shader_compile_notify_frequency | FCVAR_DEVELOPMENTONLY | **Default:** 10<br>
 r_bloom_tent_filter_radius | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 3.1<br>bloom mip up-sample filtering radius (using 3x3 tent filter, radius in mip level texels), 0.0 radius =&gt; box (2x2) filter with (fixed) 1.0 radius
-r_cacheSequenceData | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 r_camerapos | FCVAR_LINKED_CONCOMMAND | Prints out the current camera position + orientation to the console
 r_character_decal_renderdoc_capture | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 r_character_decal_resolution |  | **Default:** 1024<br>Resolution of character decal texture.
-r_cpu_light_binner_32bit_shadows |  | **Default:** false<br>
-r_cpu_light_binner_allow_sun_shadows_on_spots |  | **Default:** false<br>
-r_cpu_light_binner_default_spec_env_fade_time |  | **Default:** 1<br>
-r_cpu_light_binner_shadow_target_size |  | **Default:** 3072<br>
-r_cpu_light_binner_spot_shadow_size |  | **Default:** 768<br>
-r_cpu_light_binner_use_gpu |  | **Default:** true<br>
 r_cs2_show_icon_editor | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>CSGO/Icon Editor
 r_csgo_bloom_threshold_all_samples | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>Execute bloom threshold once per sample during downsample (default enabled, higher quality, less bloom aliasing)
 r_csgo_bloom_threshold_downsample_jimenez | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>Custom downsample based on Jimenez14, (default enabled, higher quality, decreases bloom aliasing further)
@@ -3128,6 +3182,7 @@ r_csgo_mixed_resolution_color_slices | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Defaul
 r_csgo_mixed_resolution_particles | FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_mixed_resolution_particles_minmax | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
 r_csgo_mixed_resolution_particles_scale | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 2<br>
+r_csgo_mouse_trace_coord | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
 r_csgo_msaa_resolve_apply_exposure_scale | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>0 - before, 1 - after fix for a2c fringing
 r_csgo_multiscattering | FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_no_shader_resolve | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
@@ -3160,17 +3215,15 @@ r_csgo_resolve_dither_bluenoise_amount | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDL
 r_csgo_resolve_dither_noise_amount | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.2<br>Amount of screen space dither noise to apply during resolve (used/essential with R11G11B10_FLOAT RT)
 r_csgo_shadow_map_allocation_failure_policy | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 1<br>What happens when a shadow map fails allocation? 0 = don't render, 1 = render unshadowed
 r_csgo_shadows_debug | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0<br>
-r_csgo_single_lightbinner | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_smoke_avoid_flat | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_smoke_clip_sniper | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_smoke_fullres_pass | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>Does a full res pass to cover holes and artifacts in smoke low res
 r_csgo_smoke_overlay_min_dt | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.0156863<br>
 r_csgo_smoke_quality | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>0 - no CSM, 1 - use 3x3 or bilinear PCF (dep on shader detail), 2 - use 25 tap PCSS PCF
-r_csgo_smoke_shadow | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
+r_csgo_smoke_shadow | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_stencil_sniper_zoom | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 r_csgo_tools_vis_cubemap_roughness | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0.0001<br>
-r_csgo_viewmodel_csm_pushback_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 15000<br>
-r_csgo_viewmodel_csm_pushback_distance_d16 | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1000<br>
+r_csgo_viewmodel_csm_pushback_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1000<br>
 r_csgo_viewmodel_envmap_clamp_plane_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 24<br>
 r_csgo_viewmodel_envmap_position_bias | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0.85<br>
 r_csgo_viewmodel_far_plane | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 100<br>
@@ -3197,7 +3250,6 @@ r_detailprop_force_probe | FCVAR_CLIENTDLL | **Default:** false<br>
 r_detailprop_lod_dist | FCVAR_CLIENTDLL | **Default:** 4000<br>
 r_directional_lightmaps |  | **Default:** true<br>
 r_directlighting | FCVAR_CHEAT | **Default:** true<br>Set to use direct lighting
-r_dither_scale |  | **Default:** 1<br>
 r_dof2_maxblursize | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 5<br>
 r_dof2_radiusscale | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.25<br>
 r_dof_override | FCVAR_CHEAT | **Default:** false<br>
@@ -3226,7 +3278,7 @@ r_drawropes | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
 r_drawskybox | FCVAR_CHEAT | **Default:** true<br>Render the 2d skybox.
 r_drawsprites | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
 r_drawtracers | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
-r_drawtracers_firstperson | FCVAR_CLIENTDLL | **Default:** true<br>
+r_drawtracers_firstperson | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Toggle visibility of first person weapon tracers
 r_drawviewmodel | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>Render view model
 r_drawworld | FCVAR_CHEAT | **Default:** true<br>Render the world.
 r_dx11_report_live_objects |  | Prints out live D3D11 objects (requires -dx11debug)
@@ -3278,9 +3330,13 @@ r_grass_parallel_load |  | **Default:** false<br>
 r_grass_quality |  | **Default:** 3<br>0 = Off, 1 = Low, 2 = Med, 3 = high, 4 = ultra
 r_grass_start_fade |  | **Default:** 3000<br>
 r_grass_vertex_lighting |  | **Default:** 0<br>
+r_hair_voxels |  | **Default:** -1<br>
+r_haircull_percent |  | **Default:** -1<br>
+r_hairsort |  | **Default:** true<br>
 r_icon_csm_pushback_distance | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** -1<br>csm pushback distance, should be much shorter/disabled for icon rendering
 r_icon_custommaterial_maxres | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 512<br>maxres for custommaterials when rendering icons
-r_icon_generate_mips | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>generate mips for runtime and add sidecar file for offline
+r_icon_generate_offline_mips | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>generate mips via sidecar file for offline
+r_icon_generate_runtime_mips | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>generate mips for runtime
 r_icon_highcontrast_postprocessing_weight | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0.375<br>if using high contrast postprocessing, use this weight (weight = 1.0 for characters)
 r_icon_max_mip_width | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 128<br>r_icon_max_mip_width
 r_icon_player_equip_gloves_from_loadout | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>equip gloves on player for icon rendering from loadout, or use default gloves
@@ -3289,7 +3345,6 @@ r_icon_rendering_height | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEA
 r_icon_rendering_msaa_mode | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 4<br>MSAA mode used for icon rendering 0-none, 1-2xMSAA, 2-4xMSAA, 3-6X, 4-8X, etc
 r_icon_rendering_width | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 512<br>icon rendering width
 r_icon_show_timing | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>show timing in output
-r_icon_texturestreaming_waitframes | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 30<br>r_icon_texturestreaming_waitframes
 r_icon_use_kv3_camera | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>use test kv3 data for camera
 r_impact_ricochet_chance | FCVAR_CLIENTDLL | **Default:** 0.3<br>
 r_impacts_alt_orientation | FCVAR_CLIENTDLL | **Default:** true<br>
@@ -3298,7 +3353,6 @@ r_impacts_decal_grazing_incidence_variance | FCVAR_CLIENTDLL | **Default:** 0.1<
 r_incrementlodscale | FCVAR_LINKED_CONCOMMAND | Modifies the LOD scale
 r_indirectlighting | FCVAR_CHEAT | **Default:** true<br>Set to use indirect lighting
 r_legacy_vsync | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Use legacy vsync mode -- for testing for a couple user machines.
-r_lightBinnerFarPlane | FCVAR_CHEAT | **Default:** 4096<br>
 r_light_flickering_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 r_light_probe_volume_debug_colors | FCVAR_CHEAT | **Default:** 0<br>
 r_light_probe_volume_debug_grid | FCVAR_CHEAT | **Default:** false<br>Show LPV debug grid, 0: off, 1: closest only 2: closest and keep 3: all
@@ -3337,10 +3391,14 @@ r_particle_gpu_implicit_debug_wireframe | FCVAR_DEVELOPMENTONLY | **Default:** f
 r_particle_gpu_implicit_lds_cache | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 r_particle_max_detail_level |  | **Default:** 3<br>The maximum detail level of particle to create
 r_particle_max_draw_distance | FCVAR_CHEAT | **Default:** 1e+06<br>The maximum distance that particles will render
+r_particle_max_size_cull |  | **Default:** 1200<br>Particle systems larger than this in every dimension skip culling to save CPU.  They will be drawn anyway.
 r_particle_max_texture_layers |  | **Default:** -1<br>
 r_particle_min_timestep |  | **Default:** 0<br>A minimum on particle simulation time, particle simulation happening more frequently than this will lerp.
 r_particle_mixed_resolution_viewstart | FCVAR_DEVELOPMENTONLY | **Default:** 500<br>
+r_particle_model_old | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+r_particle_model_per_thread_count | FCVAR_DEVELOPMENTONLY | **Default:** 32<br>
 r_particle_newcode | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Enable new paths in some particle operators
+r_particle_newinput | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Enable input path in particle ops
 r_particle_render_refreshes_sleep_timer | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Disable to get a better look at what's happening offscreen
 r_particle_render_test |  | **Default:** false<br>render particles 100 times and show perf
 r_particle_shadow_map_texture_size | FCVAR_CLIENTDLL | **Default:** 1536<br>
@@ -3348,6 +3406,7 @@ r_particle_shadows | FCVAR_CLIENTDLL | **Default:** true<br>
 r_particle_shadows_cast_on_particles | FCVAR_CLIENTDLL | **Default:** true<br>
 r_particle_shadows_cast_on_particles_scale | FCVAR_CLIENTDLL | **Default:** true<br>
 r_particle_shadows_cast_on_world | FCVAR_CLIENTDLL | **Default:** true<br>
+r_particle_shadows_compute | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** true<br>
 r_particle_timescale |  | **Default:** 1<br>
 r_pipeline_stats_command_flush |  | **Default:** false<br>Experimental: Set to 1 to enable full GPU pipeline flushing after each command list.
 r_pipeline_stats_flush_before_sleeping |  | **Default:** false<br>Experimental: Set to 1 to enable GPU pipeline flushes right before the render thread sleeps to wait for more work.
@@ -3370,6 +3429,7 @@ r_render_to_cubemap_debug | FCVAR_CLIENTDLL | **Default:** false<br>
 r_render_world_node_bounds | FCVAR_CHEAT | **Default:** false<br>Render world node bounds
 r_renderdoc_capture_frame | FCVAR_LINKED_CONCOMMAND | Triggers a RenderDoc capture
 r_renderdoc_open_captures |  | **Default:** true<br>
+r_renderdoc_validation_error_capture_limit |  | **Default:** 5<br>
 r_rendersun | FCVAR_CHEAT | **Default:** true<br>Render sun lighting
 r_replay_post_effect | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** -1<br>
 r_reset_character_decals |  | **Default:** false<br>
@@ -3378,7 +3438,7 @@ r_screen_size_expansion | FCVAR_CLIENTDLL | **Default:** 0<br>
 r_setpos | FCVAR_LINKED_CONCOMMAND | Moves the camera position + orientation to the specified position
 r_shadows | FCVAR_CHEAT | **Default:** true<br>
 r_show_build_info | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Build information. Leave this enabled when submitting bug screenshots and videos, please!
-r_show_hipoly_draw_calls | FCVAR_CHEAT | **Default:** 0<br>Transparent wireframe overlay for draw calls with triangle count higher than specified number
+r_show_time_info | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Show real time, large.
 r_showdebugoverlays | FCVAR_CHEAT | **Default:** false<br>Set to render debug overlays
 r_showdebugrendertarget | FCVAR_CHEAT | **Default:** false<br>Set the debug render target to show, 0 == disable
 r_showsceneobjectbounds | FCVAR_CHEAT | **Default:** false<br>Show scenesystem object bounding boxes
@@ -3398,7 +3458,6 @@ r_ssao_strength |  | **Default:** 3<br>
 r_stereo_multiview_instancing | FCVAR_CHEAT | **Default:** false<br>Use multiview instancing for stereo rendering.
 r_strip_invisible_during_sceneobject_update | FCVAR_CLIENTDLL | **Default:** false<br>
 r_suppress_redundant_state_changes |  | **Default:** true<br>
-r_temp | FCVAR_CLIENTDLL | **Default:** true<br>
 r_texture_budget_dynamic |  | **Default:** true<br>Dynamically adjust texture streaming budget based on GPU memory usage.
 r_texture_budget_threshold |  | **Default:** 0.9<br>Reduce texture memory pool size when this percentage of the budget is full.
 r_texture_budget_update_period |  | **Default:** 0.5<br>Time (in seconds) between updating texture memory budget.
@@ -3433,7 +3492,6 @@ r_validate_texture_streaming |  | **Default:** false<br>Dumps state of texture s
 r_vconsole_foregroundforcerender |  | **Default:** true<br>When VConsole is in the foreground, force all engine & tools to render
 r_viewport |  | Slams viewport size to a specified value.
 r_wait_on_present |  | **Default:** false<br>
-r_world_allow_bindless_desc |  | **Default:** true<br>
 r_world_frame_load_threshold_ms |  | **Default:** 10<br>
 r_world_wind_dir |  | **Default:** 0.707 0.707 0<br>
 r_world_wind_frequency_grass |  | **Default:** 0.03<br>
@@ -3472,7 +3530,6 @@ rangefinder | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Measures distance along a ray
 rate | FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 786432<br>Min bytes/sec the host can receive data
 ray_bench | FCVAR_GAMEDLL | Load the rays and run the benchmark
 rc_default_texture_encode_quality |  | **Default:** 2<br>Texture compression quality used in tools mode
-rc_default_texture_encode_rdo_lambda |  | **Default:** 0<br>Texture compression RDO lambda used in tools mode
 rc_relaxedcones_cpu |  | **Default:** false<br>
 rcon | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Issue an rcon command.
 rcon_address | FCVAR_DONTRECORD<br>FCVAR_RELEASE<br>FCVAR_SERVER_CANNOT_QUERY | **Default:** <br>Address of remote server if sending unconnected rcon commands (format x.x.x.x:p) 
@@ -3565,16 +3622,19 @@ save_watchclass | FCVAR_GAMEDLL | Restrict spew to entities with matching classn
 save_watchentity | FCVAR_GAMEDLL | Restrict spew to entity index
 say | FCVAR_GAMEDLL<br>FCVAR_CLIENT_CAN_EXECUTE | Display player message
 say_team | FCVAR_GAMEDLL<br>FCVAR_CLIENT_CAN_EXECUTE | Display player message to team
+sc_aggregate_debug_draw_meshlets | FCVAR_DEVELOPMENTONLY<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/Aggregates/Visualize Meshlets
 sc_aggregate_fragment_merging | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
 sc_aggregate_gpu_culling |  | **Default:** true<br>Toggles GPU culling of aggregate meshes
 sc_aggregate_gpu_culling_conservative_bounds | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 sc_aggregate_gpu_culling_show_culled | FCVAR_DEVELOPMENTONLY<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/Aggregates/Show GPU Culled Meshes
 sc_aggregate_gpu_occlusion_culling |  | **Default:** true<br>
+sc_aggregate_indirect_draw_compaction | FCVAR_RELEASE | **Default:** true<br>Use multidrawindirect...count if the driver/hardware supports it
+sc_aggregate_indirect_draw_compaction_threshold | FCVAR_RELEASE | **Default:** 8<br>Threshold of indirect draws when we will do compaction
 sc_aggregate_material_solo | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** <br>
 sc_allow_dithered_lod |  | **Default:** true<br>Allow use of dithered lod transitions
 sc_allow_dynamic_constant_batching |  | **Default:** true<br>
 sc_allow_precomputed_vismembers |  | **Default:** true<br>
-sc_allow_secondary_contexts |  | **Default:** true<br>
+sc_allow_write_depth_before_blend |  | **Default:** true<br>
 sc_batch_layer_cb_updates |  | **Default:** true<br>
 sc_bounds_group_cull |  | **Default:** true<br>
 sc_cache_envmap_lpv_lookup |  | **Default:** true<br>
@@ -3597,31 +3657,31 @@ sc_dumpworld | FCVAR_CHEAT | Dump a list of the objects in a sceneworld (Usage: 
 sc_dumpworld3d | FCVAR_CHEAT | Dump the objects in a sceneworld into a 3d geoview buffer (Usage: sc_dumpworld3d &lt;world_index&gt;)
 sc_enable_discard |  | **Default:** true<br>
 sc_extended_stats | FCVAR_CHEAT | **Default:** false<br>
+sc_fade_distance_scale_override | FCVAR_CHEAT | **Default:** -1<br>
 sc_force_lod_level | FCVAR_CHEAT | **Default:** -1<br>
 sc_force_materials_batchable | FCVAR_CHEAT | **Default:** false<br>
-sc_force_push_constant_update_every_draw |  | **Default:** false<br>
 sc_force_single_display_list_per_layer |  | **Default:** false<br>
 sc_force_translation_in_projection | FCVAR_CHEAT | **Default:** false<br>If enabled, the camera's translation will be included in the projection matrix.
 sc_hdr_enabled_override |  | **Default:** -1<br>Override default setting for HDR rendering. -1 default, 0 NoHdr, 1 Hdr, 2 Hdr 1010102 3 Hdr 111110
+sc_instanced_material_solo | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** <br>
+sc_instanced_mesh_enable | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** true<br>Toggles rendering instanced meshes
+sc_instanced_mesh_gpu_culling |  | **Default:** true<br>Toggles GPU culling of instanced meshes
+sc_instanced_mesh_gpu_occlusion_culling |  | **Default:** true<br>Toggles GPU occlusion of instanced meshes
+sc_instanced_mesh_solo | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** <br>
 sc_keep_all_layers |  | **Default:** false<br>
 sc_layer_batch_threshold |  | **Default:** 128<br>
 sc_layer_batch_threshold_fullsort |  | **Default:** 80<br>
 sc_list_extradata_allocations |  | Prints out the overall extra data allocation counts
 sc_listworlds | FCVAR_CHEAT | List all the active sceneworlds
-sc_lod_distance_scale_override | FCVAR_CHEAT | **Default:** -1<br>
-sc_log_submits | FCVAR_CHEAT | **Default:** false<br>Log out display list submits from scenesystem
 sc_max_framebuffer_copies_per_layer |  | **Default:** 1<br>
 sc_mesh_backface_culling |  | **Default:** true<br>
-sc_new_morph_atlasing |  | **Default:** true<br>
 sc_no_cull |  | **Default:** false<br>
 sc_no_vis |  | **Default:** false<br>
 sc_only_render_opaque | FCVAR_CHEAT | **Default:** false<br>
 sc_only_render_shadowcasters | FCVAR_CHEAT | **Default:** false<br>
-sc_override_shadow_fade_max_dist | FCVAR_CHEAT | **Default:** -1<br>
-sc_override_shadow_fade_min_dist | FCVAR_CHEAT | **Default:** -1<br>
-sc_parallel_render_a_view |  | **Default:** false<br>
 sc_queue_reflection_views_to_layers |  | **Default:** true<br>
 sc_reject_all_objects | FCVAR_CHEAT | **Default:** false<br>
+sc_screen_size_lod_scale_override | FCVAR_CHEAT | **Default:** -1<br>
 sc_setclassflags | FCVAR_CHEAT | Low level command to set the flags byte associated with an object class. sc_SetClassFlags &lt;classname&gt; &lt;value&gt;<br>
 sc_shadow_depth_bias |  | **Default:** 256<br>
 sc_shadow_depth_bias_clamp |  | **Default:** 0<br>
@@ -3629,18 +3689,15 @@ sc_shadow_depth_bias_state_override |  | **Default:** false<br>
 sc_shadow_slopescale_depth_bias |  | **Default:** 2.13<br>
 sc_show_cs_skinning_stats | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/Compute Skinning Stats
 sc_show_gpu_profiler | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/GPU Profiler
-sc_show_rejected_objects |  | **Default:** 0<br>
-sc_show_rejected_objects_range |  | **Default:** -1<br>
 sc_show_texture_visualizer | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/Texture Visualizer
 sc_show_tonemap_visualizer | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>SceneSystem/Tonemap Visualizer
 sc_showclasses | FCVAR_CHEAT | List the object class names known by scenesystem<br>
-sc_skip_identical_rt_binds |  | **Default:** false<br>
 sc_skip_traversal | FCVAR_CHEAT | **Default:** false<br>
 sc_spew_cmt_usage |  | **Default:** false<br>
 sc_throw_away_all_layers |  | **Default:** false<br>
 sc_use_clear_subrect |  | **Default:** false<br>
 sc_visualize_batches |  | **Default:** 0<br>color per batch
-sc_visualize_sceneobjects |  | **Default:** 0<br>1 = visualize bounds, 2 = visualize sceneobject mesh materials, 3 = required texture size, 4 = bounds group, 5 = LOD, 6 == LPV Binding
+sc_visualize_sceneobjects |  | **Default:** 0<br>1 = visualize bounds, 2 = visualize sceneobject mesh materials, 3 = required texture size, 4 = bounds group, 5 = LOD, 6 == LPV Binding, 7 == instancing
 scene_clientflex | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Do client side flex animation.
 scene_flush | FCVAR_GAMEDLL | Flush all .vcds from the cache and reload from disk.
 scene_maxcaptionradius | FCVAR_GAMEDLL | **Default:** 1200<br>Only show closed captions if recipient is within this many units of speaking actor (0==disabled).
@@ -3687,6 +3744,7 @@ script_trace_enable_all | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Turn on all trace outpu
 script_trace_enable_key | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Turn on a particular trace output by table/instance
 scrubber |  | Scrub system off - not a dev build
 sdr | FCVAR_RELEASE | An old command that has been renamed to 'net_option'
+sellbackall | FCVAR_CLIENTDLL<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Attempt to refund all equipment
 send_round_backup_file_list | FCVAR_GAMEDLL<br>FCVAR_HIDDEN<br>FCVAR_RELEASE | 
 sensitivity | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 1.25<br>Mouse sensitivity.
 server_game_time | FCVAR_GAMEDLL | Gives the game time in seconds (server's curtime)
@@ -3795,6 +3853,7 @@ snd_duckerreleasetime | FCVAR_ARCHIVE | **Default:** 2.5<br>
 snd_duckerthreshold | FCVAR_ARCHIVE | **Default:** 0.15<br>
 snd_ducktovolume | FCVAR_ARCHIVE | **Default:** 0.55<br>
 snd_enable_imgui | FCVAR_DEVELOPMENTONLY<br>FCVAR_ARCHIVE<br>FCVAR_CHEAT<br>FCVAR_MENUBAR_ITEM | **Default:** false<br>Game/Sound System Debugger
+snd_enable_sound_services_visualizer | FCVAR_CHEAT | **Default:** false<br>Toggles CEngineSoundServicesDebugVisualizerRel debug rendering.
 snd_enable_subgraph_corenull_passthrough |  | **Default:** true<br>
 snd_enable_subgraph_log |  | **Default:** false<br>
 snd_envelope_rate | FCVAR_CHEAT | **Default:** 0.9<br>
@@ -3809,9 +3868,12 @@ snd_gain_min | FCVAR_CHEAT | **Default:** 0.01<br>
 snd_gamevoicevolume | FCVAR_ARCHIVE | **Default:** 1<br>Game v.o. volume
 snd_gamevolume | FCVAR_ARCHIVE | **Default:** 1<br>Game volume
 snd_get_physics_surface_properties | FCVAR_CHEAT | Get physics surface properties for all the materials.
+snd_group_cluster_debug | FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>
 snd_headphone_eq | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_CLIENTCMD_CAN_EXECUTE | **Default:** 0<br>Select Headphone EQ Preset
 snd_headphone_pan_exponent |  | Specifies the exponent for the pan xfade from phone to phone if the "exp" pan law is being used.
 snd_headphone_pan_radial_weight |  | Apply cos(angle) * weight before pan law
+snd_hrtf_distance_behind |  | **Default:** 50<br>HRTF calculations will calculate the player as being this far behind the camera.
+snd_hrtf_perspective_distance_behind |  | **Default:** 50<br>HRTF calculations will calculate the player as being this far behind the camera.
 snd_list | FCVAR_CHEAT | **Default:** <br>
 snd_list_deferred_soundevents | FCVAR_CHEAT | List all current deferred load soundevents
 snd_list_soundevents | FCVAR_CHEAT | List all available soundevents
@@ -3860,6 +3922,7 @@ snd_refdb | FCVAR_CHEAT | **Default:** 60<br>Reference dB at snd_refdist
 snd_refdist | FCVAR_CHEAT | **Default:** 36<br>Reference distance for snd_refdb
 snd_remove_all_soundevents | FCVAR_CHEAT | Remove all soundevents
 snd_remove_soundevent | FCVAR_CHEAT | Remove the specified soundevent
+snd_report_c4_sounds | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
 snd_report_verbose_error | FCVAR_CHEAT | **Default:** false<br>If set to 1, report more error found when playing sounds.<br>
 snd_roundaction_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>Volume of Move Action Music
 snd_roundend_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0.16<br>Volume of Won/Lost Music
@@ -3886,6 +3949,8 @@ snd_sos_cl_soundevent_pause_last | FCVAR_CLIENTDLL | Test
 snd_sos_cl_soundevent_start | FCVAR_CLIENTDLL | Test
 snd_sos_cl_soundevent_stop_last | FCVAR_CLIENTDLL | Test
 snd_sos_cl_soundevent_unpause_last | FCVAR_CLIENTDLL | Test
+snd_sos_compare_kv3_native_stacks | FCVAR_CHEAT | **Default:** false<br>
+snd_sos_compare_operator_stacks | FCVAR_CHEAT | Compares 2 operator stacks and spews any errors
 snd_sos_debug_trigger_opvar | FCVAR_GAMEDLL | **Default:** false<br>
 snd_sos_default_update_stack |  | **Default:** core_update_default<br>
 snd_sos_flush_operators | FCVAR_CHEAT | Flush and re-parse the sound operator system
@@ -3909,6 +3974,7 @@ snd_sos_print_operator_stacks | FCVAR_CHEAT | Prints a list of currently availab
 snd_sos_print_operators | FCVAR_CHEAT | Prints a list of currently available operators
 snd_sos_print_stack_exec_list | FCVAR_CHEAT | Prints the current stack execution list
 snd_sos_print_strings | FCVAR_CHEAT | Prints a list of currently cached strings
+snd_sos_print_table_arrays | FCVAR_CHEAT | **Default:** false<br>
 snd_sos_print_tool_properties | FCVAR_CHEAT | Prints the current state of tool properties.
 snd_sos_report_entity_deleted |  | **Default:** false<br>
 snd_sos_resolve_execute_operator | FCVAR_CHEAT | Resolve the inputs and execute one specified operator from a specified stack
@@ -3930,6 +3996,7 @@ snd_sos_show_operator_updates | FCVAR_CHEAT | **Default:** false<br>
 snd_sos_show_opvar_updates | FCVAR_CHEAT | **Default:** false<br>
 snd_sos_show_opvar_updates_filter | FCVAR_CHEAT | **Default:** <br>
 snd_sos_show_parameter_overwrite_warnings |  | **Default:** false<br>
+snd_sos_show_perspective_debug | FCVAR_CHEAT | **Default:** false<br>Render spheres and text for stacks that implement 'util_draw_perspective'.
 snd_sos_show_queuetotrack | FCVAR_CHEAT | **Default:** false<br>
 snd_sos_show_soundevent_overwrites |  | **Default:** false<br>
 snd_sos_show_soundevent_param_overwrite | FCVAR_CHEAT | **Default:** false<br>
@@ -3966,6 +4033,7 @@ snd_soundmixer_setmixlayer_amount | FCVAR_CHEAT | Set named mix layer mix amount
 snd_soundmixer_version |  | **Default:** 2<br>
 snd_spatialize_lerp | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>
 snd_steamaudio_active_hrtf | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>Index of active HRTF.
+snd_steamaudio_baked_data_stats | FCVAR_CHEAT | Display baked data stats for the current mod.
 snd_steamaudio_default_hrtf_volume_gain | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>Adjust overall volume of the default HRTF by the specified gain (dB).
 snd_steamaudio_display_probes |  | Load all the probes from a file and display probes based on the passed on arguments.
 snd_steamaudio_dynamicpathing_max_samples | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 16<br>
@@ -3986,6 +4054,8 @@ snd_steamaudio_load_reverb_data | FCVAR_CHEAT | **Default:** true<br>If set, bak
 snd_steamaudio_max_convolution_sources | FCVAR_CHEAT | **Default:** 4<br>The maximum number of simultaneous sources that can be modeled by Steam Audio.
 snd_steamaudio_max_hrtf_normalization_gain_db |  | **Default:** 6<br>Maximum gain any HRTF could have during volume normalization.
 snd_steamaudio_max_occlusion_samples | FCVAR_CHEAT | **Default:** 64<br>The maximum number of rays that can be traced for volumetric occlusion by Steam Audio.
+snd_steamaudio_max_probes_pathing |  | **Default:** 4294967295<br>Maximum number of probes to create when baking paths.
+snd_steamaudio_max_probes_reverb |  | **Default:** 4294967295<br>Maximum number of probes to create when baking reverb.
 snd_steamaudio_normalize_default_hrtf_volume | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Normalize volume of default HRTF dataset across all directions.
 snd_steamaudio_num_bounces | FCVAR_CHEAT | **Default:** 128<br>The maximum number of times any ray can bounce when using Steam Audio.
 snd_steamaudio_num_diffuse_samples | FCVAR_CHEAT | **Default:** 2048<br>The number of directions considered for ray bounce by Steam Audio.
@@ -3993,6 +4063,7 @@ snd_steamaudio_num_rays | FCVAR_CHEAT | **Default:** 65536<br>The number of rays
 snd_steamaudio_num_threads | FCVAR_CHEAT | **Default:** 2<br>Sets the number of threads used for realtime reflection by Steam Audio.
 snd_steamaudio_pathing_caching_threshold | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>
 snd_steamaudio_pathing_enable_caching | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
+snd_steamaudio_pathing_enable_source_probe_interp |  | **Default:** false<br>If set, all the probes near a source withing probe range are used to find paths instead of nearest probe.
 snd_steamaudio_pathing_order | FCVAR_CHEAT | **Default:** 1<br>The amount of directional detail in the simulated by Steam Audio.
 snd_steamaudio_pathing_order_rendering | FCVAR_CHEAT | **Default:** 1<br>The amount of directional detail in the rendered audio by Steam Audio.
 snd_steamaudio_perspective_correction_factor |  | **Default:** 1<br>Perspective correction factor, ratio of screen size and view depth from screen, for 3D audio.
@@ -4010,6 +4081,7 @@ snd_surround_speaker_pan_exponent |  | Specifies the exponent for the pan xfade 
 snd_surround_speaker_pan_radial_weight |  | Apply cos(angle) * weight before pan law
 snd_tensecondwarning_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0.04<br>Volume of Ten Second Warnings
 snd_toolvolume | FCVAR_ARCHIVE | **Default:** 1<br>Volume of sounds in tools (e.g. Hammer, SFM)
+snd_ui_positional | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** false<br>
 snd_ui_spatialization_spread | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | **Default:** 1<br>
 snd_use_baked_occlusion | FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0<br>
 snd_vmidi_flush | FCVAR_CHEAT | Purge and reload all vmidi data and files.
@@ -4118,9 +4190,9 @@ stopsoundscape | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Stops all soundscape processin
 subclass_change | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Changes the subclass of the given entity.<br>	Arguments:   	&lt;new_subclass&gt; {entity_name} / {class_name} / {entity_index} / {no argument = pick what player is looking at}
 subclass_create | FCVAR_GAMEDLL<br>FCVAR_CHEAT<br>FCVAR_VCONSOLE_FUZZY_MATCHING | Creates an entity of the given subclass where the player is looking.
 surfaceprop | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Reports the surface properties at the cursor
-suspicious_hit_odds_threshold | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0.01<br>
-suspicious_hit_player_radius | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 8<br>
-suspicious_hit_strategy | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>What to do about suspicious hits. 0: Nothing. 1: Skip the bullet. 2: Skip the bullet and re-roll a new bullet.
+suspicious_hit_odds_threshold | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0.01<br>
+suspicious_hit_player_radius | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 8<br>
+suspicious_hit_strategy | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 0<br>What to do about suspicious hits. 0: Nothing. 1: Skip the bullet. 2: Skip the bullet and re-roll a new bullet.
 sv_accelerate | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 5.5<br>
 sv_accelerate_debug_speed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>
 sv_accelerate_use_weapon_speed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** true<br>
@@ -4133,9 +4205,6 @@ sv_airaccelerate_rappel | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<b
 sv_allchat | FCVAR_GAMEDLL<br>FCVAR_NOTIFY<br>FCVAR_RELEASE | **Default:** true<br>Players can receive all other players' text chat, no death restrictions
 sv_allow_votes | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** true<br>Allow voting?
 sv_alltalk | FCVAR_GAMEDLL<br>FCVAR_NOTIFY<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>Players can hear all other players' voice communication, no team restrictions
-sv_alternateticks | FCVAR_SPONLY<br>FCVAR_RELEASE | **Default:** false<br>If set, server only simulates entities on even numbered ticks.<br>
-sv_always_play_damage_headshot_feedback | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** true<br>If true, we always play damage headshot feedback, even through smokes and objects.
-sv_anim_queue_changes | FCVAR_GAMEDLL | **Default:** false<br>
 sv_auto_adjust_bot_difficulty | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** true<br>Adjust the difficulty of bots each round based on contribution score.
 sv_auto_full_alltalk_during_warmup_half_end | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** true<br>When enabled will automatically turn on full all talk mode in warmup, at halftime and at the end of the match
 sv_autobunnyhopping | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>Players automatically re-jump while holding jump button
@@ -4159,6 +4228,8 @@ sv_bounce | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED
 sv_buy_status_override | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** -1<br>Override for buy status map info. 0 = everyone can buy, 1 = ct only, 2 = t only 3 = nobody
 sv_chat_proximity | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** -1<br>
 sv_cheats | FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Allow cheats on server
+sv_client_max_interp_ratio | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 5<br>This can be used to limit the value of cl_interp_ratio for connected clients (only while they are connected).
+sv_client_min_interp_ratio | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>This can be used to limit the value of cl_interp_ratio for connected clients (only while they are connected).<br>
 sv_clientrates |  | Show client rates.
 sv_clip_penetration_traces_to_players | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>
 sv_clockcorrection_msecs | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 30<br>The server tries to keep each player's m_nTickBase withing this many msecs of the server absolute tickcount
@@ -4179,11 +4250,15 @@ sv_csgo_shoot_verify | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL
 sv_csgo_shoot_verify_on_attack_only | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Only run lag compensation error check when primary attack goes down.
 sv_damage_print_enable | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 1<br>0: no damage print in console. 1: damage print in console on death. 2: damage print in console only at next round restart.
 sv_deadtalk | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>Dead players can speak (voice, text) to the living
+sv_debug_client_not_in_pvs | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** false<br>If set, draw failed client PVS checks with red box
 sv_debug_overlays_bandwidth | FCVAR_RELEASE | **Default:** 65536<br>Broadcast server debug overlays traffic
 sv_debug_overlays_broadcast | FCVAR_NOTIFY<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** false<br>Broadcast server debug overlays
 sv_debug_player_use | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>Visualizes +use logic. Green cross=trace success, Red cross=trace too far, Green box=radius success
 sv_debugroundstats | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 sv_dev_damage_use_netvars | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>Whether we should use network vars (true) or legacy messages (false).
+sv_dev_entitydeltapadding_extra_max |  | **Default:** 0<br>When encoding entity deltas, append on a random number of extra bytes.  This happens after sv_dev_entitydeltapadding_min_size.
+sv_dev_entitydeltapadding_extra_min |  | **Default:** 0<br>When encoding entity deltas, append on a random number of extra bytes.  This happens after sv_dev_entitydeltapadding_min_size.
+sv_dev_entitydeltapadding_min_size |  | **Default:** 0<br>When encoding entity deltas, if the delta size is &lt; N bytes, then shove in N dummy bytes.  This happens before sv_dev_entitydeltapadding_extra_min/sv_dev_entitydeltapadding_extra_max
 sv_dev_simulate_gcdown | FCVAR_GAMEDLL | &lt;state&gt; Turn on/off simulated GC communications failure (GC is down in a way that we know it is down)
 sv_disable_immunity_alpha | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>If set, clients won't slam the player model render settings each frame for immunity \[mod authors use this\]
 sv_disable_observer_interpolation | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** false<br>Disallow interpolating between observer targets on this server.
@@ -4193,8 +4268,6 @@ sv_disable_reliable_delta_retransmit |  | **Default:** true<br>Assume that a rel
 sv_disable_teamselect_menu | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>Disable teamselect menu on clients
 sv_disconnected_player_data_hold_time | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 60<br>Duration, in seconds, to hold onto the data of disconnected players, for scoreboard display.
 sv_disconnected_players_cleanup_delay | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>Delay between player disconnecting and their corpse getting cleaned up.
-sv_distance_guaranteed_damage_feedback | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 1070<br>Attacks made within this radius are guaranteed to generate damage feedback sounds.
-sv_dm_gamemoderules_controls_rounds | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>
 sv_dz_cash_bundle_size | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 50<br>Size of a cash bundle
 sv_dz_cash_mega_bundle_size | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 13<br>Size of a mega cash bundle
 sv_dz_contractkill_reward | FCVAR_GAMEDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 10<br>Cash bundles to award for a successful contract kill
@@ -4203,6 +4276,8 @@ sv_dz_show_enemy_name_scope_range | FCVAR_MISSING0 | **Default:** 0<br>
 sv_dz_squad_wipe_reward | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 2<br>Number of cash bundles to award for eliminating a squad
 sv_enable_alternate_baselines | FCVAR_RELEASE | **Default:** 1<br>Allow alternate baseline system, set to 2 for debugging spew.
 sv_enable_delta_packing | FCVAR_RELEASE | **Default:** true<br>When enabled, this allows for entity packing to use the property changes for building up the data. This is many times faster, but can be disabled for error checking.
+sv_enable_donttransmit | FCVAR_DEVELOPMENTONLY | **Default:** false<br>When encoding entity deltas, instead of unreliably deducing explicit deletions, actually send list of existing but not networked entities (dont_transmit list) to each client.
+sv_enable_pvs_vis_bits | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>
 sv_enablebunnyhopping | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** false<br>Allow player speed to exceed maximum running speed
 sv_endmatch_item_drop_interval | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>The time between drops on the end match scoreboard 
 sv_endmatch_item_drop_interval_ancient | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 3.5<br>The time between drops on the end match scoreboard for ancient items 
@@ -4260,6 +4335,7 @@ sv_hegrenade_damage_multiplier | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLI
 sv_hegrenade_radius_multiplier | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 1<br>
 sv_hibernate_postgame_delay | FCVAR_RELEASE | **Default:** 5<br># of seconds to wait after final client leaves before hibernating.
 sv_hibernate_when_empty | FCVAR_RELEASE | **Default:** true<br>Puts the server into extremely low CPU usage mode when no clients connected
+sv_hide_ent_in_pvs | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** -1<br>
 sv_hide_roundtime_until_seconds | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>
 sv_highlight_distance | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 500<br>
 sv_highlight_duration | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 3.5<br>
@@ -4290,12 +4366,14 @@ sv_load_random_client_names_file | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Loads a file
 sv_log_change_offsets | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>Log change offsets to game/varchangeinfoN.log files.
 sv_log_http_record_before_any_listeners | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>
 sv_log_onefile | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Log server information to only one file.
+sv_log_roundstats | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** true<br>
 sv_logbans | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Log server bans in the server logs.
 sv_logblocks | FCVAR_RELEASE | **Default:** false<br>If true when log when a query is blocked (can cause very large log files)
 sv_logecho | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Echo log information to the console.
 sv_logfile | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Log server information in the log file.
 sv_logflush | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Flush the log file to disk on each write (slow).
 sv_logsdir | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** logs<br>Folder in the game directory where server logs will be stored.
+sv_long_frame_ms |  | **Default:** 15<br>If a server frame takes longer than N ms, complain about it.  (Dedicated server only.)
 sv_mapvetopickvote_maps | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** de_anubis,de_inferno,de_mirage,de_vertigo,de_overpass,de_nuke,de_ancient<br>Which maps are used for map veto pick sequence
 sv_mapvetopickvote_phase_duration | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** \[1:5\]\[2:15\]\[3:20\]\[4:10\]\[5:10\]\[6:5\]<br>How many seconds each phase lasts
 sv_mapvetopickvote_rnd | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>When enabled will shuffle veto pick maps list order every time
@@ -4322,6 +4400,7 @@ sv_memlimit | FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0<br>If set, whenever 
 sv_merge_changes_after_tick_with_calcdelta | FCVAR_RELEASE | **Default:** 1<br>This fixes bugs where pure calcdelta is used due to recipient changing but it doesn't pick up a field change where the value was changed back to same value as the from snapshot even though the destination fields change list does note the change. Set to 2 to spew any changes merged in by this fix.
 sv_metaduplication | FCVAR_CHEAT | Check serializer meta for duplication, add verbose to command for full spew
 sv_min_jump_landing_sound | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 260<br>
+sv_minimum_desired_chicken_count | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>Minimum number of chickens to attempt to spawn in the map
 sv_minrate | FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 98304<br>Min bandwidth rate allowed on server, 0 == unlimited
 sv_mmqueue_reservation | FCVAR_DEVELOPMENTONLY<br>FCVAR_DONTRECORD | **Default:** <br>Server queue reservation
 sv_mmqueue_reservation_extended_timeout | FCVAR_DEVELOPMENTONLY | **Default:** 21<br>Extended time in seconds before mmqueue reservation expires.
@@ -4409,7 +4488,6 @@ sv_sequence_debug2 | FCVAR_GAMEDLL | **Default:** -1<br>
 sv_sequence_model_substring | FCVAR_GAMEDLL | **Default:** <br>
 sv_server_graphic1 | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** <br>A 360x60 (&lt;16kb) image file in /csgo/ that will be displayed to spectators.
 sv_server_graphic2 | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** <br>A 220x45 (&lt;16kb) image file in /csgo/ that will be displayed to spectators.
-sv_server_side_animation | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>
 sv_server_verify_blood_on_player | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 sv_setsteamaccount | FCVAR_RELEASE | token<br>Set game server account token to use for logging in to a persistent game server account
 sv_shared_team_pvs | FCVAR_GAMEDLL | **Default:** false<br>PVS is shared between teams
@@ -4467,6 +4545,9 @@ sv_steamgroup | FCVAR_NOTIFY<br>FCVAR_RELEASE | **Default:** <br>The ID of the s
 sv_steamgroup_exclusive | FCVAR_RELEASE | **Default:** false<br>If set, only members of Steam group will be able to join the server when it's empty, public people will be able to join the server only if it has players.
 sv_stepsize | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED | **Default:** 18<br>
 sv_stopspeed | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_NOTIFY<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 80<br>Minimum stopping speed when on ground.
+sv_strafing_inaccuracy_bias | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0.5<br>
+sv_strafing_inaccuracy_enabled | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** false<br>
+sv_strafing_inaccuracy_scale | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 0.1<br>
 sv_stressbots | FCVAR_RELEASE | **Default:** false<br>If set to 1, the server calculates data and fills packets to bots. Used for perf testing.
 sv_strict_notarget | FCVAR_GAMEDLL | **Default:** false<br>If set, notarget will cause entities to never think they are in the pvs
 sv_suppress_friendlyfire_decals | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>
@@ -4495,11 +4576,11 @@ sv_unlag | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** true<br>Enables
 sv_unlag_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 sv_unlag_fixstuck | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>Disallow backtracking a player for lag compensation if it will cause them to become stuck
 sv_unlockedchapters | FCVAR_ARCHIVE | **Default:** 1<br>Highest unlocked game chapter.
+sv_unpause_on_console_close | FCVAR_ARCHIVE | **Default:** true<br>1 = Unpause the game when pressing ~ to close the console. 0 = Leave the game paused.
 sv_update_animgraph_movement_in_finish | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>Whether we should update animgraph movement in FinishMove.
 sv_usenetworkvars |  | **Default:** true<br>Use networkvar system.
 sv_usercmd_custom_random_seed | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>When enabled server will populate an additional random seed independent of the client
 sv_usercmd_queue_spew_threshold | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** 10<br>Spew warning if command queue has grown above this many backlogged commands.
-sv_usestepsimulation | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>use old stepsimulation system.
 sv_versus_screen_scene_id | FCVAR_GAMEDLL<br>FCVAR_RELEASE<br>FCVAR_MISSING3 | **Default:** 0<br>Determines which scene is used for the versus screen.
 sv_visiblemaxplayers | FCVAR_RELEASE | **Default:** -1<br>Overrides the max players reported to prospective clients
 sv_voice_proximity | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** -1<br>
@@ -4556,6 +4637,7 @@ test_dispatcheffect | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Test a clientside dispatch 
 test_entity_blocker | FCVAR_GAMEDLL<br>FCVAR_CHEAT | Test command that drops an entity blocker out in front of the player.
 test_list_entities | FCVAR_GAMEDLL<br>FCVAR_CHEAT | test-list entities
 test_restoreonnewmodel | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 0<br>
+test_voice_containers | FCVAR_LINKED_CONCOMMAND | Quick example for how we'd derive traits from voice containers.
 test_vqlayout | FCVAR_DEVELOPMENTONLY | Usage: test_vqlayout tools/layout/examples/simple.vqlayout
 testscript_debug |  | **Default:** false<br>Debug test scripts.
 think_limit | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 10<br>Maximum think time in milliseconds, warning is printed if this is exceeded.
@@ -4578,6 +4660,7 @@ toggleconsole | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Show/hide the console.
 tool_spawned_model_scales | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 1 1 1<br>
 toolhud_enable |  | **Default:** true<br>
 tools_renderscenes |  | **Default:** true<br>
+tools_stall_monitor_break_on_unknown_cause | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Break on unknown stall cause
 tr_best_course_time | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 0<br>The player's best time for the timed obstacle course
 tr_completed_training | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** false<br>Whether the local player has completed the initial training portion of the training map
 tr_valve_course_time | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** 352<br>Valve's best time for the timed obstacle course
@@ -4679,10 +4762,11 @@ ui_deepstats_radio_heat_tab | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE 
 ui_deepstats_radio_heat_team | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>
 ui_deepstats_toplevel_mode | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>
 ui_hud_dist | FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 24<br>distance from the player to the hud
+ui_inspect_bkgnd_map_B0B70CFF | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** warehouse<br>Inspect background map
 ui_inventorysettings_recently_acknowledged | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>
 ui_leaderboards_top_public_appid | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_RELEASE | **Default:** 730<br>
 ui_lobby_draft_enabled | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>
-ui_mainmenu_bkgnd_movie_1016BB11 | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** de_dust2<br>Main menu background movie
+ui_mainmenu_bkgnd_movie_B0B70CFF | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** ar_baggage<br>Main menu background movie
 ui_nearbylobbies_filter3 | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** competitive<br>
 ui_news_last_read_link | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>
 ui_party_msg_sound_enabled | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** true<br>When enabled, lobby messages will play a short sound
@@ -4709,6 +4793,7 @@ ui_playsettings_maps_listen_scrimcomp2v2 | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>F
 ui_playsettings_maps_listen_skirmish | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** mg_skirmish_armsrace<br>
 ui_playsettings_maps_official_casual | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** mg_dust247<br>
 ui_playsettings_maps_official_deathmatch | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** mg_dust247<br>
+ui_playsettings_maps_official_gungameprogressive | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** mg_armsrace<br>
 ui_playsettings_maps_workshop | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>
 ui_playsettings_mode_listen | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** deathmatch<br>
 ui_playsettings_mode_official_v20 | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** deathmatch<br>
@@ -4777,17 +4862,21 @@ voice_all_icons | FCVAR_CLIENTDLL | **Default:** false<br>Draw all players' voic
 voice_always_sample_mic | FCVAR_ARCHIVE | **Default:** false<br>For systems experiencing a hang/stall when using voice chat.
 voice_bypass_noise_gate | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 voice_clientdebug | FCVAR_CLIENTDLL | **Default:** 0<br>
+voice_containers_generate_curve | FCVAR_LINKED_CONCOMMAND | Args: \[Voice Container Path\] \[Curve Name\] \[Num Sections\]
+voice_containers_get_instance_params | FCVAR_LINKED_CONCOMMAND | Args: \[Voice Container Path\]
 voice_debugfeedbackfrom |  | **Default:** false<br>
 voice_device_override | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>Default device used for voice capture.
 voice_fadeouttime |  | **Default:** 0.005<br>
-voice_in_process |  | **Default:** false<br>
+voice_in_process |  | **Default:** true<br>
 voice_initial_buffer_ms |  | **Default:** 200<br>
+voice_input_stallout | FCVAR_DEVELOPMENTONLY | **Default:** 0.8<br>Time before we consider a mic stalled out and need to reset it.
 voice_loopback | FCVAR_USERINFO | **Default:** false<br>
-voice_loopback_no_networking | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+voice_loopback_no_networking | FCVAR_USERINFO | **Default:** false<br>
 voice_min_buffer_ms |  | **Default:** 100<br>
 voice_modenable | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE<br>FCVAR_CLIENTCMD_CAN_EXECUTE | **Default:** true<br>Enable/disable voice in this mod.
 voice_modenable_toggle | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | Toggle the voice_modenable convar.
 voice_mute |  | Mute a specific Steam user
+voice_noise_supression |  | **Default:** false<br>
 voice_player_speaking_delay_threshold | FCVAR_GAMEDLL<br>FCVAR_CHEAT | **Default:** 0.5<br>
 voice_reset_mutelist |  | Reset all mute information for all players who were ever muted.
 voice_sequence_maximum_wait_time |  | **Default:** 0.5<br>When receiving packets out of sequence, wait this many seconds for missing sequences to arrive
@@ -4796,10 +4885,10 @@ voice_show_mute |  | Show whether current players are muted.
 voice_stall_ms |  | **Default:** 250<br>
 voice_status_test_toggle | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Test voice and status notices
 voice_test_log_send | FCVAR_RELEASE | **Default:** false<br>
-voice_threshold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0<br>decibel threshold for how loud the talker's input signal is before we think they are talking.
+voice_threshold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** -120<br>decibel threshold for how loud the talker's input signal is before we think they are talking.
 voice_threshold_attack | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.3<br>Amount of time we buffer outgoing audio to detect an onset.
-voice_threshold_delay | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 1.5<br>Amount of time the talker is silent before we infer that they are no longer talking.
-voice_threshold_hold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.8<br>Amount of time after the talker starts talking we should keep listening regardless of how loud they are speaking.
+voice_threshold_delay | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.7<br>Amount of time the talker is silent before we infer that they are no longer talking.
+voice_threshold_hold | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0.2<br>Amount of time after the talker starts talking we should keep listening regardless of how loud they are speaking.
 voice_unmute |  | Unmute a specific Steam user, or `all` to unmute all connected players.
 voice_vox | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 0<br>Voice chat uses a vox-style always on
 voice_vox_current_peak | FCVAR_CLIENTDLL | **Default:** 0<br>Current peak value (out of 64k) of the incoming voice stream
@@ -4835,11 +4924,9 @@ vprof_remote_stop |  | Stop an existing remote VProf data request
 vprof_reset |  | Reset the stats in VProf profiler
 vprof_reset_peaks |  | Reset just the peak time in VProf profiler
 vprof_scope_entity_clientthink | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN | **Default:** false<br>Does nothing whatsoever.
-vprof_scope_entity_gamephys | FCVAR_GAMEDLL | **Default:** false<br>
 vprof_scope_entity_thinks | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>
 vprof_think_limit | FCVAR_GAMEDLL | **Default:** false<br>
 vprof_time_scale | FCVAR_DEVELOPMENTONLY<br>FCVAR_HIDDEN | Scale used when displaying time (0 = use default)
-vprof_vtrace |  | Toggle whether vprof data is sent to VTrace
 vtune |  | Controls VTune's sampling.
 weapon_accuracy_forcespread | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 0<br>Force spread to the specified value.
 weapon_accuracy_logging | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_REPLICATED | **Default:** false<br>
