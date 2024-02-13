@@ -4770,7 +4770,7 @@ voice_device_override                                                           
 voice_fadeouttime                                                               : 0.005             : devonly                             : 
 voice_in_process                                                                : true              : devonly                             : 
 voice_initial_buffer_ms                                                         : 200               : devonly                             : 
-voice_input_stallout                                                            : 0.8               : devonly                             : Time before we consider a mic stalled out and need to reset it.
+voice_input_stallout                                                            : 2                 : devonly                             : Time before we consider a mic stalled out and need to reset it.
 voice_loopback                                                                  : false             : user                                : 
 voice_loopback_no_networking                                                    : false             : user                                : 
 voice_min_buffer_ms                                                             : 100               : devonly                             : 

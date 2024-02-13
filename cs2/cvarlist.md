@@ -4770,7 +4770,7 @@ voice_device_override | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** <br>Defaul
 voice_fadeouttime | FCVAR_DEVELOPMENTONLY | **Default:** 0.005<br>
 voice_in_process | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
 voice_initial_buffer_ms | FCVAR_DEVELOPMENTONLY | **Default:** 200<br>
-voice_input_stallout | FCVAR_DEVELOPMENTONLY | **Default:** 0.8<br>Time before we consider a mic stalled out and need to reset it.
+voice_input_stallout | FCVAR_DEVELOPMENTONLY | **Default:** 2<br>Time before we consider a mic stalled out and need to reset it.
 voice_loopback | FCVAR_USERINFO | **Default:** false<br>
 voice_loopback_no_networking | FCVAR_USERINFO | **Default:** false<br>
 voice_min_buffer_ms | FCVAR_DEVELOPMENTONLY | **Default:** 100<br>
