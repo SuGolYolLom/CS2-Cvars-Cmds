@@ -433,7 +433,7 @@ cl_clock_unhook | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdbg | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 4<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -936,7 +936,6 @@ cl_snd_cast_retrigger | FCVAR_DEVELOPMENTONLY | **Default:** true<br>
 cl_snd_new_visualize | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>Displays soundevent name played at it's 3d position
 cl_sniper_auto_rezoom | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO<br>FCVAR_PER_USER | **Default:** true<br>Auto-rezoom snipers after a shot
 cl_sniper_delay_unscope | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>
-cl_sniper_scope_shader_enabled | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** true<br>
 cl_sos_test_get_opvar | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | 
 cl_sos_test_set_opvar | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | 
 cl_soundscape_flush | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_SERVER_CAN_EXECUTE | Flushes the client side soundscapes
@@ -989,6 +988,7 @@ cl_track_aim_head_log_closest | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 
 cl_track_aim_head_threshold | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 0<br>Notify render device when rendering a frame with enemy head within threshold distance
 cl_track_render_eye_angles | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Spew render eye angles
 cl_tree_sway_dir | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | sets tree sway wind direction and strength
+cl_ui_particles_destroy_when_not_painting | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_updatevisibility | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Updates visibility bits.
 cl_use_entity_as_targetid | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_use_old_wearable_shoulddraw | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
@@ -2688,6 +2688,7 @@ net_max_polymorphic_spew | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Max polymor
 net_messageinfo | FCVAR_CHEAT | Display info about a message (by classname or id)
 net_option | FCVAR_RELEASE | Get or set SteamNetworkingSockets options such as fake packet lag and loss
 net_p2p_listen_dedicated | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Should dedicated server listen for new-style P2P?
+net_print_sdr_ping_times | FCVAR_RELEASE | Print current ping times to SDR points of presence, and selected route
 net_public_adr | FCVAR_RELEASE | **Default:** <br>For servers behind NAT/DHCP meant to be exposed to the public internet, this is the public facing ip address string: ("x.x.x.x" )
 net_qosinterval_spew | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Spew QoS interval data as we gather it
 net_qospacketloss_percentage_threshold | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Spew a warning if packet loss percentage is above this threshold
@@ -3002,6 +3003,7 @@ playvol | FCVAR_DEVELOPMENTONLY | Play a sound at a specified volume.
 png_screenshot | FCVAR_DEVELOPMENTONLY | Take a .png screenshot: png_screenshot \[filename\]
 pop_var_values | FCVAR_DEVELOPMENTONLY | Restore previously pushed convars and config values
 population_distribution_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_REPLICATED | **Default:** 0<br>
+print_changed_convars | FCVAR_RELEASE | Prints all convars that have changed from their default value
 print_mapgroup | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | Prints the current mapgroup and the contained maps
 print_mapgroup_sv | FCVAR_GAMEDLL<br>FCVAR_RELEASE | Prints the current mapgroup and the contained maps
 print_model_bind_pose | FCVAR_DEVELOPMENTONLY | Prints the bind pose of the specified model. Optionally limits to a particular bone and its parent chain, otherwise prints the entire skeleton.
@@ -3753,7 +3755,7 @@ snd_boxverb_simd_svf | FCVAR_DEVELOPMENTONLY | **Default:** 1<br>0 = use biquad 
 snd_break_on_start_soundevent | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** <br>Use to debug break on any soundevent that is started matching this name
 snd_cast | FCVAR_CHEAT | Casts a ray and starts a sound event where the ray hits. The sound event will retrigger periodically if cl_snd_cast_retrigger is set. The sound event will clear previous snd_cast events if cl_snd_cast_clear is set. Usage: snd_cast &lt;eventname&gt; \[&lt;retrigger time&gt;\] \[&lt;max distance&gt;\]. Arguments that are specified will become defaults for the remainder of the session.
 snd_compare_KV_convert | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
-snd_compare_soundevents | FCVAR_CHEAT | Compare the compiled and loaded contents of 2 soundevents.
+snd_compare_soundevents | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | Compare the compiled and loaded contents of 2 soundevents.
 snd_cs_duck_reverb | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | One shot trigger to duck reverb for a few seconds.
 snd_deathcamera_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0.16<br>Volume of Deathcam Timers
 snd_delay_sound_ms_max | FCVAR_DEVELOPMENTONLY | **Default:** 40<br>Sound device synchronization max delay (ms)
@@ -3791,9 +3793,9 @@ snd_headphone_pan_radial_weight | FCVAR_DEVELOPMENTONLY | Apply cos(angle) * wei
 snd_hrtf_distance_behind | FCVAR_DEVELOPMENTONLY | **Default:** 50<br>HRTF calculations will calculate the player as being this far behind the camera.
 snd_hrtf_perspective_distance_behind | FCVAR_DEVELOPMENTONLY | **Default:** 50<br>HRTF calculations will calculate the player as being this far behind the camera.
 snd_list | FCVAR_CHEAT | **Default:** <br>
-snd_list_deferred_soundevents | FCVAR_CHEAT | List all current deferred load soundevents
-snd_list_soundevents | FCVAR_CHEAT | List all available soundevents
-snd_list_soundevents_by_stack | FCVAR_CHEAT | List all available soundevents using specified stack name
+snd_list_deferred_soundevents | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | List all current deferred load soundevents
+snd_list_soundevents | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | List all available soundevents
+snd_list_soundevents_by_stack | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | List all available soundevents using specified stack name
 snd_mainmenu_music_break_time_max | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0<br>Maximum amount of time to pause between playing main menu music
 snd_mainmenu_music_break_time_min | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0<br>Minimum amount of time to pause between playing main menu music
 snd_mapobjective_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0.04<br>Volume of Map Objective Music
@@ -3836,8 +3838,8 @@ snd_rear_stereo_speaker_position | FCVAR_DEVELOPMENTONLY | Specifies the positio
 snd_rear_surround_speaker_position | FCVAR_DEVELOPMENTONLY | Specifies the position (in degrees) of the virtual rear left/right speakers.
 snd_refdb | FCVAR_CHEAT | **Default:** 60<br>Reference dB at snd_refdist
 snd_refdist | FCVAR_CHEAT | **Default:** 36<br>Reference distance for snd_refdb
-snd_remove_all_soundevents | FCVAR_CHEAT | Remove all soundevents
-snd_remove_soundevent | FCVAR_CHEAT | Remove the specified soundevent
+snd_remove_all_soundevents | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | Remove all soundevents
+snd_remove_soundevent | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | Remove the specified soundevent
 snd_report_c4_sounds | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>
 snd_report_verbose_error | FCVAR_CHEAT | **Default:** false<br>If set to 1, report more error found when playing sounds.<br>
 snd_roundaction_volume | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0<br>Volume of Move Action Music
@@ -3938,7 +3940,7 @@ snd_sos_unpause_soundevent | FCVAR_CHEAT | UnPause the first soundevent in the l
 snd_sos_use_case_sensitive_soundevents | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 snd_sound_areas_debug | FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** false<br>
 snd_sound_areas_debug_interval | FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** 0.2<br>
-snd_soundevent_clear_deferred | FCVAR_CHEAT | Clear the list of deferred soundevents for loading.
+snd_soundevent_clear_deferred | FCVAR_DEVELOPMENTONLY<br>FCVAR_CHEAT | Clear the list of deferred soundevents for loading.
 snd_soundmixer | FCVAR_DEVELOPMENTONLY | **Default:** Default_Mix<br>
 snd_soundmixer_flush | FCVAR_DEVELOPMENTONLY | Reload soundmixers.txt file.
 snd_soundmixer_list_mix_groups | FCVAR_DEVELOPMENTONLY | List all mix groups to dev console.
@@ -4733,6 +4735,10 @@ unpause | FCVAR_RELEASE | Clear the pause state of the server.
 url_execute | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Executes url-based commands, used for incoming commands from url-based launches when the game's already running.
 use_fx_queue | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** true<br>use_fx_queue
 users | FCVAR_DEVELOPMENTONLY | Show user info for players on server.
+v8_jitless | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Disable runtime allocation of executable memory for V8.
+v8_maximum_heap_size_mb | FCVAR_DEVELOPMENTONLY | **Default:** 512<br>Hard limit for the v8 heap size (in mBytes)
+v8_stack_size | FCVAR_DEVELOPMENTONLY | **Default:** 384<br>Default size of stack region v8 is allowed to use (in kBytes)
+v8_write_heap_stats | FCVAR_DEVELOPMENTONLY | Dump output of v8::Isolate::GetHeapStatistics.
 vconsole_rcon_server_details | FCVAR_DONTRECORD<br>FCVAR_RELEASE<br>FCVAR_SERVER_CANNOT_QUERY | **Default:** <br>when non-empty allows for easy vconsole connection to the dedicated server.
 vehicle_debug_impact_damage | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL | **Default:** false<br>
 view_punch_decay | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** 18<br>Decay factor exponent for view punch
