@@ -433,7 +433,7 @@ cl_clock_unhook | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdbg | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 1<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 2<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -1324,7 +1324,6 @@ econ_clear_inventory_images | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | clear t
 econ_debug_loadout_ui | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>Show debug data when players change their loadout.
 econ_enable_inventory_images | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>allow inventory image rendering for use by scaleform
 econ_inventory_image_pinboard | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
-econ_item_icon_create | FCVAR_CLIENTDLL<br>FCVAR_HIDDEN<br>FCVAR_DONTRECORD<br>FCVAR_CLIENTCMD_CAN_EXECUTE | Test: generate and resolve item icon texture
 econ_show_items_with_tag | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Lists the item definitions that have a specified tag.
 enable_boneflex | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** true<br>
 enable_priority_boost | FCVAR_DEVELOPMENTONLY | Disable focus based priority boost
@@ -1903,6 +1902,7 @@ log_level | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Set the spew level of a logging 
 log_verbosity | FCVAR_DONTRECORD<br>FCVAR_RELEASE | Set the verbosity of a logging channel.
 logaddress_add_http | FCVAR_GAMEDLL<br>FCVAR_UNLOGGED<br>FCVAR_RELEASE | Set URI of a listener to receive logs via http post. Wrap URI in double quotes.
 logaddress_add_http_delayed | FCVAR_GAMEDLL<br>FCVAR_UNLOGGED<br>FCVAR_RELEASE | Set a delay and URI of a listener to receive logs via http post. Wrap URI in double quotes.
+logaddress_del_http | FCVAR_GAMEDLL<br>FCVAR_UNLOGGED<br>FCVAR_RELEASE | Remove http listener by URI. Wrap URI in double quotes.
 logaddress_delall_http | FCVAR_GAMEDLL<br>FCVAR_UNLOGGED<br>FCVAR_RELEASE | Remove all http listeners from the dispatch list.
 logaddress_list_http | FCVAR_GAMEDLL<br>FCVAR_UNLOGGED<br>FCVAR_RELEASE | List all URIs currently receiving server logs
 logaddress_token_secret | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** <br>Set a secret string that will be hashed when using logaddress with explicit token hash.
@@ -3263,6 +3263,7 @@ r_icon_highcontrast_postprocessing_weight | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIEN
 r_icon_max_mip_width | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 128<br>r_icon_max_mip_width
 r_icon_player_equip_gloves_from_loadout | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>equip gloves on player for icon rendering from loadout, or use default gloves
 r_icon_reload_map | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>force reload map on new request
+r_icon_rendering_4xnice | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 0<br>icon rendering 4x nice
 r_icon_rendering_height | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 384<br>icon rendering height
 r_icon_rendering_msaa_mode | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 4<br>MSAA mode used for icon rendering 0-none, 1-2xMSAA, 2-4xMSAA, 3-6X, 4-8X, etc
 r_icon_rendering_width | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** 512<br>icon rendering width
