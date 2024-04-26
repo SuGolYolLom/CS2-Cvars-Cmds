@@ -420,6 +420,10 @@ cl_box                                                                          
 cl_boxmove                                                                      : 0                 : devonly, cl                         : run in a square, # represents how many usercommands to run before turning.
 cl_boxmove_speed                                                                : 1                 : devonly, cl                         : how fast to run (1 to use player max run speed).
 cl_break_on_missing_resource                                                    : cmd               : devonly                             : Break in debugger when missing resource match is found.\nFormat: cl_break_on_missing_resource <substring> /(empty to break on all) / 0 to turn off.\n
+cl_buymenu_ct_nextround_high                                                    : 5000              : cl, a, per_user, release            : 
+cl_buymenu_ct_nextround_low                                                     : 1400              : cl, a, per_user, release            : 
+cl_buymenu_t_nextround_high                                                     : 5000              : cl, a, per_user, release            : 
+cl_buymenu_t_nextround_low                                                      : 1400              : cl, a, per_user, release            : 
 cl_buywheel_donate_key                                                          : 0                 : cl, a, per_user, release            : Set the key to use for donation in the buy menu. 0: Left Control; 1: Left Alt; 2: Left Shift.
 cl_buywheel_nonumberpurchasing                                                  : false             : cl, a, per_user, release            : Set non-zero to prevent buy wheel from purchasing via number keys
 cl_cache_sendtable                                                              : true              :                                     : Cache sendtables
@@ -451,7 +455,7 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             :                                     : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 1                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 3                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : cl                                  : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -631,9 +635,24 @@ cl_glow_item_far_b                                                              
 cl_glow_item_far_g                                                              : 0.4               : cl, release                         : 
 cl_glow_item_far_r                                                              : 0.3               : cl, release                         : 
 cl_graphics_driver_warning_dont_show_again                                      : false             : cl, a, release                      : 
+cl_grenadecrosshair_decoy                                                       : true              : cl, a, per_user                     : Is the grenade crosshair enabled
+cl_grenadecrosshair_explosive                                                   : true              : cl, a, per_user                     : Is the grenade crosshair enabled
+cl_grenadecrosshair_fire                                                        : true              : cl, a, per_user                     : Is the grenade crosshair enabled
+cl_grenadecrosshair_flash                                                       : true              : cl, a, per_user                     : Is the grenade crosshair enabled
+cl_grenadecrosshair_keepusercrosshair                                           : true              : cl, a, per_user                     : Keep the user's crosshair when the grenade crosshair is enabled
+cl_grenadecrosshair_smoke                                                       : true              : cl, a, per_user                     : Is the grenade crosshair enabled
+cl_grenadecrosshair_tickinterval                                                : 10                : devonly, cl                         : 
+cl_grenadecrosshair_ticklabels                                                  : true              : devonly, cl                         : 
+cl_grenadecrosshair_tickscaling                                                 : 1.1               : devonly, cl                         : 
+cl_grenadecrosshairdelay_decoy                                                  : 2                 : cl, a, per_user                     : How long should the pin be pulled for before showing the grenade crosshair
+cl_grenadecrosshairdelay_explosive                                              : 2                 : cl, a, per_user                     : How long should the pin be pulled for before showing the grenade crosshair
+cl_grenadecrosshairdelay_fire                                                   : 2                 : cl, a, per_user                     : How long should the pin be pulled for before showing the grenade crosshair
+cl_grenadecrosshairdelay_flash                                                  : 2                 : cl, a, per_user                     : How long should the pin be pulled for before showing the grenade crosshair
+cl_grenadecrosshairdelay_smoke                                                  : 2                 : cl, a, per_user                     : How long should the pin be pulled for before showing the grenade crosshair
 cl_groups                                                                       : cmd               : cl                                  : Show status of all spawn groups.
 cl_gunlowerangle                                                                : 2                 : cl                                  : 
 cl_gunlowerspeed                                                                : 0.1               : cl                                  : 
+cl_headbob_land_dip_velocity_threshold                                          : 250               : sv, cl, rep, release                : Dev only convar cl_headbob_land_dip_velocity_threshold
 cl_hide_avatar_images                                                           : 0                 : cl, a                               : Hide avatar images for other players. \n	0 - Off.\n	1 - Block All\n	2 - Block all but friends
 cl_hitbox_debug                                                                 : false             : cl                                  : 
 cl_hold_game_events_force_delay_ticks                                           : 0                 : cl                                  : Debugging convar to force late dispatch of game events.
@@ -700,10 +719,7 @@ cl_massreport                                                                   
 cl_matchlist_controlroom_aid                                                    : 0                 : cl, hidden, release                 : 
 cl_matchstats_print_own_data                                                    : cmd               : cl                                  : cl_matchstats_print_own_data RANGENAME
 cl_min_china_movie_time                                                         : 6                 : cl                                  : 
-cl_min_ct                                                                       : 1                 : cl                                  : Controls which CT model is used when cl_minmodels is set to 1.
 cl_min_movie_time                                                               : 4                 : cl                                  : 
-cl_min_t                                                                        : 1                 : cl                                  : Controls which Terrorist model is used when cl_minmodels is set to 1.
-cl_minmodels                                                                    : 0                 : cl                                  : Uses one player model for each team.  Set this value to -1 to allow unapproved / in progress player models to be used.
 cl_mouselook                                                                    : true              : cl, a, user, per_user, notconnected : Set to 1 to use mouse for look, 0 for keyboard look. Cannot be set while connected to a server.
 cl_mute_all_but_friends_and_party                                               : 0                 : cl, a                               : Only allow communication from friends and matchmaking party members. Set to 1 to apply the in non-competitive game modes. Set to 2 will apply the setting in all modes.\n
 cl_mute_enemy_team                                                              : false             : cl, a                               : Block all communication from players on the enemy team.
@@ -783,7 +799,6 @@ cl_player_visibility_stencil_bloat_amount                                       
 cl_player_visibility_stencil_proxy_min_dist                                     : 3                 : devonly, cl                         : 
 cl_player_visibility_stencil_proxy_min_dist_box                                 : 1                 : devonly, cl                         : 
 cl_player_visibility_stencil_proxy_type                                         : 1                 : devonly, cl                         : 0 - box, 1 - dodecahedron
-cl_playerspray_auto_apply                                                       : true              : cl, a, release                      : Automatically apply graffiti when graffiti menu closes
 cl_playerspraydisable                                                           : false             : cl, a                               : Disable player sprays.
 cl_precacheinfo                                                                 : cmd               :                                     : Show precache info (client).
 cl_pred_build_verbose                                                           : false             : cl                                  : Verbose spew when building prediction optimized data runs.
@@ -799,6 +814,7 @@ cl_predict_weapon_drop                                                          
 cl_predictioncopy_describe                                                      : cmd               : cl                                  : Describe datamap_t for entindex
 cl_predictioncopy_print                                                         : cmd               : cl                                  : Print simple description of prediction copy fields for entindex
 cl_predictioncopy_runs                                                          : true              : cl                                  : 
+cl_prefer_lefthanded                                                            : false             : cl, a, user, per_user               : Left handed preference
 cl_printfps                                                                     : cmd               : cl                                  : Print information from cl_showfps.
 cl_profilereadpacketentities                                                    : false             : devonly                             : 
 cl_promoted_settings_acknowledged                                               : 0:0               : cl, a                               : 
@@ -814,6 +830,7 @@ cl_radar_fast_transforms                                                        
 cl_radar_icon_scale_min                                                         : 0.6               : cl, a, release                      : Sets the minimum icon scale. Valid values are 0.4 to 1.25.
 cl_radar_rotate                                                                 : true              : cl, a, release                      : 1
 cl_radar_scale                                                                  : 0.7               : cl, a, release                      : Sets the radar scale. Valid values are 0.25 to 1.0.
+cl_radar_scale_alternate                                                        : 1                 : cl, a, release                      : Sets the alternate radar scale. Valid values are 0.25 to 1.0.
 cl_radar_square_with_scoreboard                                                 : true              : cl, a, release                      : If set, the radar will toggle to square when the scoreboard is visible.
 cl_radial_coyote_time                                                           : 0.15              : devonly, cl                         : Selection lenience: How long in seconds the last selected radial segment is used if no segment is selected.
 cl_radial_menu_icon_radius                                                      : 200               : devonly, cl                         : 
@@ -1011,7 +1028,6 @@ cl_updatevisibility                                                             
 cl_use_entity_as_targetid                                                       : true              : cl                                  : 
 cl_use_old_wearable_shoulddraw                                                  : false             : cl                                  : 
 cl_use_opens_buy_menu                                                           : false             : cl, a, user, per_user               : Pressing the +use key will open the buy menu if in a buy zone (just as if you pressed the 'buy' key).
-cl_usenewbob                                                                    : true              : cl, a                               : Use the new weapon bob
 cl_usercmd_dbg                                                                  : 0                 : devonly                             : show usercmd payload sizing info for packets with more than this many usercmds
 cl_usercmd_max_per_movemsg                                                      : 4                 : release                             : max number of CUserCmds to send in one client move message
 cl_usercmd_showsize                                                             : false             : devonly                             : 
@@ -1165,7 +1181,6 @@ crowbar_impact_damage_mass                                                      
 crowbar_impact_damage_scale                                                     : 1                 : sv                                  : 
 cs_AssistDamageThreshold                                                        : 25                : devonly, sv                         : cs_AssistDamageThreshold defines the amount of damage needed to score an assist
 cs_ShowStateTransitions                                                         : -2                : sv, cheat                           : cs_ShowStateTransitions <ent index or -1 for all>. Show player state transitions.
-cs_enable_player_physics_box                                                    : false             : sv, release                         : 
 cs_hostage_near_rescue_music_distance                                           : 2000              : sv, cheat                           : 
 cs_logtouchexpansion                                                            : -2                : sv, cheat                           : cs_logtouchexpansion <ent index or -1 for all>. Log player touch expansion component.
 cs_minimap_create_output_size                                                   : 1024              : cl, cheat                           : Size of minimap texture generated with cs_minimap_create (512 default)
@@ -1251,6 +1266,7 @@ demo_flush                                                                      
 demo_goto                                                                       : cmd               : release                             : Skips to location in demo.
 demo_gotomark                                                                   : cmd               : release                             : Skips the current demo playback to the marked tick
 demo_gototick                                                                   : cmd               : release                             : Skips to a tick in demo.
+demo_highlight_seconds_before                                                   : 6                 : cl, release                         : How many seconds before the actual highlight event to show when viewing highlights.
 demo_info                                                                       : cmd               : release                             : Print information about currently playing demo.
 demo_marktick                                                                   : cmd               : release                             : Marks the current demo playback tick for later use
 demo_pause                                                                      : cmd               : release                             : Pauses demo playback.
@@ -1258,6 +1274,7 @@ demo_pauseatservertick                                                          
 demo_quitafterplayback                                                          : false             : release                             : Quits game after demo playback.
 demo_recordcommands                                                             : true              : cheat                               : Record commands typed at console into .dem files.
 demo_resume                                                                     : cmd               : release                             : Resumes demo playback.
+demo_skip_to_shot_seconds_before                                                : 2                 : cl, release                         : How many seconds before the shot to skip to when skipping to a specific shot ID.
 demo_timescale                                                                  : cmd               : release                             : Sets demo replay speed.
 demo_togglepause                                                                : cmd               : release                             : Toggles demo playback.
 demo_usefastgoto                                                                : true              :                                     : Use fast frame skipping when available for demo_goto commands.
@@ -2051,7 +2068,6 @@ mat_print_textures_size_in_memory                                               
 mat_reinitmaterials                                                             : cmd               :                                     : Reinitializes all loaded materials, reloading their shaders.
 mat_reloadmaterials                                                             : cmd               :                                     : Reloads all materials. Takes an optional substring as an argument.
 mat_reloadshaders                                                               : cmd               :                                     : Reloads all shaders. Takes optional substrings of shader names to recompile as arguments.
-mat_reloadwearablecustommaterials                                               : cmd               : devonly, cl, cheat                  : Reloads wearable custom materials for the local player
 mat_reset_material_costs                                                        : cmd               :                                     : Reset material cost heuristic
 mat_set_shader_quality                                                          : cmd               :                                     : Force shader quality setting (valid values are 0 or 1)
 mat_shader_cache                                                                : true              : devonly                             : 
@@ -2101,6 +2117,7 @@ mm_datacenter_debugprint                                                        
 mm_datacenter_query_delay                                                       : 5                 : devonly                             : Delay after datacenter update is enabled before data is actually queried.
 mm_datacenter_retry_interval                                                    : 75                : devonly                             : Interval between datacenter stats retries.
 mm_datacenter_update_interval                                                   : 3600              : devonly                             : Interval between datacenter stats updates.
+mm_debug_friend_rp                                                              : 0                 : devonly                             : 
 mm_debugprint                                                                   : cmd               :                                     : Show debug information about current matchmaking session
 mm_dedicated_allow                                                              : true              : devonly                             : 1 = allow searches for dedicated servers
 mm_dedicated_fake                                                               : false             : devonly                             : 1 = pretend like search is going, but abort after some time
@@ -2148,6 +2165,7 @@ mm_teamsearch_errortime                                                         
 mm_teamsearch_nostart                                                           : false             : devonly                             : Team search will fake cancel before searching for server
 mm_title_debug_version                                                          : 0                 : devonly                             : This matchmaking version will override .res file version for isolating matchmaking
 mm_tu_string                                                                    : 00000000          :                                     : 
+mm_use_p2p_for_listen_server                                                    : true              :                                     : 
 mobile_fps_increase_during_charging                                             : false             : a                                   : MOBILE_FPS_CONTROL: If true we increase framerate limit while charging
 mobile_fps_increase_during_hfr_animations                                       : true              : hidden                              : MOBILE_FPS_CONTROL: If true we increase framerate limit during HFR-tagged animations and transitions.
 mobile_fps_increase_during_touch                                                : true              : a                                   : MOBILE_FPS_CONTROL: If true we increase framerate limit during touch
@@ -2183,8 +2201,8 @@ mp_c4_cannot_be_defused                                                         
 mp_c4timer                                                                      : 40                : sv, cl, nf, rep, release, missing3  : how long from when the C4 is armed until it blows
 mp_chattime                                                                     : 10                : sv, cl, rep                         : amount of time players can chat after the game is over
 mp_competitive_endofmatch_extra_time                                            : 15                : sv, release                         : After a competitive match finishes rematch voting extra time is given for rankings.
-mp_consecutive_loss_aversion                                                    : 1                 : sv, rep, release                    : How loss streak is affected with round win: 0 = win fully resets loss bonus, 1 = first win steps down loss bonus, 2 = first win holds loss bonus and step down starting with second win
-mp_consecutive_loss_max                                                         : 4                 : sv, rep, release, missing3          : 
+mp_consecutive_loss_aversion                                                    : 1                 : sv, cl, rep, release                : How loss streak is affected with round win: 0 = win fully resets loss bonus, 1 = first win steps down loss bonus, 2 = first win holds loss bonus and step down starting with second win
+mp_consecutive_loss_max                                                         : 4                 : sv, cl, rep, release, missing3      : 
 mp_coop_force_join_ct                                                           : false             : sv, cl, rep, release, missing3      : If set, real players will auto join CT on join.
 mp_coopmission_bot_difficulty_offset                                            : 0                 : sv, rep, release, missing3          : The difficulty offset modifier for bots during coop missions.
 mp_coopmission_mission_number                                                   : 0                 : sv, cl, rep, release, missing3      : Which mission the map should run after it loads.
@@ -2277,8 +2295,6 @@ mp_guardian_give_random_grenades_to_bots                                        
 mp_guardian_loc_string_hud                                                      : #guardian_mission_type_kills : sv, cl, rep, release, missing3      : Loc string token to use on hud for this mission, otherwise default to kills with weapon.
 mp_guardian_loc_weapon                                                          :                   : sv, cl, rep, release, missing3      : Override to weapon dialog var applied to UI
 mp_guardian_new_bounds                                                          : cmd               : sv                                  : mp_guardian_new_bounds
-mp_guardian_player_dist_max                                                     : 2000              : sv, rep, release, missing3          : The maximum distance a player is allowed to get from the bombsite before they're killed.
-mp_guardian_player_dist_min                                                     : 1300              : sv, rep, release, missing3          : The distance at which we start to warn a player when they are too far from the guarded bombsite.
 mp_guardian_shoot_point                                                         : cmd               : sv                                  : mp_guardian_shoot_point
 mp_guardian_special_kills_needed                                                : 10                : sv, rep, release, missing3          : The number of kills needed with a specific weapon.
 mp_guardian_special_weapon_needed                                               : awp               : sv, rep, release, missing3          : The weapon that needs to be used to increment the kills needed to complete the mission.
@@ -2308,9 +2324,6 @@ mp_join_grace_time                                                              
 mp_limitteams                                                                   : 2                 : sv, nf, rep, release, missing3      : Max # of players 1 team can have over another (0 disables check)
 mp_logdetail                                                                    : 0                 : sv, release                         : Logs attacks.  Values are: 0=off, 1=enemy, 2=teammate, 3=both)
 mp_logdetail_items                                                              : false             : sv, release                         : Logs a line any time a player acquires or loses an item.
-mp_logdistance_2d                                                               : 250               : sv, release                         : Enables distance logging every so many units
-mp_logdistance_sec                                                              : 15                : sv, release                         : Enables distance logging every so many seconds
-mp_logloadouts                                                                  : true              : sv, release                         : Enables distance logging with full loadouts
 mp_logmoney                                                                     : false             : sv, release                         : Enables money logging.  Values are: 0=off, 1=on
 mp_match_can_clinch                                                             : true              : sv, cl, rep, release, missing3      : Can a team clinch and end the match by being so far ahead that the other team has no way to catching up?
 mp_match_end_changelevel                                                        : false             : sv, cl, rep, release, missing3      : At the end of the match, perform a changelevel even if next map is the same
@@ -2375,7 +2388,7 @@ mp_solid_teammates                                                              
 mp_spawnprotectiontime                                                          : 5                 : sv, rep, release                    : Kick players who team-kill within this many seconds of a round restart.
 mp_spec_swapplayersides                                                         : false             : sv, cl, rep, release                : Toggle set the player names and team names to the opposite side in which they are are on the spectator panel.
 mp_spectators_max                                                               : 2                 : sv, cl, rep, release                : How many spectators are allowed in a match.
-mp_starting_losses                                                              : 0                 : sv, rep, release, missing3          : Determines what the initial loss streak is.
+mp_starting_losses                                                              : 0                 : sv, cl, rep, release, missing3      : Determines what the initial loss streak is.
 mp_startmoney                                                                   : 800               : sv, cl, rep, release, missing3      : amount of money each player gets when they reset
 mp_suicide_penalty                                                              : true              : sv, release, missing3               : Punish players for suicides
 mp_swapteams                                                                    : cmd               : sv, release                         : Swap the teams and restart the game
@@ -4137,9 +4150,8 @@ spec_glow_silent_factor                                                         
 spec_glow_spike_factor                                                          : 1.2               : cl, release                         : Noisy player xray glow scaling (pop when noise is made).  Make >1 to add a 'spike' to noise-making players
 spec_glow_spike_time                                                            : 0                 : cl, release                         : Time for noisy player glow 'spike' to show that they made noise very recently.
 spec_goto                                                                       : cmd               : cl, clientcmd_can_execute           : Move the spectator camera to a specific location. `spec_goto x y z pitch yaw`
-spec_hide_players                                                               : false             : cl, release, clientcmd_can_execute  : Toggle the visibility of scoreboard players.
-spec_lock_to_accountid                                                          :                   : cl, release                         : As an observer, lock the spectator target to the given accountid.
-spec_lock_to_current_player                                                     : cmd               : cl, release                         : As an observer, lock the spectator target to the currently observed target
+spec_lock_to_accountid                                                          :                   : devonly, cl                         : As an observer, lock the spectator target to the given accountid.
+spec_lock_to_current_player                                                     : cmd               : devonly, cl                         : As an observer, lock the spectator target to the currently observed target
 spec_mode                                                                       : cmd               : cl, clientcmd_can_execute           : Set spectator mode
 spec_next                                                                       : cmd               : cl, clientcmd_can_execute           : Spectate next player
 spec_player                                                                     : cmd               : cl, clientcmd_can_execute           : Spectate a player by name or slot
@@ -4218,6 +4230,8 @@ sv_airaccelerate                                                                
 sv_airaccelerate_parachute                                                      : 2.6               : sv, cl, rep, release                : 
 sv_airaccelerate_rappel                                                         : 2.2               : sv, cl, rep, release                : 
 sv_allchat                                                                      : true              : sv, nf, release                     : Players can receive all other players' text chat, no death restrictions
+sv_allow_ground_weapon_pickup                                                   : true              : devonly, sv, cl, rep                : 
+sv_allow_switching_weapon_handedness                                            : true              : devonly, sv, cl, rep                : 
 sv_allow_votes                                                                  : true              : sv, release, missing3               : Allow voting?
 sv_alltalk                                                                      : false             : sv, nf, release, missing3           : Players can hear all other players' voice communication, no team restrictions
 sv_auto_adjust_bot_difficulty                                                   : true              : sv, release, missing3               : Adjust the difficulty of bots each round based on contribution score.
@@ -4241,6 +4255,7 @@ sv_bots_get_easier_each_win                                                     
 sv_bots_get_harder_after_each_wave                                              : 0                 : sv, release, missing3               : If > 0, some # of bots will raise thier difficulty each time CTs beat a Guardian wave. The argument defines how many will raise their difficulty each time
 sv_bounce                                                                       : 0                 : sv, cl, nf, rep, release            : Bounce multiplier for when physically simulated objects collide with other objects.
 sv_buy_status_override                                                          : -1                : sv, rep, release, missing3          : Override for buy status map info. 0 = everyone can buy, 1 = ct only, 2 = t only 3 = nobody
+sv_buymenu_open_prevents_opportunistic_pickup                                   : false             : sv, release                         : 
 sv_chat_proximity                                                               : -1                : sv, cl, rep, release                : 
 sv_cheats                                                                       : false             : nf, rep, release                    : Allow cheats on server
 sv_client_max_interp_ratio                                                      : 5                 : sv, cl, rep                         : This can be used to limit the value of cl_interp_ratio for connected clients (only while they are connected).
@@ -4389,7 +4404,7 @@ sv_logfile                                                                      
 sv_logflush                                                                     : false             : a, release                          : Flush the log file to disk on each write (slow).
 sv_logsdir                                                                      : logs              : a, release                          : Folder in the game directory where server logs will be stored.
 sv_long_frame_ms                                                                : 15                :                                     : If a server frame takes longer than N ms, complain about it.  (Dedicated server only.)  See also engine_enable_frametime_warnings.
-sv_mapvetopickvote_maps                                                         : de_anubis,de_inferno,de_mirage,de_vertigo,de_overpass,de_nuke,de_ancient : sv, release                         : Which maps are used for map veto pick sequence
+sv_mapvetopickvote_maps                                                         : de_anubis,de_inferno,de_mirage,de_vertigo,de_dust2,de_nuke,de_ancient : sv, release                         : Which maps are used for map veto pick sequence
 sv_mapvetopickvote_phase_duration                                               : [1:5][2:15][3:20][4:10][5:10][6:5] : sv, release                         : How many seconds each phase lasts
 sv_mapvetopickvote_rnd                                                          : false             : sv, release                         : When enabled will shuffle veto pick maps list order every time
 sv_massreport                                                                   : false             : sv                                  : 
@@ -4516,7 +4531,6 @@ sv_shield_explosive_damage_scale                                                
 sv_shield_hitpoints                                                             : 850               : sv, cl, rep, release                : 
 sv_show_bot_difficulty_in_name                                                  : false             : sv, cl, rep                         : 0 = hide bot difficulty in bot name, 1 = show bot difficulty in bot name
 sv_show_move_collisions                                                         : false             : sv, cl, rep, cheat                  : Enable this to visualize collisions between player and geometry.
-sv_show_ragdoll_playernames                                                     : false             : cl, rep, release, missing3          : 
 sv_show_team_equipment_force_on                                                 : false             : sv, cl, rep, release, missing3      : Force on if not prohibited
 sv_show_team_equipment_prohibit                                                 : false             : sv, cl, nf, rep, release            : Determines whether +cl_show_team_equipment is prohibited.
 sv_show_teammate_death_notification                                             : false             : sv, release                         : Show chat notification upon teammate death
@@ -4556,6 +4570,7 @@ sv_staminamax                                                                   
 sv_staminarecoveryrate                                                          : 60                : sv, cl, rep, release                : Rate at which stamina recovers (units/sec)
 sv_standable_normal                                                             : 0.7               : sv, cl, rep, cheat, release         : 
 sv_stats                                                                        : true              :                                     : Collect CPU usage stats
+sv_steamauth_enforce                                                            : 2                 : release                             : By default, player must maintain a reliable connection to Steam servers. When player Steam session drops, enforce it: 2 = instantly kick, 1 = kick at next spawn, 0 = do not kick.
 sv_steamgroup                                                                   :                   : nf, release                         : The ID of the steam group that this server belongs to. You can find your group's ID on the admin profile page in the steam community.
 sv_steamgroup_exclusive                                                         : false             : release                             : If set, only members of Steam group will be able to join the server when it's empty, public people will be able to join the server only if it has players.
 sv_stepsize                                                                     : 18                : devonly, sv, cl, nf, rep            : 
@@ -4640,6 +4655,7 @@ sv_waterfriction                                                                
 sv_weapon_require_use_grace_period                                              : 1                 : sv, release                         : 
 sv_weapon_swap_difficulty_near_hi_pri                                           : 2                 : sv, cl, rep, release                : 0 = Cone searches easily reach past high priority items to swap weapons. 1 = Cone searches are narrowed and require that the weapon is strictly closer. 2 = cone searches are disabled near high priority items
 sv_workshop_allow_other_maps                                                    : true              : sv, release                         : When hosting a workshop collection, users can play other workshop map on this server when it is empty and then mapcycle into this server collection.
+switchhands                                                                     : cmd               : cl, release                         : 
 sys_info                                                                        : cmd               : release                             : Print system information to the console
 sys_minidumpexpandedspew                                                        : true              :                                     : 
 sys_minidumpspewlines                                                           : 2000              : release                             : Lines of crash dump console spew to keep.
@@ -4657,7 +4673,6 @@ test_vqlayout                                                                   
 testscript_debug                                                                : false             :                                     : Debug test scripts.
 think_limit                                                                     : 10                : sv, cl, rep, release                : Maximum think time in milliseconds, warning is printed if this is exceeded.
 thirdperson                                                                     : cmd               : cl, cheat, per_tick                 : Switch to thirdperson camera.
-thirdperson_lockcamera                                                          : false             : cl, rep, cheat                      : 
 thirdperson_mayamode                                                            : cmd               : cl, cheat                           : Switch to thirdperson Maya-like camera controls.
 thirdpersonshoulder                                                             : cmd               : cl                                  : Switch to thirdperson-shoulder camera.
 throttle_expensive_ai                                                           : false             : sv                                  : 
@@ -4672,6 +4687,7 @@ timeout_terrorist_start                                                         
 toggle                                                                          : cmd               : norecord, release                   : Toggles specified convar value on and off.
 toggleRdrOpt                                                                    : cmd               : devonly, cl                         : 
 toggleconsole                                                                   : cmd               : norecord, release                   : Show/hide the console.
+toggleradarscale                                                                : cmd               : cl, release                         : Toggles the radar scale
 tool_spawned_model_scales                                                       : 1 1 1             : devonly, sv, rep                    : 
 toolhud_enable                                                                  : true              :                                     : 
 tools_renderscenes                                                              : true              :                                     : 
@@ -4842,13 +4858,11 @@ vcon_clients                                                                    
 vconsole_rcon_server_details                                                    :                   : norecord, release, server_cannot_query : when non-empty allows for easy vconsole connection to the dedicated server.
 vehicle_debug_impact_damage                                                     : false             : devonly, sv                         : 
 view_punch_decay                                                                : 18                : sv, cl, rep, cheat, release         : Decay factor exponent for view punch
-viewmodel_always_on                                                             : false             : cl, cheat                           : Force the view model to draw, even when in 3rd person
-viewmodel_fov                                                                   : 60                : cl, a                               : Viewmodel FOV
-viewmodel_offset_randomize                                                      : false             : cl, cheat                           : randomly change viewmodel offsets to visualize range
-viewmodel_offset_x                                                              : 1                 : cl, a                               : viewmodel_offset_x
-viewmodel_offset_y                                                              : 1                 : cl, a                               : viewmodel_offset_y
-viewmodel_offset_z                                                              : -1                : cl, a                               : viewmodel_offset_z
-viewmodel_presetpos                                                             : 1                 : cl, a                               : 1:"Desktop", 2:"Couch", 3:"Classic" 
+viewmodel_fov                                                                   : 60                : cl, a, user, per_user               : Viewmodel FOV
+viewmodel_offset_x                                                              : 1                 : cl, a, user, per_user               : viewmodel_offset_x
+viewmodel_offset_y                                                              : 1                 : cl, a, user, per_user               : viewmodel_offset_y
+viewmodel_offset_z                                                              : -1                : cl, a, user, per_user               : viewmodel_offset_z
+viewmodel_presetpos                                                             : 1                 : cl, a                               : 1:"Desktop", 2:"Classic" 
 violence_ablood                                                                 : true              : a                                   : Draw alien blood
 violence_agibs                                                                  : true              : a                                   : Show alien gib entities
 violence_hblood                                                                 : true              : a                                   : Draw human blood
