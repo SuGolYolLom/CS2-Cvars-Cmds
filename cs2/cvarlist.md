@@ -427,7 +427,7 @@ cl_clock_recvmargin_adjust_limit_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 
 cl_clock_recvmargin_desired | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>Recvmargin-based clock sync will try to maintain N ms margin between tick arrival and polling network
 cl_clock_recvmargin_enable | FCVAR_RELEASE | **Default:** true<br>Enable new client clock synchronization strategy that tries to achieve a certain client recv margin
 cl_clock_recvmargin_minsamples_slowdown | FCVAR_DEVELOPMENTONLY | **Default:** 3<br>Recvmargin-based clock sync will not slow down unless we have N indicating samples
-cl_clock_recvmargin_minsamples_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 32<br>Recvmargin-based clock sync will not speed up unless we have N indicating samples
+cl_clock_recvmargin_minsamples_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 0.5<br>Recvmargin-based clock sync will not speed up unless we have N seconds of indicating samples
 cl_clock_recvmargin_spew_interval | FCVAR_RELEASE | **Default:** 0<br>
 cl_clock_recvmargin_timeconstant_slowdown | FCVAR_DEVELOPMENTONLY | **Default:** 0.3<br>Recvmargin-based clock sync will remove 63.2% of the error in N seconds
 cl_clock_recvmargin_timeconstant_speedup | FCVAR_DEVELOPMENTONLY | **Default:** 0.6<br>Recvmargin-based clock sync will remove 63.2% of the error in N seconds
@@ -437,7 +437,7 @@ cl_clock_unhook | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdbg | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_clockdrift_max_ticks | FCVAR_CHEAT | **Default:** 3<br>Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>Silence voice and other distracting sounds until the end of round or next death.
-cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 4<br>Preferred teammate color
+cl_color | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO | **Default:** 0<br>Preferred teammate color
 cl_commandtool_exec | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Runs a command from the command tool
 cl_connectionretrytime_p2p | FCVAR_RELEASE | **Default:** 20<br>Number of seconds over which to spread retry attempts for P2P.
 cl_cq_min_queue | FCVAR_CLIENTDLL<br>FCVAR_USERINFO | **Default:** 0<br>Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
@@ -598,6 +598,7 @@ cl_firstperson_legs | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** tr
 cl_fixedcrosshairgap | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_USER | **Default:** 3<br>For crosshair style 1: How big to make the gap between the pips in the fixed crosshair
 cl_flushentitypacket | FCVAR_CHEAT | **Default:** 0<br>For debugging. Force the engine to flush an entity packet.
 cl_force_next_signon_to_reset | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
+cl_frametime_summary_report_detailed | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** false<br>When a perf report is dumped at the end of the session, should it be detailed?
 cl_fullupdate | FCVAR_CHEAT | Force uncompressed update
 cl_game_mode_convars | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Display the values of the convars for the current game_mode.
 cl_globallight_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
@@ -634,7 +635,6 @@ cl_grenadecrosshairdelay_smoke | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_PER_U
 cl_groups | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Show status of all spawn groups.
 cl_gunlowerangle | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>
 cl_gunlowerspeed | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.1<br>
-cl_headbob_land_dip_velocity_threshold | FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED<br>FCVAR_RELEASE | **Default:** 250<br>Dev only convar cl_headbob_land_dip_velocity_threshold
 cl_hide_avatar_images | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0<br>Hide avatar images for other players. <br>	0 - Off.<br>	1 - Block All<br>	2 - Block all but friends
 cl_hitbox_debug | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>
 cl_hold_game_events_force_delay_ticks | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0<br>Debugging convar to force late dispatch of game events.
@@ -725,8 +725,7 @@ cl_observed_bot_crosshair | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | 
 cl_paintkit_override | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_RELEASE | **Default:** <br>
 cl_panel_freeze_time_after_press | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.5<br>time to freeze mouse/pointer motion after a mouse button press
 cl_parallel_readpacketentities | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Set to 1 to use threading snapshot reading (if game supports and server is sending bitcounts).
-cl_parallel_readpacketentities_threshold | FCVAR_DEVELOPMENTONLY | **Default:** 8<br>Use parallel processing of snapshot reading if above this many entries.
-cl_parallel_readpacketentities_type | FCVAR_DEVELOPMENTONLY | **Default:** -1<br><br>	-1 = use default (parallel controller split)<br>	0 = single threaded combined (i.e., ReadFieldList and Decode combined into one call)<br>	1 = single threaded split (first pass ReadFieldList, second pass Decode)<br>	2 = worker thread for decode (main thread does ReadFieldList, worker thread does Decode)<br>	3 = parallel combined (threadpool does read/decode on work items in parallel)<br>	4 = parallel split<br>	5 = parallel controller combined (like parallel, but uses a parallelcontroller so each thread in pool can share a single SerializedEntity<br>	6 = parallel controller split<br>
+cl_parallel_readpacketentities_threshold | FCVAR_DEVELOPMENTONLY | **Default:** 2<br>Use parallel processing of snapshot reading if above this many entries.
 cl_particle_batch_mode | FCVAR_DEVELOPMENTONLY | **Default:** 1<br>
 cl_particle_fallback_base | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>Base for falling back to cheaper effects under load.
 cl_particle_fallback_multiplier | FCVAR_DEVELOPMENTONLY | **Default:** 0<br>Multiplier for falling back to cheaper effects under load.
@@ -798,7 +797,6 @@ cl_predictioncopy_print | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Print simpl
 cl_predictioncopy_runs | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_prefer_lefthanded | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_USERINFO<br>FCVAR_PER_USER | **Default:** false<br>Left handed preference
 cl_printfps | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | Print information from cl_showfps.
-cl_profilereadpacketentities | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 cl_promoted_settings_acknowledged | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE | **Default:** 0:0<br>
 cl_prop_debug | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Toggle prop debug mode. If on, props will show colorcoded bounding boxes. Red means ignore all damage. White means respond physically to damage but never break. Green maps health in the range of 100 down to 1.
 cl_querycache_stats | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Display status of the query cache (client only)
@@ -936,6 +934,7 @@ cl_sim_grenade_trajectory | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | Draw trajectory of 
 cl_simulate_dormant_entities | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** true<br>
 cl_skel_constraints_enable | FCVAR_REPLICATED<br>FCVAR_CHEAT | **Default:** true<br>
 cl_skeleton_instance_smear_boneflags | FCVAR_CLIENTDLL<br>FCVAR_CHEAT | **Default:** false<br>Smear boneflags across the model.  Costs computation, but tests to make sure your bone flags are consistent.
+cl_skip_hierarchy_update_for_unchanged_entities | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>Skip updating hierarchy information in PostDataUpdate for entities that have not changed
 cl_skip_update_animations | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** false<br>Enable to skip game animations
 cl_smoke_edge_feather | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 21<br>
 cl_smoke_lower_speed | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** 1<br>
@@ -976,6 +975,7 @@ cl_streams_request_url | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:**
 cl_streams_write_response_file | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** <br>When set will save streams info file for diagnostics
 cl_teamcounter_playercount_instead_of_avatars | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>
 cl_teamid_overhead_colors_show | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Show team overhead id in teammate color
+cl_teamid_overhead_fade_near_crosshair | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 0.75<br>The amount to fade teamid when near the crosshair. Range is 0.0-1.0. 0: off
 cl_teamid_overhead_maxdist | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_PER_USER | **Default:** 6000<br>max distance at which the overhead team id icons will show
 cl_teamid_overhead_maxdist_spec | FCVAR_CLIENTDLL<br>FCVAR_CHEAT<br>FCVAR_PER_USER | **Default:** 4000<br>max distance at which the overhead team id icons will show when a spectator
 cl_teamid_overhead_mode | FCVAR_CLIENTDLL<br>FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** 2<br>Always show team id over teammates. 1 = pips; 2 = pips, name, and equipment
@@ -1248,6 +1248,8 @@ demo_flush | FCVAR_ARCHIVE | **Default:** false<br>Flush writing the demo file e
 demo_goto | FCVAR_RELEASE | Skips to location in demo.
 demo_gotomark | FCVAR_RELEASE | Skips the current demo playback to the marked tick
 demo_gototick | FCVAR_RELEASE | Skips to a tick in demo.
+demo_highlight_fade_duration | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 0.25<br>Duration of the fade in and of the fade out transitions (fade in + fade out is 2x this value).
+demo_highlight_seconds_after | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 2<br>How many seconds after the actual highlight event to show when viewing highlights.
 demo_highlight_seconds_before | FCVAR_CLIENTDLL<br>FCVAR_RELEASE | **Default:** 6<br>How many seconds before the actual highlight event to show when viewing highlights.
 demo_info | FCVAR_RELEASE | Print information about currently playing demo.
 demo_marktick | FCVAR_RELEASE | Marks the current demo playback tick for later use
@@ -1351,7 +1353,9 @@ engine_allow_multiple_simulates_per_frame | FCVAR_DEVELOPMENTONLY | **Default:**
 engine_allow_multiple_ticks_per_frame | FCVAR_DEVELOPMENTONLY | **Default:** true<br>When the client is catching up in low frame rate situations, should we run tick more than once a frame?
 engine_client_tick_pad_enable | FCVAR_DEVELOPMENTONLY | **Default:** false<br>
 engine_cpu_info_extended | FCVAR_DEVELOPMENTONLY | **Default:** <br>CPU the engine is running on.
-engine_enable_frametime_warnings | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Enable framerate-related warnings, such as sv_long_frame_ms.  Disabling warnings is useful when running in situations such a debug where a slow frame rate is expected
+engine_frametime_amnesty_debug | FCVAR_DEVELOPMENTONLY | **Default:** false<br>Enable logging about events that disable frame time warnings
+engine_frametime_print_report | FCVAR_DEVELOPMENTONLY | Print a performance report from the current data in the vprof 'lite' profiler
+engine_frametime_warnings_enable | FCVAR_DEVELOPMENTONLY | **Default:** true<br>Enable framerate-related warnings, such as sv_long_frame_ms.  Disabling warnings is useful when running in situations such a debug where a slow frame rate is expected
 engine_low_latency_sleep_after_client_tick | FCVAR_RELEASE | **Default:** false<br>When r_low_latency is enabled, this moves the low latency sleep on tick frames to happen after client simulation.
 engine_max_resource_system_update_time | FCVAR_DEVELOPMENTONLY | **Default:** 5<br>
 engine_no_focus_sleep | FCVAR_ARCHIVE | **Default:** 20<br>
@@ -3519,7 +3523,6 @@ rope_smooth_minalpha | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0
 rope_smooth_minwidth | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 0.3<br>When using smoothing, this is the min screenspace width it lets a rope shrink to
 rope_subdiv | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 2<br>Rope subdivision amount
 rope_wind_dist | FCVAR_DEVELOPMENTONLY<br>FCVAR_CLIENTDLL | **Default:** 1000<br>Don't use CPU applying small wind gusts to ropes when they're past this distance.
-rpestats | FCVAR_DEVELOPMENTONLY | dump rpe
 rr_dacmode | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** false<br>If set to 1, enable special functionality for DAC
 rr_debugclassname | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** <br>If set, rr_debugclassname will print only response tests where 'classname' corresponds to this variable. Use to filter for a specific character.
 rr_debugresponseconcept | FCVAR_DEVELOPMENTONLY<br>FCVAR_GAMEDLL<br>FCVAR_CLIENTDLL<br>FCVAR_REPLICATED | **Default:** <br>If set, rr_debugresponseconcept will print only responses testing for the specified concept
@@ -4310,7 +4313,7 @@ sv_logecho | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** true<br>Echo log info
 sv_logfile | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Log server information in the log file.
 sv_logflush | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** false<br>Flush the log file to disk on each write (slow).
 sv_logsdir | FCVAR_ARCHIVE<br>FCVAR_RELEASE | **Default:** logs<br>Folder in the game directory where server logs will be stored.
-sv_long_frame_ms | FCVAR_DEVELOPMENTONLY | **Default:** 15<br>If a server frame takes longer than N ms, complain about it.  (Dedicated server only.)  See also engine_enable_frametime_warnings.
+sv_long_frame_ms | FCVAR_DEVELOPMENTONLY | **Default:** 15<br>If a server frame takes longer than N ms, complain about it.  (Dedicated server only.)  See also engine_frametime_warnings_enable.
 sv_mapvetopickvote_maps | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** de_anubis,de_inferno,de_mirage,de_vertigo,de_dust2,de_nuke,de_ancient<br>Which maps are used for map veto pick sequence
 sv_mapvetopickvote_phase_duration | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** \[1:5\]\[2:15\]\[3:20\]\[4:10\]\[5:10\]\[6:5\]<br>How many seconds each phase lasts
 sv_mapvetopickvote_rnd | FCVAR_GAMEDLL<br>FCVAR_RELEASE | **Default:** false<br>When enabled will shuffle veto pick maps list order every time

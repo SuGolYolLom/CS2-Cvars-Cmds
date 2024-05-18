@@ -9,15 +9,15 @@
 ## Version
 
 ```
-ClientVersion=2000301
-ServerVersion=2000301
-PatchVersion=1.40.0.4
+ClientVersion=2000318
+ServerVersion=2000318
+PatchVersion=1.40.0.8
 ProductName=cs2
 appID=730
 ServerAppID=2347773
-SourceRevision=8848995
-VersionDate=Apr 25 2024
-VersionTime=17:29:04
+SourceRevision=8881868
+VersionDate=May 09 2024
+VersionTime=14:56:18
 
 ```
 [steam.inf](https://github.com/SuGolYolLom/CS2-Cvars-Cmds/commits/main/steam.inf)
