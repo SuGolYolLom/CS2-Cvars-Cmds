@@ -176,9 +176,6 @@ animgraph_set_parameter_int                                                     
 animgraph_set_parameter_string                                                  : cmd               : sv, cheat                           : Specified entities will have the specified bool parameter set to the value specified.  Useful for animators to test.\n	Arguments: <entity> <parameter name> <value you want to send to animgraph for the entity>
 animgraph_set_parameter_vector                                                  : cmd               : sv, cheat                           : Specified entities will have the specified vector parameter set to the value specified.  Useful for animators to test.\n	Arguments: <entity> <parameter name> <value you want to send to animgraph for the entity>
 animgraph_slope_draw_raycasts                                                   : false             : sv, cl, rep, cheat                  : 
-animgraph_slope_drop_use_capsule                                                : true              : sv, cl, rep                         : 
-animgraph_slope_drop_use_capsule_smoothing                                      : true              : sv, cl, rep                         : 
-animgraph_slope_drop_use_capsule_soft_cliffs                                    : false             : sv, cl, rep                         : 
 animgraph_slope_enable                                                          : true              : sv, cl, rep, cheat                  : 
 animgraph_slowdownonslopes_enabled                                              : true              : rep                                 : 
 animgraph_trace_ignore_prop_physics                                             : true              : sv, cl, rep                         : 
@@ -458,10 +455,10 @@ cl_clock_unhook                                                                 
 cl_clockdbg                                                                     : false             :                                     : 
 cl_clockdrift_max_ticks                                                         : 3                 : cheat                               : Maximum number of ticks the clock is allowed to drift before the client snaps its clock to the server's.
 cl_clutch_mode                                                                  : false             : cl, release                         : Silence voice and other distracting sounds until the end of round or next death.
-cl_color                                                                        : 4                 : cl, a, user                         : Preferred teammate color
+cl_color                                                                        : 3                 : cl, a, user                         : Preferred teammate color
 cl_commandtool_exec                                                             : cmd               : cl                                  : Runs a command from the command tool
 cl_connectionretrytime_p2p                                                      : 20                : release                             : Number of seconds over which to spread retry attempts for P2P.
-cl_cq_min_queue                                                                 : 0                 : cl, user                            : Allows client to disable (=-1), defer to server (=0), or request a certain min-command queue size for games that support the command queue (IsUsingCommandQueue()) for CUserCmds.
+cl_cq_min_queue                                                                 : 0                 : user                                : Used by the client to inform the server of their desired queue length.  Derived from cl_tickpacket_recvmargin_desired and cl_tickpacket_desired_queuelength
 cl_crosshair_drawoutline                                                        : true              : cl, a, per_user                     : Draws a black outline around the crosshair for better visibility
 cl_crosshair_dynamic_maxdist_splitratio                                         : 1                 : cl, a, per_user                     : If using cl_crosshairstyle 2, this is the ratio used to determine how long the inner and outer xhair pips will be. [inner = cl_crosshairsize*(1-cl_crosshair_dynamic_maxdist_splitratio), outer = cl_crosshairsize*cl_crosshair_dynamic_maxdist_splitratio]  [0 - 1]
 cl_crosshair_dynamic_splitalpha_innermod                                        : 0                 : cl, a, per_user                     : If using cl_crosshairstyle 2, this is the alpha modification that will be used for the INNER crosshair pips once they've split. [0 - 1]
@@ -622,7 +619,7 @@ cl_firstperson_legs                                                             
 cl_fixedcrosshairgap                                                            : 3                 : cl, a, per_user                     : For crosshair style 1: How big to make the gap between the pips in the fixed crosshair
 cl_flushentitypacket                                                            : 0                 : cheat                               : For debugging. Force the engine to flush an entity packet.
 cl_force_next_signon_to_reset                                                   : false             : devonly                             : 
-cl_frametime_summary_report_detailed                                            : false             : cl, release                         : When a perf report is dumped at the end of the session, should it be detailed?
+cl_frametime_summary_report_detailed                                            : true              : cl, release                         : When a perf report is dumped at the end of the session, should it be detailed?
 cl_fullupdate                                                                   : cmd               : cheat                               : Force uncompressed update
 cl_game_mode_convars                                                            : cmd               : cl                                  : Display the values of the convars for the current game_mode.
 cl_globallight_debug                                                            : false             : cl                                  : 
@@ -681,6 +678,7 @@ cl_imgui_set_status_text                                                        
 cl_import_csgo_config                                                           : true              : cl, a, release                      : 
 cl_in_forcebuttonstate                                                          : cmd               : devonly, cl, vconsole_fuzzy_matching : Forces a button to be a particular state - WHEN PROCESSING USERCOMMANDS
 cl_inferno_bodyburn                                                             : true              : devonly, cl                         : 
+cl_input_enable_raw_keyboard                                                    : false             : release                             : Enable raw keyboard input
 cl_instant_death_anim                                                           : false             : devonly, cl                         : 
 cl_interp                                                                       : cmd               : cl, release                         : Read the effective client simulation interpolation amount in terms of time.
 cl_interp_all                                                                   : false             : cl                                  : Disable interpolation list optimizations.
@@ -706,6 +704,7 @@ cl_jiggle_bone_debug_yaw_constraints                                            
 cl_jiggle_bone_invert                                                           : false             : cheat                               : 
 cl_jiggle_bone_sanity                                                           : true              :                                     : Prevent jiggle bones from pointing directly away from their target in case of numerical instability.
 cl_join_advertise                                                               : 1                 : cl, a                               : Advertise joinable game in progress to Steam friends, otherwise need a Steam invite (2: all servers, 1: official servers, 0: none)
+cl_joystick_enabled                                                             : false             : a                                   : Enable joystick input
 cl_lagcompensation_test_auto_target                                             : false             : devonly, cl                         : Auto-pick value of cl_lagcompensation_test_target.
 cl_lagcompensation_test_target                                                  : -1                : devonly, cl                         : Player whose head is tracked to test lag compensation.
 cl_language                                                                     : english           :                                     : Language
@@ -716,6 +715,7 @@ cl_loadout_saved_sort                                                           
 cl_lock_camera                                                                  : false             : cl, cheat                           : 
 cl_log_tick                                                                     : false             :                                     : Log when a tick is received\n
 cl_log_tick_skips                                                               : 0                 :                                     : Log when the tick delta >= this
+cl_low_latency_vsync_recommendation_dont_show_again                             : false             : cl, a, release                      : 
 cl_mainmenu_hide_blog                                                           : cmd               : cl, hidden, clientcmd_can_execute   : Show the news panel and hide blog
 cl_mainmenu_show_blog                                                           : cmd               : cl, hidden, clientcmd_can_execute   : Show the blog and hide news panel
 cl_mantle_gunloweramt                                                           : 20                : cl                                  : 
@@ -880,6 +880,7 @@ cl_random_taser_power                                                           
 cl_rebuy                                                                        :                   : cl, release                         : The order in which rebuy will attempt to repurchase items
 cl_record_bone_setup_stats                                                      : cmd               : devonly, cl                         : generate bone setup statistics
 cl_redemption_reset_timestamp                                                   : 0                 : cl, a, release                      : 
+cl_refresh_rate_recommendation_dont_show_again                                  : false             : cl, a, release                      : 
 cl_reload_hud                                                                   : cmd               : cl                                  : Reloads the hud scale and resets scale and borders
 cl_removedecals                                                                 : cmd               : cl, cheat                           : Remove the decals from the entity under the crosshair.
 cl_report_entities                                                              : cmd               : devonly, cl, cheat                  : Lists all entities
@@ -998,10 +999,10 @@ cl_streams_request_url                                                          
 cl_streams_write_response_file                                                  :                   : devonly, cl                         : When set will save streams info file for diagnostics
 cl_teamcounter_playercount_instead_of_avatars                                   : false             : cl, a, release                      : 
 cl_teamid_overhead_colors_show                                                  : true              : cl, a, release                      : Show team overhead id in teammate color
-cl_teamid_overhead_fade_near_crosshair                                          : 0.75              : cl, a, release                      : The amount to fade teamid when near the crosshair. Range is 0.0-1.0. 0: off
+cl_teamid_overhead_fade_near_crosshair                                          : 0.5               : cl, a, release                      : The amount to fade teamid when near the crosshair. Range is 0.0-1.0. 0: off
 cl_teamid_overhead_maxdist                                                      : 6000              : cl, cheat, per_user                 : max distance at which the overhead team id icons will show
 cl_teamid_overhead_maxdist_spec                                                 : 4000              : cl, cheat, per_user                 : max distance at which the overhead team id icons will show when a spectator
-cl_teamid_overhead_mode                                                         : 2                 : cl, a, release                      : Always show team id over teammates. 1 = pips; 2 = pips, name, and equipment
+cl_teamid_overhead_mode                                                         : 3                 : cl, a, release                      : Always show team id over teammates. 0 = off, 1 = pips; 2 = +name, 3 = +equipment
 cl_teammate_color_1                                                             : 136 206 245 255   : cl                                  : 
 cl_teammate_color_2                                                             : 0 158 128 255     : cl                                  : 
 cl_teammate_color_3                                                             : 241 228 65 255    : cl                                  : 
@@ -1009,13 +1010,13 @@ cl_teammate_color_4                                                             
 cl_teammate_color_5                                                             : 189 44 150 255    : cl                                  : 
 cl_teammate_colors_show                                                         : 1                 : cl, a, release                      : In competitive, 1 = show teammates as separate colors in the radar, scoreboard, etc., 2 = show colors and letters
 cl_test_list_entities                                                           : cmd               : cl, cheat                           : test-list entities
-cl_tickpacket_desired_queuelength                                               : 99                :                                     : Desired command queue length on the server, used to avoid command queue starvation due to packet loss.  The effective value is the smaller of this value and cl_interp_ratio, hence the large default value.  This value, multiplied by the tick interval, is added to cl_tickpacket_recvmargin_desired to obtain the effective desired recv margin.
+cl_tickpacket_desired_queuelength                                               : 0                 : user                                : This value, multiplied by the tick interval, is added to cl_tickpacket_recvmargin_desired to obtain the effective desired recv margin.
 cl_tickpacket_recvmargin_adjust_limit                                           : 5                 : devonly                             : Recvmargin-based usercommand pacing will not speed up or slow down command pacing by more than N% compared to realtime
 cl_tickpacket_recvmargin_desired                                                : 5                 : devonly                             : Recvmargin-based usercommand pacing will try to maintain N ms margin between user command arriving at the server and the server needing that user command.  See also cl_tickpacket_desired_queuelength.
 cl_tickpacket_recvmargin_minsamples                                             : 10                : devonly                             : Recvmargin-based usercommand pacing will not take action unless we have N samples
 cl_tickpacket_recvmargin_spew_interval                                          : 0                 : release                             : 
 cl_tickpacket_recvmargin_timeconstant                                           : 0.4               : devonly                             : Recvmargin-based usercommand pacing will remove 63.2% of the error in N seconds
-cl_tickpacket_recvmargin_window                                                 : 0.75              : devonly                             : Recvmargin-based usercommand pacing will use past N seconds
+cl_tickpacket_recvmargin_window                                                 : 4                 : devonly                             : Recvmargin-based usercommand pacing will use past N seconds
 cl_tickpacket_send_every_tick                                                   : true              : devonly                             : Send a network packet each time we generate a new usercommand, even if our frame rate is slow and we generate multiple commands in one frame
 cl_ticks_warning_level                                                          : 0                 : release                             : Print a message about problems with ticks and interpolation.  0=never, 1=warnings, 2=all, even if hidden by interpolation
 cl_ticktiming                                                                   : cmd               : norecord, release                   : {print|<interval>} [summary|detail]  Print timing stats now, or set report interval
@@ -1043,6 +1044,7 @@ cl_viewmodelsclonedasworld                                                      
 cl_viewtarget_clamp                                                             : true              : cl                                  : 
 cl_voiceenabled                                                                 : true              : cl                                  : 
 cl_voip_lobby_audio_volume                                                      : 0                 : devonly, cl, hidden                 : Lobby voip stream audio volume
+cl_vrr_recommendation_dont_show_again                                           : false             : cl, a, release                      : 
 cl_vsnd_morph_override_ease_enabled                                             : true              : cl                                  : Controls whether the compiled in vsnd morph data ease in/out values are used or values set from the convars (cl_vsnd_morph_override_ease_in, cl_vsnd_morph_override_ease_out) are used
 cl_vsnd_morph_override_ease_in                                                  : 0.2               : cl                                  : If cl_enable_vsnd_morph_override_ease_enabled is true, ease into vsnd morph driven animation over the specified number of seconds.
 cl_vsnd_morph_override_ease_out                                                 : 0.2               : cl                                  : If cl_enable_vsnd_morph_override_ease_enabled is true, ease out of vsnd morph driven animation over the specified number of seconds.
@@ -1156,25 +1158,18 @@ convars_echo_toggle_changes                                                     
 convert_steamid                                                                 : cmd               : cl                                  : Convert SteamID into multiple formats
 cpu_level                                                                       : 2                 : cl                                  : CPU Level - Default: High
 cpuinfo                                                                         : cmd               :                                     : Print CPU configuration information
-cq_adjust_deadzone_ticks_faster                                                 : 0.75              : sv                                  : don't adjust rate faster/slower if average queue is this close to goal.
-cq_adjust_deadzone_ticks_slower                                                 : 0.25              : sv                                  : don't adjust rate faster/slower if average queue is this close to goal.
-cq_buffer_bloat_msecs                                                           : 64                : sv, release                         : tolerable buffer bloat before we start pushing the rate down.
-cq_buffer_bloat_msecs_max                                                       : 64                : sv, release                         : absolute max buffer bloat before we reset and discard buffered user commands.
+cq_buffer_bloat_msecs_max                                                       : 64                : rep, release                        : Server will not allow the client to buffer up more than N ms of commands.
 cq_debug                                                                        : 0                 : sv, rep                             : Verbose command queue logging.
 cq_dilation_percentage                                                          : 5                 : sv, cl, rep                         : When speeding up slowing down, this is how much
 cq_enable                                                                       : true              : sv, cl, rep                         : Run one usercmd per server tick and maintain a buffer.  Client speeds up/slows down it's usercmd tick rate to maintain server command queue buffering.
 cq_fake_starve                                                                  : 0                 : devonly, sv                         : if set, starve this many commands by discarding during process usercmds.
 cq_logging                                                                      : false             : sv, release                         : command queue logging of events.
 cq_logging_interval                                                             : 0                 : sv, release                         : command queue logging per player stats every N seconds, 0 to disable.
-cq_min_queue_size                                                               : 0                 : sv, cl, rep, release                : min buffer queue target size.
+cq_max_starved_substitute_commands                                              : 4                 : sv, release                         : Server will stop generating substitute commands if client hasn't sent one, after N in a row
 cq_print_every_command                                                          : false             : sv, release                         : print every command as we execute it
-cq_queue_sample_count                                                           : 20                : sv                                  : how many frames of samples to store in the buffer sample queue.
-cq_resolve_commands_per_second                                                  : 0.5               : sv                                  : once cq_starve_hold_time elapses, we return to cq_min_queue_size over this many commands per second.
 cq_runtests                                                                     : false             : devonly, sv                         : 
 cq_runtests_broadcast_info                                                      : false             : devonly, sv                         : send message to remote client console when tests change.
 cq_runtests_interval                                                            : 30                : devonly, sv                         : 
-cq_starve_hold_msecs                                                            : 400               : sv                                  : if we starve, we hold the faster time dilation for at least this many msecs.
-cq_starve_increment_msecs                                                       : 1000              : sv                                  : if we starve, we increment target queue only this often, 0 to disable.
 crash                                                                           : cmd               : cheat                               : Crash the client. Optional parameter -- type of crash:\n 0: read from NULL\n 1: write to NULL\n 2: force an Assert\n 3: infinite loop\n 4: stack buffer overrun\n 5: multiple asserts across multiple threads
 crash_error                                                                     : cmd               : cheat                               : Cause the engine to crash by Plat_FatalError on main thread (Debug!!)
 crash_error_job                                                                 : cmd               : cheat                               : Cause the engine to crash by Plat_FatalError on job thread (Debug!!)
@@ -1194,6 +1189,9 @@ cs_minimap_create_output_size                                                   
 cs_minimap_renderdoc_capture_enabled                                            : false             : devonly, cl, hidden, cheat          : 
 cs_minimap_rendering_msaa_mode                                                  : 2                 : devonly, cl, cheat                  : MSAA mode used for minimap rendering 0-none, 1-2xMSAA, 2-4xMSAA, 3-6X, 4-8X, etc
 cs_quit_prompt                                                                  : cmd               : cl, release                         : Quit the game
+cs_steamvideo_max_kills_per_multikill                                           : 5                 : devonly, cl                         : Max number of kills for a single multikill event
+cs_steamvideo_max_time_between_multikill_events                                 : 5                 : devonly, cl                         : Maximum time in seconds between consecutive kills for them to be combined into a multikill event
+cs_steamvideo_multikill_padding_time                                            : 2                 : devonly, cl                         : Time in seconds to add before the first kill and after the last kill for multikill events
 csgo_3d_skybox                                                                  : true              : cl                                  : 
 csgo_demoui_playbeck_timestep_value                                             : 15                : cl                                  : Number of seconds to seek when using TimeStep buttons on demo playback controller.
 csgo_demoui_player_death_seek_lead_up_time                                      : 1                 : cl                                  : Seek to a moment this amount of seconds leading up to a player death instead of the exact time of the death.
@@ -1279,6 +1277,7 @@ demo_highlight_seconds_before                                                   
 demo_info                                                                       : cmd               : release                             : Print information about currently playing demo.
 demo_marktick                                                                   : cmd               : release                             : Marks the current demo playback tick for later use
 demo_mouse_enable_binding                                                       : drop              : cl, a                               : Name of the binding to enable mouse on demo playback UI
+demo_movie_write_intervals                                                      : false             : cl, hidden, release                 : Write highlight interval metadata along with movie files when recording.
 demo_pause                                                                      : cmd               : release                             : Pauses demo playback.
 demo_pauseatservertick                                                          : 0                 :                                     : Pauses demo playback at server tick
 demo_playback_override_settings                                                 : false             : cl                                  : 
@@ -1568,13 +1567,14 @@ force_floating_point_exceptions                                                 
 force_hibernate                                                                 : cmd               : devonly                             : Force toggle hibernation state
 force_spectator_only_tools                                                      : false             : devonly, cl, hidden, cheat          : 
 fov_cs_debug                                                                    : 0                 : cl, cheat                           : Sets the view fov if cheats are on.
+fov_cs_near_z                                                                   : 6.5               : devonly, cl, cheat                  : 
 fov_cs_super_ultrawide_near_z                                                   : 1                 : devonly, cl, cheat                  : 
 fov_cs_ultrawide_near_z                                                         : 4                 : devonly, cl, cheat                  : 
 fov_desired                                                                     : 75                : cl, a, user                         : Sets the base field-of-view.
 fp_trace                                                                        : cmd               :                                     : Toggle field path tracing to file\n
 fps_max                                                                         : 400               : a, release                          : Frame rate limiter.  0=no limit.  Does not apply to dedicated server.
 fps_max_tools                                                                   : 120               : a                                   : Additional frame rate limit while in tools mode and a window other than the game window has focus. Note that fps_max still applies, this only allows the maximum frame rate for tools mode to be lower. 0=no tools specific limit.
-fps_max_ui                                                                      : 120               : a                                   : Frame rate limiter while the game UI is displayed.  0=no limit.  Does not apply to dedicated server.
+fps_max_ui                                                                      : 200               : a                                   : Frame rate limiter while the game UI is displayed.  0=no limit.  Does not apply to dedicated server.
 frag_grenade_blip_frequency                                                     : 1                 : sv, cl, rep                         : 
 freecamera_accel                                                                : 5                 : cl                                  : Tweak this parameter to adjust Free Camera movement acceleration.
 freecamera_fog_end                                                              : 2500              : cl                                  : Fog end for Free Camera.
@@ -2461,7 +2461,6 @@ mp_weapons_allow_rifles                                                         
 mp_weapons_allow_smgs                                                           : -1                : sv, cl, rep, release, missing3      : Determines which team, if any, can purchase SMGs. -1 = any; 0 = non; 2 = Ts; 3 = CTs.
 mp_weapons_allow_typecount                                                      : 5                 : sv, cl, rep, release, missing3      : Determines how many purchases of each weapon type allowed per player per round (0 to disallow purchasing, -1 to have no limit).
 mp_weapons_allow_zeus                                                           : 1                 : sv, cl, rep, release, missing3      : Determines how many Zeus purchases a player can make per round (0 to disallow, -1 to have no limit).
-mp_weapons_glow_on_ground                                                       : false             : sv, cl, rep, release, missing3      : If this convar is set, weapons on the ground will have a glow around them.
 mp_weapons_max_gun_purchases_per_weapon_per_match                               : -1                : sv, cl, rep, release, missing3      : Max number of times a player may purchase any weapon per match
 mp_weaponstay                                                                   : false             : sv, nf                              : 
 mp_win_panel_display_time                                                       : 3                 : sv, cl, rep, release, missing3      : The amount of time to show the win panel between matches / halfs
@@ -2775,8 +2774,11 @@ net_connections_stats                                                           
 net_culloptimization                                                            : true              :                                     : Enable optimization of slow path that makes HLTV CPU consumption high in AnimGraph-using mods. Will switch to this on by default soon.
 net_debug_to_file                                                               : false             : sv                                  : 
 net_detailed_canpacket_log                                                      : false             :                                     : 
+net_fakeclear                                                                   : cmd               : release                             : Clear all simulated network conditions
+net_fakejitter                                                                  : cmd               : release                             : Shortcut to set jitter net options.  Run with no arguments for usage.
 net_fakelag                                                                     : cmd               : release                             : Shortcut to set both FakePacketLag_Recv and FakePacketLag_Send net options
 net_fakeloss                                                                    : cmd               : release                             : Shortcut to set both FakePacketLoss_Recv and FakePacketLoss_Send net options
+net_fakestatus                                                                  : cmd               : release                             : Print current simulated network condifions
 net_filelogging                                                                 : false             : devonly                             : Log packets to files
 net_fs_showindirections                                                         : false             : devonly                             : 
 net_listallmessages                                                             : cmd               : cheat                               : List all registered net messages
@@ -2928,6 +2930,7 @@ panorama_joystick_axis_repeat_interval_start                                    
 panorama_joystick_button_repeat_curve_time                                      : 1.2               : hidden                              : 
 panorama_joystick_button_repeat_interval_end                                    : 0.1               : hidden                              : 
 panorama_joystick_button_repeat_interval_start                                  : 0.48              : hidden                              : 
+panorama_joystick_enabled                                                       : false             : a                                   : Enable panorama joystick input
 panorama_js_minidumps                                                           : true              : hidden                              : Enable sending minidumps on JS Exceptions.
 panorama_large_dispatch_event_queue                                             : 0                 : hidden                              : 
 panorama_light_inout_scale                                                      : 0.5               : cl                                  : 
@@ -3087,8 +3090,8 @@ playcast                                                                        
 playdemo                                                                        : cmd               : release                             : Play a recorded demo file (.dem ).
 player0_using_joystick                                                          : false             : a                                   : 
 player_botdifflast_s                                                            : 2                 : cl, a, release                      : 
-player_competitive_maplist_2v2_10_0_C8D88986                                    : mg_de_inferno,mg_de_nuke,mg_de_vertigo,mg_de_overpass : cl, a                               : 
-player_competitive_maplist_8_10_0_5069769                                       : mg_de_dust2,mg_de_ancient,mg_de_inferno,mg_de_nuke,mg_de_vertigo,mg_de_mirage,mg_cs_office,mg_de_anubis,mg_lobby_mapveto,mg_de_overpass : cl, a                               : 
+player_competitive_maplist_2v2_10_0_12FCB095                                    : mg_de_inferno,mg_de_nuke,mg_de_vertigo,mg_de_assembly,mg_de_memento,mg_de_overpass : cl, a                               : 
+player_competitive_maplist_8_10_0_DE80D4BB                                      : mg_de_thera,mg_de_dust2,mg_de_ancient,mg_de_inferno,mg_de_nuke,mg_de_vertigo,mg_de_mirage,mg_cs_office,mg_de_mills,mg_de_anubis,mg_lobby_mapveto,mg_de_overpass : cl, a                               : 
 player_debug_off_nav                                                            : false             : sv, cheat                           : 
 player_debug_print_damage                                                       : false             : sv, cheat                           : When true, print amount and type of all damage received by player to console.
 player_nevershow_communityservermessage                                         : 0                 : cl, a, per_user                     : 
@@ -3134,7 +3137,9 @@ proped_debug_margin                                                             
 proped_debug_priority                                                           : false             :                                     : 
 proped_sync_timings                                                             : false             :                                     : 
 property_editor_use_overlay                                                     : true              :                                     : 
+props_break_apply_radial_forces                                                 : true              : devonly, sv, cl, rep                : 
 props_break_max_pieces_perframe                                                 : 16                : sv, cl, rep                         : Maximum prop breakable piece count per frame (-1 = model default)
+props_break_radial_force_ratio                                                  : 0.33              : devonly, sv, cl, rep                : 
 pulse_debug_entity                                                              : cmd               : sv, cheat, vconsole_fuzzy_matching  : Opens a graph referencing the selected entity. If it is referenced by more than 1 graph, list all the active pulse graph instances referring to that entity so you can pick which one you want.
 pulse_debug_print                                                               : cmd               : devonly                             : Usage: pulse_debug_print <vpulse_resource>
 pulse_list_graphs                                                               : cmd               : cheat                               : List all the active pulse graph instances
@@ -4184,6 +4189,7 @@ spawn_group_unload                                                              
 spawngroup_ignore_timeouts                                                      : false             :                                     : 
 speaker_config                                                                  : -1                : a                                   : 
 spec_autodirector                                                               : false             : cl, clientcmd_can_execute           : Auto-director chooses best view modes while spectating
+spec_autodirector_cameraman                                                     : -1                : devonly, cl                         : 
 spec_centerchasecam                                                             : false             : cl, a                               : Looks at the target player's center, instead of his eye position, in chase came mode
 spec_chasedistance                                                              : 96                : cl                                  : Chase cam's ideal distance from target
 spec_chasedistancespeed                                                         : 144               : cl                                  : Chase cam's ideal distance from target
@@ -4231,8 +4237,6 @@ spec_replay_winddown_time                                                       
 spec_show_xray                                                                  : 1                 : cl, a, release                      : If set to 1, you can see player outlines and name IDs through walls - who you can see depends on your team and mode
 spec_track                                                                      : 0                 : cl                                  : Tracks an entity in spec mode
 spec_usenumberkeys_nobinds                                                      : true              : cl, a                               : If set to 1, map voting and spectator view use the raw number keys instead of the weapon binds (slot1, slot2, etc).
-spec_xray_dropped_defusekits                                                    : false             : cl, release                         : Whether to X-ray dropped defuse kits.
-spec_xray_dropped_unoccluded                                                    : false             : cl, release                         : Whether to always X-ray dropped c4 and defuse kits.
 spew_fonts                                                                      : cmd               :                                     : Spew information about font manager fonts
 splitscreen_mode                                                                : 0                 : a, cheat                            : 
 splitscreen_testreadconfigconflict                                              : cmd               :                                     : 
@@ -4318,6 +4322,10 @@ sv_cluster                                                                      
 sv_coaching_enabled                                                             : false             : devonly, sv, cl, rep, release       : Allows spectating and communicating with a team ( 'coach t' or 'coach ct' )
 sv_competitive_minspec                                                          : true              : sv, cl, nf, rep, release            : Enable to force certain client convars to minimum/maximum values to help prevent competitive advantages.
 sv_compute_per_bot_difficulty                                                   : false             : devonly, sv, cl, rep                : 0 = compute all bot difficulties equally, 1 = compute unique bot difficulty for each bot 
+sv_cq_min_queue                                                                 : 0                 : rep                                 : Server min buffer size.
+sv_cq_trim_bloat_remainder                                                      : 1                 : sv, release                         : When trimming a bloated CQ, leave at least N more commands than the minimum
+sv_cq_trim_bloat_space                                                          : 0                 : sv, release                         : When trimming a bloated CQ, try to leave room for N more commands to be added.  0 will trim only what is needed to remove the immediate bloat, a very large value will reset the whole queue.
+sv_cq_trim_catchup_remainder                                                    : 1                 : sv, release                         : When trimming an overful CQ due to app 'catchup' request, leave at least N more commands than the minimum
 sv_cs_dump_econ_item_stringtable                                                : cmd               : sv                                  : sv_cs_dump_econ_item_stringtable
 sv_cs_player_speed_has_hostage                                                  : 200               : sv, cl, rep, release                : 
 sv_csgo_shoot_assert_lagcompensation_error                                      : false             : devonly, sv, cl, rep                : 
@@ -4660,7 +4668,7 @@ sv_unpause_on_console_close                                                     
 sv_update_animgraph_movement_in_finish                                          : true              : sv, cl, rep, cheat                  : Whether we should update animgraph movement in FinishMove.
 sv_usenetworkvars                                                               : true              :                                     : Use networkvar system.
 sv_usercmd_custom_random_seed                                                   : false             : sv, release                         : When enabled server will populate an additional random seed independent of the client
-sv_usercmd_queue_spew_threshold                                                 : 10                : sv, release                         : Spew warning if command queue has grown above this many backlogged commands.
+sv_usercmd_execute_warning_ms                                                   : 5                 : sv                                  : Emit a warning if we spend more than N ms executing user commands for a single player
 sv_vac_webapi_auth_key                                                          :                   : sv, release                         : Key for when posting to vac related webapis.
 sv_versus_screen_scene_id                                                       : 0                 : sv, release, missing3               : Determines which scene is used for the versus screen.
 sv_visiblemaxplayers                                                            : -1                : release                             : Overrides the max players reported to prospective clients
@@ -4789,6 +4797,7 @@ tv_extended_logging                                                             
 tv_grouprelaydatareliable                                                       : false             :                                     : When enabled, this will collect all information for relay sending into a single datagram to ensure that the data stays together through a potentially large number of relays
 tv_grouprelaydataunreliable                                                     : false             :                                     : When enabled, this will collect all information for relay sending into a single datagram to ensure that the data stays together through a potentially large number of relays
 tv_grouprelaydatavoice                                                          : false             :                                     : Similar to tv_grouprelaydata, but controls whether or not the voice channels should be routed into the grouped data for the relays
+tv_include_usercommands                                                         : true              : sv, release                         : HLTV streams will include player usercommands each tick
 tv_instant_replay_full_frame                                                    : true              :                                     : Send embedded full frames
 tv_instant_replay_full_frame_build_threaded                                     : false             :                                     : Build the full frames on a seperate job thread
 tv_instant_replay_full_frame_time                                               : 30                :                                     : Seconds between full frame embeddeds
@@ -4803,7 +4812,8 @@ tv_msg                                                                          
 tv_name                                                                         : SourceTV          : release                             : SourceTV host name
 tv_nochat                                                                       : false             : a, user                             : Don't receive chat messages from other SourceTV spectators
 tv_overridemaster                                                               : false             : release                             : Overrides the SourceTV master root address.
-tv_password                                                                     :                   : prot, nf, norecord, release         : SourceTV password for all clients
+tv_password                                                                     :                   : prot, nf, norecord, release         : SourceTV password for all clients of CSTV[0]
+tv_password1                                                                    :                   : prot, nf, norecord, release         : SourceTV password for all clients of CSTV[1]. If empty, tv_password is used
 tv_playcast_delay_prediction                                                    : true              : release                             : 
 tv_playcast_delay_resync                                                        : 0                 : release                             : To alleviate intermittent network connectivity problems, this is the number of seconds to wait before actually re-syncing the stream after failure
 tv_playcast_max_rcvage                                                          : 15                : hidden, release                     : 
@@ -4881,8 +4891,10 @@ ui_playsettings_mode_official_v20                                               
 ui_playsettings_survival_solo                                                   : 0                 : cl, a, release                      : 
 ui_playsettings_warmup_map_name                                                 : de_mirage         : cl, a, release                      : 
 ui_popup_weaponupdate_version                                                   : 0                 : cl, a, release                      : 
+ui_render_task_clips_label                                                      : dealt_damage      : cl, release                         : 
 ui_render_task_file                                                             : rendertask        : cl, release                         : 
 ui_render_task_fps                                                              : 60                : cl, release                         : 
+ui_render_task_generate_clips                                                   : false             : cl, release                         : 
 ui_setting_advertiseforhire_auto                                                : 1                 : cl, a, release                      : Whether users will automatically advertise for invites (0: off; 1: last; 2: auto)
 ui_setting_advertiseforhire_auto_last                                           : /competitive      : cl, a, release                      : Which game mode users last used to advertise for invites
 ui_show_subscription_alert                                                      : 0                 : cl, a, release                      : 
@@ -4950,7 +4962,7 @@ vmix_debug_list                                                                 
 vmix_input                                                                      : cmd               : cheat                               : Set an input mix value
 vmix_output                                                                     : cmd               : cheat                               : Dump main graph control output values
 voice_all_icons                                                                 : false             : cl                                  : Draw all players' voice icons
-voice_always_sample_mic                                                         : false             : a                                   : For systems experiencing a hang/stall when using voice chat.
+voice_always_sample_mic                                                         : false             : a                                   : When enabled, open the voip audio input stream when the application launches.
 voice_bypass_noise_gate                                                         : false             : devonly                             : 
 voice_clientdebug                                                               : 0                 : cl                                  : 
 voice_containers_get_instance_args                                              : cmd               : linked_concommand                   : Args: [Voice Container Path]
@@ -5044,6 +5056,7 @@ weapon_sound_falloff_multiplier                                                 
 weapon_switch                                                                   : cmd               : devonly, sv                         : Use a particular weapon	\nArguments: <weapon_name>
 webapi_values_init_buffer_size                                                  : 65536             : cl                                  : Initial buffer size for buffers in the WebAPIValues buffer pool
 webapi_values_max_pool_size_mb                                                  : 400               : cl                                  : Maximum size in bytes of the WebAPIValues buffer pool
+workshop_item_submit                                                            : cmd               : cl, hidden, release                 : 
 workshop_tournament_item_submit                                                 : cmd               : cl, hidden, release                 : 
 world_dump_loaded_worlds                                                        : cmd               :                                     : Dump all of the worlds that we know about
 world_layer_list                                                                : cmd               :                                     : List all world layers
